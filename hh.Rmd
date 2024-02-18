@@ -1,0 +1,75 @@
+---
+title: "Insurance Parity Laws and Reducing Suicides: Are mandates effective?"
+author: "Daniel Ownby"
+date: "11/30/2021"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## What are Insurance Parity laws?
+
+-   Parity means that when comparing two health plans, they have the same terms and conditions for mental health care as they do physical care.
+
+-   Persons covered will use services available to them that might lead to less suicides.
+
+## Previous Research/ Replication Paper
+
+-   The Impact of Mental Health Insurance Laws on state Suicide Rates
+
+    -   by Matthew Lang
+
+-   Main findings
+
+    -   Used DiD to find the wave of passing insurance parity laws lead to less suicides
+
+        -   Reduced Suicides by 4%.
+
+-   Performed Several Robustness checks
+
+    -   Event-study analysis
+
+    -   Age-specfic results
+
+    -   Mortality trends
+
+## Graph of Insurance laws passed.
+
+![](Number%20of%20States%20enacting%20Mental%20health%20laws%20by%20year.PNG)
+
+## Lang 2011's summary stats
+
+![](sum%20stats%20for%20Matthew%20Lang.PNG)
+
+## Main Methods
+
+-   Lang ran one main DiD while also making comparisons
+
+    -   One DiD was ran after the passing of 1996 Federal Mental Health Parity Act
+
+    -   The other after 2008 Mental Health Parity Act.
+
+        -   Consistent results: Regressions had the effect pegged at 4-7% using two-way fixed effects
+
+## My Methods
+
+-   Unfortunately for us, the grounds where we can infer conclusions has gotten shakier i.e Goodman-Bacon, Sant'Anna, etc etc.
+
+-   To build on top of Lang's work, We need to delineate more between our control and treatment, meaning:
+
+-   placebo tests
+
+    -   Gendered Response?
+
+-   propensity score matching.
+
+```{=html}
+<!-- -->
+```
+    -   Pulling treatment closer to treatment and control closer to control.
+
+## Thank you
+
+Thank you

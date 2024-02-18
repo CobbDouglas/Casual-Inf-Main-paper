@@ -1,0 +1,9 @@
+
+<table style="text-align:center"><tr><td colspan="8" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Pctl(25)</td><td>Pctl(75)</td><td>Max</td></tr>
+<tr><td colspan="8" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Treat</td><td>2</td><td>0.500</td><td>0.707</td><td>0</td><td>0.2</td><td>0.8</td><td>1</td></tr>
+<tr><td style="text-align:left">labor.force.participation.rate</td><td>2</td><td>69.616</td><td>0.057</td><td>69.576</td><td>69.596</td><td>69.636</td><td>69.657</td></tr>
+<tr><td style="text-align:left">employment.population.ratio</td><td>2</td><td>66.101</td><td>0.147</td><td>65.998</td><td>66.049</td><td>66.153</td><td>66.205</td></tr>
+<tr><td style="text-align:left">unemployment.rate</td><td>2</td><td>5.074</td><td>0.122</td><td>4.987</td><td>5.030</td><td>5.117</td><td>5.160</td></tr>
+<tr><td style="text-align:left">TOTAL.FILINGS</td><td>2</td><td>8,717.469</td><td>64.050</td><td>8,672.179</td><td>8,694.824</td><td>8,740.114</td><td>8,762.759</td></tr>
+<tr><td style="text-align:left">population</td><td>2</td><td>2,383,959.000</td><td>96,512.520</td><td>2,315,714.000</td><td>2,349,837.000</td><td>2,418,081.000</td><td>2,452,204.000</td></tr>
+<tr><td colspan="8" style="border-bottom: 1px solid black"></td></tr></table>

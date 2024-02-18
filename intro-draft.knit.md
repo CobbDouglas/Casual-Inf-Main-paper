@@ -1,0 +1,42 @@
+---
+title: "Insurance Parity Laws and Reducing Suicides: Replicating Lang (2013)"
+subtitle: Daniel Ownby
+output: pdf_document
+date: "02/01/2024"
+abstract: Over the past two decades, despite efforts from psychologists and mental health professionals alike, the United States has seen a steady growth of suicides despite nearly all other Western countries experiencing the contrary. Apart of this growth could be attributed to the lagging implementation of mental health care pairty. The Mental Health Parity Act of 1996 (MHPA) was critized during the turn of the century for not doing enough to restrict insurance companies ability to discrimate between treating bodily and mental injury. In this study, I attempt to replicate and build upon results from Lang (2013) using additional data, propensity score matching methods along with heterogenous difference in difference.
+bibliography: references.bib
+fontsize: 12pt
+header-includes: \usepackage{setspace}\doublespacing
+---
+
+
+
+\newpage
+
+## Introduction
+
+( DELETE\-\-\-- 1.Hook,2. ResearchQ 3.Antecedents,4.value added, 5.Roadmap)
+
+According to 2019 Survey for Drug use and Health, it was estimated that at least 51.5 million adults in the United States had some sort of mental illness. In the same year, 13.1 million were estimated to have a serious mental illness that resulted in serious functional impairment or interferes with at least one or more major life activity. Only 65.5% of those 13.1 million received any sort of mental health treatment in the past year. According to the Center for Disease Control's WISQARS Leading Causes of Death Report, Suicides are the second leading cause of death amongst people aged 10-34 and the fourth from 35-44 in the United States. Suicide rates have gradually increased over the past two decades, starting with 10.5 per 100,000 people to 14.2 per 10,000 in 2018. Suicide rates vary from state to state with both east and west coasts supporting low rates such as 7.4 per 100,000 while mid-western states suffer from rates as high as 25 per 100,000. Several Sources outline the negative effects not only through statistical life projections and productivity losses but more generally how devastating the preventable loss of life has on communities. [@klick2006; @lang2013]
+
+The Federal Mental Health Parity Act of 1996 prevented group health plan and insurance issuers from offering less mental health or substance abuse coverage benefits compared to regular medical coverage. If a provider gave mental health services, they couldn't offer benefit limitations that they wouldn't otherwise give to their same medical/surgical coverage. Most states by 2002 instated mental health parity laws alongside further stipulations with varying degrees of restrictiveness and exemptions.
+
+### Lang (2013)
+
+My seminal paper, @lang2013 attempts to identify causal effects using difference-in-difference methods and fixed effects using two policy shocks, the aftereffects of the Federal Health Parity Act of 1996 and The Affordable Care Act of 2008. @lang2013 showed a statistically significant effect of a 4-7% decrease in suicide rate after policy implementation. I draw the same data detailed in the study but add years spanning from 1990 to 2016, 36 years of data in total. I run my difference in difference using regression unlike @lang2013 addition to conduct propensity score matching methods to achieve a better balance between covariates between control and treatment states.
+
+### Parity laws:
+
+ Any state implementing a law that requires insurance packages to include access to mental health services and to have those services at parity with any other physical service is flagged as a parity state. This type of law is the strongest type amongst the ones implemented and is the type expected to create an effect this study investigates. A less strict version of the parity law is the "mandated offering" law, which does not force insurance package providers to provide mental health services in the first place. This can be a crucial difference when it comes to further analysis but for the purposes of this study both are lumped together as a Parity state.
+
+## Literature
+
+## Data
+
+## Methods
+
+## Results
+
+## Discussion
+
+## Conclusion
