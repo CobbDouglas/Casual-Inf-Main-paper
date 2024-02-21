@@ -1,0 +1,1378 @@
+"";"Deaths";"Crude.Rate"
+"Alabama-1990";514;12,711
+"Alabama-1991";539;13,141
+"Alabama-1992";523;12,585
+"Alabama-1993";551;13,069
+"Alabama-1994";532;12,481
+"Alabama-1995";563;13,096
+"Alabama-1996";513;11,836
+"Alabama-1997";512;11,715
+"Alabama-1998";569;12,907
+"Alabama-1999";554;12,505
+"Alabama-2000";582;13,087
+"Alabama-2001";512;11,46
+"Alabama-2002";513;11,451
+"Alabama-2003";520;11,547
+"Alabama-2004";541;11,941
+"Alabama-2005";535;11,707
+"Alabama-2006";579;12,508
+"Alabama-2007";592;12,669
+"Alabama-2008";602;12,759
+"Alabama-2009";673;14,145
+"Alabama-2010";679;14,206
+"Alabama-2011";654;13,625
+"Alabama-2012";724;15,033
+"Alabama-2013";720;14,908
+"Alabama-2014";714;14,742
+"Alabama-2015";750;15,452
+"Alabama-2016";788;16,203
+"Alaska-1990";70;12,728
+"Alaska-1991";73;12,797
+"Alaska-1992";90;15,27
+"Alaska-1993";97;16,17
+"Alaska-1994";121;20,036
+"Alaska-1995";103;17,023
+"Alaska-1996";120;19,697
+"Alaska-1997";128;20,863
+"Alaska-1998";129;20,79
+"Alaska-1999";96;15,365
+"Alaska-2000";137;21,852
+"Alaska-2001";101;15,938
+"Alaska-2002";132;20,55
+"Alaska-2003";124;19,124
+"Alaska-2004";155;23,51
+"Alaska-2005";131;19,642
+"Alaska-2006";135;19,991
+"Alaska-2007";149;21,902
+"Alaska-2008";169;24,583
+"Alaska-2009";143;20,461
+"Alaska-2010";164;23,091
+"Alaska-2011";143;19,787
+"Alaska-2012";168;22,979
+"Alaska-2013";170;23,07
+"Alaska-2014";167;22,669
+"Alaska-2015";201;27,247
+"Alaska-2016";193;26,014
+"Arizona-1990";686;18,692
+"Arizona-1991";662;17,47
+"Arizona-1992";653;16,669
+"Arizona-1993";727;17,876
+"Arizona-1994";767;18,057
+"Arizona-1995";805;18,156
+"Arizona-1996";726;15,818
+"Arizona-1997";757;15,97
+"Arizona-1998";804;16,454
+"Arizona-1999";766;15,247
+"Arizona-2000";783;15,261
+"Arizona-2001";762;14,45
+"Arizona-2002";884;16,382
+"Arizona-2003";840;15,244
+"Arizona-2004";879;15,551
+"Arizona-2005";944;16,167
+"Arizona-2006";976;16,188
+"Arizona-2007";1015;16,457
+"Arizona-2008";972;15,477
+"Arizona-2009";1058;16,679
+"Arizona-2010";1092;17,084
+"Arizona-2011";1160;17,937
+"Arizona-2012";1151;17,574
+"Arizona-2013";1162;17,541
+"Arizona-2014";1241;18,467
+"Arizona-2015";1276;18,716
+"Arizona-2016";1269;18,309
+"Arkansas-1990";293;12,455
+"Arkansas-1991";283;11,87
+"Arkansas-1992";293;12,125
+"Arkansas-1993";317;12,902
+"Arkansas-1994";364;14,59
+"Arkansas-1995";360;14,197
+"Arkansas-1996";323;12,552
+"Arkansas-1997";356;13,68
+"Arkansas-1998";344;13,092
+"Arkansas-1999";336;12,67
+"Arkansas-2000";349;13,055
+"Arkansas-2001";382;14,192
+"Arkansas-2002";376;13,895
+"Arkansas-2003";372;13,652
+"Arkansas-2004";361;13,129
+"Arkansas-2005";400;14,383
+"Arkansas-2006";371;13,148
+"Arkansas-2007";402;14,112
+"Arkansas-2008";446;15,515
+"Arkansas-2009";422;14,568
+"Arkansas-2010";447;15,33
+"Arkansas-2011";461;15,683
+"Arkansas-2012";485;16,437
+"Arkansas-2013";515;17,407
+"Arkansas-2014";514;17,324
+"Arkansas-2015";577;19,376
+"Arkansas-2016";553;18,506
+"California-1990";3708;12,431
+"California-1991";3716;12,191
+"California-1992";3723;12,012
+"California-1993";3875;12,382
+"California-1994";3712;11,782
+"California-1995";3694;11,646
+"California-1996";3408;10,634
+"California-1997";3430;10,549
+"California-1998";3415;10,342
+"California-1999";3069;9,161
+"California-2000";2963;8,748
+"California-2001";2819;8,176
+"California-2002";3218;9,228
+"California-2003";3391;9,619
+"California-2004";3349;9,414
+"California-2005";3195;8,918
+"California-2006";3323;9,225
+"California-2007";3586;9,892
+"California-2008";3765;10,286
+"California-2009";3810;10,308
+"California-2010";3904;10,479
+"California-2011";3990;10,59
+"California-2012";3887;10,226
+"California-2013";4012;10,466
+"California-2014";4205;10,871
+"California-2015";4165;10,681
+"California-2016";4277;10,897
+"Colorado-1990";554;16,811
+"Colorado-1991";563;16,618
+"Colorado-1992";598;17,101
+"Colorado-1993";607;16,792
+"Colorado-1994";614;16,481
+"Colorado-1995";654;17,086
+"Colorado-1996";694;17,698
+"Colorado-1997";611;15,203
+"Colorado-1998";611;14,837
+"Colorado-1999";574;13,583
+"Colorado-2000";613;14,252
+"Colorado-2001";722;16,314
+"Colorado-2002";726;16,168
+"Colorado-2003";728;16,075
+"Colorado-2004";796;17,399
+"Colorado-2005";799;17,25
+"Colorado-2006";730;15,465
+"Colorado-2007";811;16,882
+"Colorado-2008";801;16,381
+"Colorado-2009";941;18,925
+"Colorado-2010";865;17,2
+"Colorado-2011";910;17,779
+"Colorado-2012";1049;20,212
+"Colorado-2013";1007;19,117
+"Colorado-2014";1080;20,188
+"Colorado-2015";1093;20,059
+"Colorado-2016";1167;21,063
+"Connecticut-1990";299;9,094
+"Connecticut-1991";330;9,989
+"Connecticut-1992";298;9,027
+"Connecticut-1993";302;9,124
+"Connecticut-1994";324;9,768
+"Connecticut-1995";323;9,716
+"Connecticut-1996";292;8,748
+"Connecticut-1997";259;7,732
+"Connecticut-1998";257;7,634
+"Connecticut-1999";274;8,091
+"Connecticut-2000";304;8,927
+"Connecticut-2001";282;8,215
+"Connecticut-2002";260;7,517
+"Connecticut-2003";272;7,806
+"Connecticut-2004";293;8,381
+"Connecticut-2005";293;8,355
+"Connecticut-2006";291;8,273
+"Connecticut-2007";270;7,655
+"Connecticut-2008";314;8,856
+"Connecticut-2009";316;8,872
+"Connecticut-2010";353;9,877
+"Connecticut-2011";370;10,307
+"Connecticut-2012";367;10,212
+"Connecticut-2013";330;9,177
+"Connecticut-2014";378;10,524
+"Connecticut-2015";384;10,712
+"Connecticut-2016";396;11,072
+"Delaware-1990";80;11,998
+"Delaware-1991";79;11,558
+"Delaware-1992";88;12,661
+"Delaware-1993";94;13,301
+"Delaware-1994";80;11,144
+"Delaware-1995";80;10,957
+"Delaware-1996";97;13,085
+"Delaware-1997";87;11,572
+"Delaware-1998";68;8,902
+"Delaware-1999";86;11,097
+"Delaware-2000";82;10,465
+"Delaware-2001";107;13,447
+"Delaware-2002";74;9,179
+"Delaware-2003";94;11,491
+"Delaware-2004";93;11,194
+"Delaware-2005";83;9,821
+"Delaware-2006";90;10,474
+"Delaware-2007";95;10,898
+"Delaware-2008";109;12,332
+"Delaware-2009";107;11,999
+"Delaware-2010";106;11,805
+"Delaware-2011";105;11,565
+"Delaware-2012";125;13,632
+"Delaware-2013";122;13,184
+"Delaware-2014";126;13,477
+"Delaware-2015";122;12,923
+"Delaware-2016";119;12,499
+"District of Columbia-1990";37;6,069
+"District of Columbia-1991";34;5,632
+"District of Columbia-1992";34;5,666
+"District of Columbia-1993";43;7,194
+"District of Columbia-1994";29;4,905
+"District of Columbia-1995";39;6,698
+"District of Columbia-1996";35;6,098
+"District of Columbia-1997";35;6,15
+"District of Columbia-1998";43;7,589
+"District of Columbia-1999";30;5,261
+"District of Columbia-2000";23;4,021
+"District of Columbia-2001";40;6,963
+"District of Columbia-2002";31;5,409
+"District of Columbia-2003";36;6,332
+"District of Columbia-2004";33;5,812
+"District of Columbia-2005";32;5,642
+"District of Columbia-2006";30;5,257
+"District of Columbia-2007";35;6,093
+"District of Columbia-2008";43;7,411
+"District of Columbia-2009";29;4,897
+"District of Columbia-2010";41;6,814
+"District of Columbia-2011";37;5,963
+"District of Columbia-2012";37;5,824
+"District of Columbia-2013";38;5,854
+"District of Columbia-2014";52;7,891
+"District of Columbia-2015";34;5,072
+"District of Columbia-2016";40;5,872
+"Florida-1990";2086;16,105
+"Florida-1991";2095;15,667
+"Florida-1992";2027;14,845
+"Florida-1993";2130;15,288
+"Florida-1994";2075;14,567
+"Florida-1995";2165;14,885
+"Florida-1996";2153;14,488
+"Florida-1997";2098;13,808
+"Florida-1998";2172;14,016
+"Florida-1999";2027;12,862
+"Florida-2000";2086;13,052
+"Florida-2001";2309;14,116
+"Florida-2002";2334;13,985
+"Florida-2003";2292;13,479
+"Florida-2004";2384;13,689
+"Florida-2005";2338;13,104
+"Florida-2006";2426;13,354
+"Florida-2007";2583;14,063
+"Florida-2008";2737;14,773
+"Florida-2009";2852;15,29
+"Florida-2010";2786;14,818
+"Florida-2011";2876;15,06
+"Florida-2012";2998;15,498
+"Florida-2013";2918;14,901
+"Florida-2014";3029;15,23
+"Florida-2015";3200;15,806
+"Florida-2016";3137;15,219
+"Georgia-1990";880;13,573
+"Georgia-1991";893;13,417
+"Georgia-1992";811;11,891
+"Georgia-1993";856;12,261
+"Georgia-1994";835;11,66
+"Georgia-1995";825;11,25
+"Georgia-1996";867;11,55
+"Georgia-1997";903;11,74
+"Georgia-1998";822;10,444
+"Georgia-1999";872;10,838
+"Georgia-2000";846;10,334
+"Georgia-2001";931;11,114
+"Georgia-2002";903;10,613
+"Georgia-2003";963;11,168
+"Georgia-2004";966;11,016
+"Georgia-2005";924;10,352
+"Georgia-2006";921;10,059
+"Georgia-2007";996;10,652
+"Georgia-2008";980;10,311
+"Georgia-2009";1132;11,766
+"Georgia-2010";1129;11,654
+"Georgia-2011";1157;11,792
+"Georgia-2012";1165;11,75
+"Georgia-2013";1203;12,048
+"Georgia-2014";1292;12,808
+"Georgia-2015";1317;12,913
+"Georgia-2016";1403;13,608
+"Hawaii-1990";125;11,262
+"Hawaii-1991";107;9,407
+"Hawaii-1992";129;11,126
+"Hawaii-1993";120;10,224
+"Hawaii-1994";138;11,608
+"Hawaii-1995";142;11,853
+"Hawaii-1996";127;10,534
+"Hawaii-1997";138;11,376
+"Hawaii-1998";116;9,53
+"Hawaii-1999";136;11,237
+"Hawaii-2000";137;11,308
+"Hawaii-2001";136;11,093
+"Hawaii-2002";120;9,68
+"Hawaii-2003";130;10,39
+"Hawaii-2004";116;9,108
+"Hawaii-2005";107;8,277
+"Hawaii-2006";120;9,162
+"Hawaii-2007";133;10,109
+"Hawaii-2008";133;9,983
+"Hawaii-2009";174;12,92
+"Hawaii-2010";207;15,217
+"Hawaii-2011";180;13,064
+"Hawaii-2012";190;13,651
+"Hawaii-2013";171;12,158
+"Hawaii-2014";204;14,403
+"Hawaii-2015";201;14,104
+"Hawaii-2016";174;12,18
+"Idaho-1990";192;19,072
+"Idaho-1991";165;15,84
+"Idaho-1992";168;15,671
+"Idaho-1993";189;17,044
+"Idaho-1994";201;17,55
+"Idaho-1995";186;15,795
+"Idaho-1996";177;14,708
+"Idaho-1997";209;17,012
+"Idaho-1998";201;16,046
+"Idaho-1999";181;14,189
+"Idaho-2000";166;12,829
+"Idaho-2001";209;15,834
+"Idaho-2002";202;15,07
+"Idaho-2003";216;15,843
+"Idaho-2004";236;16,956
+"Idaho-2005";228;15,964
+"Idaho-2006";222;15,116
+"Idaho-2007";223;14,816
+"Idaho-2008";252;16,424
+"Idaho-2009";304;19,557
+"Idaho-2010";290;18,5
+"Idaho-2011";281;17,738
+"Idaho-2012";297;18,61
+"Idaho-2013";308;19,107
+"Idaho-2014";320;19,589
+"Idaho-2015";359;21,72
+"Idaho-2016";351;20,854
+"Illinois-1990";1158;10,12
+"Illinois-1991";1189;10,271
+"Illinois-1992";1142;9,762
+"Illinois-1993";1160;9,817
+"Illinois-1994";1068;8,96
+"Illinois-1995";1118;9,305
+"Illinois-1996";1061;8,762
+"Illinois-1997";901;7,39
+"Illinois-1998";1036;8,435
+"Illinois-1999";1020;8,253
+"Illinois-2000";1002;8,068
+"Illinois-2001";1138;9,112
+"Illinois-2002";1140;9,101
+"Illinois-2003";1007;8,02
+"Illinois-2004";1026;8,149
+"Illinois-2005";1084;8,596
+"Illinois-2006";1008;7,972
+"Illinois-2007";1106;8,711
+"Illinois-2008";1197;9,39
+"Illinois-2009";1176;9,19
+"Illinois-2010";1177;9,173
+"Illinois-2011";1221;9,495
+"Illinois-2012";1291;10,03
+"Illinois-2013";1319;10,241
+"Illinois-2014";1396;10,849
+"Illinois-2015";1361;10,6
+"Illinois-2016";1413;11,038
+"Indiana-1990";728;13,125
+"Indiana-1991";703;12,51
+"Indiana-1992";695;12,245
+"Indiana-1993";731;12,733
+"Indiana-1994";718;12,39
+"Indiana-1995";698;11,926
+"Indiana-1996";738;12,491
+"Indiana-1997";729;12,239
+"Indiana-1998";699;11,648
+"Indiana-1999";628;10,389
+"Indiana-2000";682;11,216
+"Indiana-2001";715;11,668
+"Indiana-2002";743;12,07
+"Indiana-2003";736;11,877
+"Indiana-2004";703;11,279
+"Indiana-2005";745;11,866
+"Indiana-2006";822;12,98
+"Indiana-2007";790;12,383
+"Indiana-2008";809;12,592
+"Indiana-2009";826;12,788
+"Indiana-2010";864;13,326
+"Indiana-2011";878;13,474
+"Indiana-2012";940;14,378
+"Indiana-2013";943;14,355
+"Indiana-2014";947;14,359
+"Indiana-2015";959;14,502
+"Indiana-2016";1033;15,574
+"Iowa-1990";336;12,101
+"Iowa-1991";335;11,97
+"Iowa-1992";287;10,181
+"Iowa-1993";318;11,206
+"Iowa-1994";322;11,292
+"Iowa-1995";335;11,68
+"Iowa-1996";321;11,142
+"Iowa-1997";345;11,932
+"Iowa-1998";329;11,331
+"Iowa-1999";305;10,454
+"Iowa-2000";289;9,876
+"Iowa-2001";303;10,334
+"Iowa-2002";314;10,701
+"Iowa-2003";352;11,965
+"Iowa-2004";343;11,613
+"Iowa-2005";332;11,199
+"Iowa-2006";334;11,198
+"Iowa-2007";322;10,736
+"Iowa-2008";380;12,596
+"Iowa-2009";361;11,903
+"Iowa-2010";371;12,178
+"Iowa-2011";422;13,767
+"Iowa-2012";383;12,45
+"Iowa-2013";447;14,457
+"Iowa-2014";407;13,095
+"Iowa-2015";432;13,837
+"Iowa-2016";450;14,355
+"Kansas-1990";297;11,986
+"Kansas-1991";310;12,402
+"Kansas-1992";311;12,276
+"Kansas-1993";336;13,137
+"Kansas-1994";292;11,311
+"Kansas-1995";291;11,183
+"Kansas-1996";334;12,77
+"Kansas-1997";320;12,14
+"Kansas-1998";325;12,21
+"Kansas-1999";299;11,164
+"Kansas-2000";325;12,089
+"Kansas-2001";292;10,806
+"Kansas-2002";344;12,677
+"Kansas-2003";347;12,743
+"Kansas-2004";370;13,531
+"Kansas-2005";361;13,15
+"Kansas-2006";379;13,717
+"Kansas-2007";382;13,722
+"Kansas-2008";337;12,001
+"Kansas-2009";381;13,45
+"Kansas-2010";401;14,055
+"Kansas-2011";394;13,731
+"Kansas-2012";502;17,399
+"Kansas-2013";424;14,657
+"Kansas-2014";455;15,693
+"Kansas-2015";477;16,41
+"Kansas-2016";514;17,68
+"Kentucky-1990";549;14,889
+"Kentucky-1991";490;13,156
+"Kentucky-1992";493;13,089
+"Kentucky-1993";523;13,715
+"Kentucky-1994";517;13,428
+"Kentucky-1995";480;12,346
+"Kentucky-1996";488;12,447
+"Kentucky-1997";488;12,344
+"Kentucky-1998";526;13,192
+"Kentucky-1999";470;11,697
+"Kentucky-2000";520;12,866
+"Kentucky-2001";492;12,094
+"Kentucky-2002";539;13,179
+"Kentucky-2003";567;13,772
+"Kentucky-2004";560;13,507
+"Kentucky-2005";566;13,532
+"Kentucky-2006";619;14,671
+"Kentucky-2007";649;15,247
+"Kentucky-2008";611;14,243
+"Kentucky-2009";592;13,713
+"Kentucky-2010";631;14,541
+"Kentucky-2011";675;15,449
+"Kentucky-2012";722;16,466
+"Kentucky-2013";698;15,862
+"Kentucky-2014";728;16,497
+"Kentucky-2015";775;17,516
+"Kentucky-2016";756;17,039
+"Louisiana-1990";558;13,215
+"Louisiana-1991";558;13,108
+"Louisiana-1992";529;12,317
+"Louisiana-1993";530;12,271
+"Louisiana-1994";552;12,69
+"Louisiana-1995";544;12,417
+"Louisiana-1996";531;12,063
+"Louisiana-1997";528;11,934
+"Louisiana-1998";480;10,802
+"Louisiana-1999";518;11,612
+"Louisiana-2000";467;10,45
+"Louisiana-2001";491;10,965
+"Louisiana-2002";497;11,051
+"Louisiana-2003";460;10,175
+"Louisiana-2004";537;11,796
+"Louisiana-2005";505;11,034
+"Louisiana-2006";490;11,388
+"Louisiana-2007";521;11,907
+"Louisiana-2008";531;11,971
+"Louisiana-2009";490;10,909
+"Louisiana-2010";557;12,287
+"Louisiana-2011";571;12,48
+"Louisiana-2012";567;12,317
+"Louisiana-2013";581;12,558
+"Louisiana-2014";678;14,587
+"Louisiana-2015";721;15,442
+"Louisiana-2016";676;14,439
+"Maine-1990";155;12,624
+"Maine-1991";177;14,303
+"Maine-1992";157;12,674
+"Maine-1993";181;14,568
+"Maine-1994";168;13,517
+"Maine-1995";161;12,947
+"Maine-1996";171;13,689
+"Maine-1997";137;10,918
+"Maine-1998";196;15,563
+"Maine-1999";175;13,814
+"Maine-2000";154;12,079
+"Maine-2001";160;12,445
+"Maine-2002";166;12,809
+"Maine-2003";137;10,486
+"Maine-2004";171;13,017
+"Maine-2005";175;13,27
+"Maine-2006";158;11,937
+"Maine-2007";190;14,318
+"Maine-2008";181;13,604
+"Maine-2009";197;14,817
+"Maine-2010";186;14,002
+"Maine-2011";233;17,542
+"Maine-2012";209;15,727
+"Maine-2013";245;18,434
+"Maine-2014";220;16,532
+"Maine-2015";235;17,676
+"Maine-2016";225;16,899
+"Maryland-1990";486;10,159
+"Maryland-1991";429;8,812
+"Maryland-1992";461;9,361
+"Maryland-1993";529;10,639
+"Maryland-1994";528;10,51
+"Maryland-1995";509;10,039
+"Maryland-1996";501;9,798
+"Maryland-1997";519;10,065
+"Maryland-1998";497;9,547
+"Maryland-1999";433;8,241
+"Maryland-2000";474;8,949
+"Maryland-2001";452;8,41
+"Maryland-2002";477;8,768
+"Maryland-2003";491;8,933
+"Maryland-2004";497;8,96
+"Maryland-2005";471;8,422
+"Maryland-2006";493;8,761
+"Maryland-2007";517;9,145
+"Maryland-2008";503;8,848
+"Maryland-2009";551;9,615
+"Maryland-2010";502;8,695
+"Maryland-2011";556;9,515
+"Maryland-2012";582;9,882
+"Maryland-2013";567;9,56
+"Maryland-2014";605;10,139
+"Maryland-2015";553;9,224
+"Maryland-2016";585;9,723
+"Massachusetts-1990";528;8,772
+"Massachusetts-1991";489;8,123
+"Massachusetts-1992";534;8,855
+"Massachusetts-1993";467;7,704
+"Massachusetts-1994";512;8,398
+"Massachusetts-1995";489;7,962
+"Massachusetts-1996";490;7,928
+"Massachusetts-1997";492;7,9
+"Massachusetts-1998";506;8,064
+"Massachusetts-1999";431;6,822
+"Massachusetts-2000";385;6,064
+"Massachusetts-2001";426;6,659
+"Massachusetts-2002";436;6,794
+"Massachusetts-2003";433;6,742
+"Massachusetts-2004";423;6,597
+"Massachusetts-2005";480;7,496
+"Massachusetts-2006";449;7,005
+"Massachusetts-2007";516;8,023
+"Massachusetts-2008";508;7,853
+"Massachusetts-2009";530;8,132
+"Massachusetts-2010";597;9,118
+"Massachusetts-2011";585;8,848
+"Massachusetts-2012";602;9,042
+"Massachusetts-2013";570;8,499
+"Massachusetts-2014";596;8,83
+"Massachusetts-2015";642;9,463
+"Massachusetts-2016";630;9,249
+"Michigan-1990";1073;11,54
+"Michigan-1991";1142;12,142
+"Michigan-1992";1068;11,264
+"Michigan-1993";1084;11,36
+"Michigan-1994";1036;10,79
+"Michigan-1995";980;10,126
+"Michigan-1996";1114;11,412
+"Michigan-1997";1010;10,294
+"Michigan-1998";969;9,836
+"Michigan-1999";974;9,841
+"Michigan-2000";974;9,8
+"Michigan-2001";1049;10,499
+"Michigan-2002";1106;11,043
+"Michigan-2003";1027;10,228
+"Michigan-2004";1097;10,91
+"Michigan-2005";1108;11,024
+"Michigan-2006";1137;11,329
+"Michigan-2007";1129;11,289
+"Michigan-2008";1179;11,853
+"Michigan-2009";1169;11,806
+"Michigan-2010";1262;12,769
+"Michigan-2011";1221;12,363
+"Michigan-2012";1258;12,723
+"Michigan-2013";1293;13,062
+"Michigan-2014";1352;13,635
+"Michigan-2015";1408;14,197
+"Michigan-2016";1362;13,718
+"Minnesota-1990";546;12,482
+"Minnesota-1991";511;11,502
+"Minnesota-1992";513;11,41
+"Minnesota-1993";498;10,928
+"Minnesota-1994";494;10,712
+"Minnesota-1995";520;11,156
+"Minnesota-1996";491;10,416
+"Minnesota-1997";472;9,907
+"Minnesota-1998";459;9,533
+"Minnesota-1999";437;8,967
+"Minnesota-2000";440;8,944
+"Minnesota-2001";478;9,593
+"Minnesota-2002";494;9,843
+"Minnesota-2003";497;9,835
+"Minnesota-2004";522;10,26
+"Minnesota-2005";546;10,665
+"Minnesota-2006";554;10,729
+"Minnesota-2007";572;10,985
+"Minnesota-2008";595;11,34
+"Minnesota-2009";583;11,039
+"Minnesota-2010";603;11,369
+"Minnesota-2011";681;12,732
+"Minnesota-2012";655;12,174
+"Minnesota-2013";676;12,476
+"Minnesota-2014";686;12,58
+"Minnesota-2015";729;13,297
+"Minnesota-2016";745;13,496
+"Mississippi-1990";289;11,223
+"Mississippi-1991";325;12,495
+"Mississippi-1992";333;12,687
+"Mississippi-1993";327;12,31
+"Mississippi-1994";315;11,708
+"Mississippi-1995";319;11,71
+"Mississippi-1996";310;11,273
+"Mississippi-1997";339;12,201
+"Mississippi-1998";329;11,72
+"Mississippi-1999";304;10,748
+"Mississippi-2000";293;10,3
+"Mississippi-2001";328;11,497
+"Mississippi-2002";343;11,999
+"Mississippi-2003";336;11,714
+"Mississippi-2004";350;12,115
+"Mississippi-2005";362;12,457
+"Mississippi-2006";325;11,188
+"Mississippi-2007";395;13,489
+"Mississippi-2008";409;13,875
+"Mississippi-2009";381;12,877
+"Mississippi-2010";388;13,076
+"Mississippi-2011";389;13,062
+"Mississippi-2012";410;13,736
+"Mississippi-2013";388;12,974
+"Mississippi-2014";380;12,699
+"Mississippi-2015";429;14,351
+"Mississippi-2016";383;12,815
+"Missouri-1990";708;13,829
+"Missouri-1991";714;13,801
+"Missouri-1992";626;11,996
+"Missouri-1993";672;12,744
+"Missouri-1994";728;13,668
+"Missouri-1995";721;13,402
+"Missouri-1996";760;13,986
+"Missouri-1997";710;12,948
+"Missouri-1998";698;12,634
+"Missouri-1999";700;12,586
+"Missouri-2000";699;12,493
+"Missouri-2001";721;12,781
+"Missouri-2002";691;12,177
+"Missouri-2003";677;11,858
+"Missouri-2004";712;12,387
+"Missouri-2005";722;12,469
+"Missouri-2006";796;13,624
+"Missouri-2007";807;13,707
+"Missouri-2008";778;13,133
+"Missouri-2009";857;14,377
+"Missouri-2010";856;14,293
+"Missouri-2011";933;15,522
+"Missouri-2012";913;15,152
+"Missouri-2013";959;15,87
+"Missouri-2014";1016;16,763
+"Missouri-2015";1050;17,281
+"Missouri-2016";1133;18,595
+"Montana-1990";167;20,907
+"Montana-1991";161;19,878
+"Montana-1992";153;18,526
+"Montana-1993";155;18,344
+"Montana-1994";158;18,341
+"Montana-1995";201;22,922
+"Montana-1996";174;19,631
+"Montana-1997";183;20,559
+"Montana-1998";158;17,7
+"Montana-1999";162;18,05
+"Montana-2000";158;17,513
+"Montana-2001";175;19,295
+"Montana-2002";184;20,183
+"Montana-2003";180;19,573
+"Montana-2004";175;18,817
+"Montana-2005";206;21,913
+"Montana-2006";189;19,839
+"Montana-2007";196;20,317
+"Montana-2008";203;20,79
+"Montana-2009";218;22,155
+"Montana-2010";225;22,741
+"Montana-2011";232;23,251
+"Montana-2012";233;23,18
+"Montana-2013";243;23,957
+"Montana-2014";250;24,441
+"Montana-2015";271;26,258
+"Montana-2016";267;25,611
+"Nebraska-1990";220;13,941
+"Nebraska-1991";191;11,962
+"Nebraska-1992";188;11,661
+"Nebraska-1993";171;10,514
+"Nebraska-1994";188;11,465
+"Nebraska-1995";187;11,281
+"Nebraska-1996";189;11,287
+"Nebraska-1997";176;10,434
+"Nebraska-1998";204;12,025
+"Nebraska-1999";177;10,383
+"Nebraska-2000";193;11,278
+"Nebraska-2001";187;10,873
+"Nebraska-2002";201;11,63
+"Nebraska-2003";176;10,123
+"Nebraska-2004";166;9,489
+"Nebraska-2005";187;10,616
+"Nebraska-2006";202;11,395
+"Nebraska-2007";181;10,149
+"Nebraska-2008";190;10,577
+"Nebraska-2009";170;9,378
+"Nebraska-2010";192;10,513
+"Nebraska-2011";192;10,422
+"Nebraska-2012";231;12,448
+"Nebraska-2013";220;11,774
+"Nebraska-2014";251;13,343
+"Nebraska-2015";223;11,775
+"Nebraska-2016";246;12,899
+"Nevada-1990";294;24,44
+"Nevada-1991";319;24,606
+"Nevada-1992";329;24,33
+"Nevada-1993";323;22,882
+"Nevada-1994";341;22,737
+"Nevada-1995";395;24,969
+"Nevada-1996";335;20,096
+"Nevada-1997";411;23,293
+"Nevada-1998";397;21,412
+"Nevada-1999";404;20,882
+"Nevada-2000";400;20,017
+"Nevada-2001";387;18,443
+"Nevada-2002";423;19,459
+"Nevada-2003";432;19,21
+"Nevada-2004";440;18,754
+"Nevada-2005";480;19,736
+"Nevada-2006";485;19,226
+"Nevada-2007";471;18,108
+"Nevada-2008";526;19,822
+"Nevada-2009";503;18,736
+"Nevada-2010";546;20,218
+"Nevada-2011";516;18,982
+"Nevada-2012";524;19,037
+"Nevada-2013";541;19,415
+"Nevada-2014";572;20,191
+"Nevada-2015";558;19,35
+"Nevada-2016";650;22,108
+"New Hampshire-1990";149;13,435
+"New Hampshire-1991";130;11,71
+"New Hampshire-1992";137;12,254
+"New Hampshire-1993";144;12,748
+"New Hampshire-1994";137;11,99
+"New Hampshire-1995";137;11,836
+"New Hampshire-1996";137;11,661
+"New Hampshire-1997";136;11,435
+"New Hampshire-1998";154;12,768
+"New Hampshire-1999";137;11,211
+"New Hampshire-2000";130;10,52
+"New Hampshire-2001";166;13,222
+"New Hampshire-2002";132;10,401
+"New Hampshire-2003";158;12,345
+"New Hampshire-2004";133;10,309
+"New Hampshire-2005";162;12,476
+"New Hampshire-2006";151;11,541
+"New Hampshire-2007";157;11,962
+"New Hampshire-2008";179;13,603
+"New Hampshire-2009";166;12,613
+"New Hampshire-2010";196;14,888
+"New Hampshire-2011";198;15,017
+"New Hampshire-2012";201;15,214
+"New Hampshire-2013";185;13,987
+"New Hampshire-2014";247;18,589
+"New Hampshire-2015";228;17,141
+"New Hampshire-2016";244;18,28
+"New Jersey-1990";567;7,33
+"New Jersey-1991";513;6,562
+"New Jersey-1992";513;6,508
+"New Jersey-1993";558;7,018
+"New Jersey-1994";578;7,209
+"New Jersey-1995";578;7,149
+"New Jersey-1996";586;7,187
+"New Jersey-1997";586;7,127
+"New Jersey-1998";581;7,006
+"New Jersey-1999";563;6,735
+"New Jersey-2000";559;6,643
+"New Jersey-2001";588;6,924
+"New Jersey-2002";553;6,466
+"New Jersey-2003";587;6,824
+"New Jersey-2004";596;6,902
+"New Jersey-2005";535;6,184
+"New Jersey-2006";583;6,731
+"New Jersey-2007";592;6,822
+"New Jersey-2008";612;7,026
+"New Jersey-2009";554;6,327
+"New Jersey-2010";719;8,178
+"New Jersey-2011";687;7,77
+"New Jersey-2012";678;7,641
+"New Jersey-2013";754;8,473
+"New Jersey-2014";786;8,807
+"New Jersey-2015";787;8,808
+"New Jersey-2016";685;7,658
+"New Mexico-1990";283;18,671
+"New Mexico-1991";283;18,189
+"New Mexico-1992";303;18,987
+"New Mexico-1993";287;17,533
+"New Mexico-1994";303;18,003
+"New Mexico-1995";297;17,261
+"New Mexico-1996";318;18,139
+"New Mexico-1997";300;16,9
+"New Mexico-1998";297;16,552
+"New Mexico-1999";318;17,588
+"New Mexico-2000";327;17,976
+"New Mexico-2001";361;19,709
+"New Mexico-2002";349;18,811
+"New Mexico-2003";341;18,162
+"New Mexico-2004";355;18,647
+"New Mexico-2005";340;17,596
+"New Mexico-2006";352;17,94
+"New Mexico-2007";401;20,15
+"New Mexico-2008";417;20,739
+"New Mexico-2009";375;18,411
+"New Mexico-2010";412;20,008
+"New Mexico-2011";417;20,07
+"New Mexico-2012";441;21,163
+"New Mexico-2013";428;20,526
+"New Mexico-2014";449;21,555
+"New Mexico-2015";500;24,035
+"New Mexico-2016";471;22,633
+"New York-1990";1553;8,623
+"New York-1991";1584;8,737
+"New York-1992";1532;8,393
+"New York-1993";1384;7,529
+"New York-1994";1498;8,111
+"New York-1995";1370;7,392
+"New York-1996";1327;7,134
+"New York-1997";1372;7,349
+"New York-1998";1364;7,266
+"New York-1999";1195;6,329
+"New York-2000";1131;5,96
+"New York-2001";1251;6,556
+"New York-2002";1227;6,411
+"New York-2003";1166;6,081
+"New York-2004";1181;6,16
+"New York-2005";1187;6,204
+"New York-2006";1325;6,935
+"New York-2007";1393;7,281
+"New York-2008";1405;7,313
+"New York-2009";1414;7,324
+"New York-2010";1545;7,973
+"New York-2011";1649;8,448
+"New York-2012";1704;8,693
+"New York-2013";1684;8,56
+"New York-2014";1694;8,591
+"New York-2015";1650;8,356
+"New York-2016";1675;8,483
+"North Carolina-1990";929;14,005
+"North Carolina-1991";844;12,437
+"North Carolina-1992";860;12,462
+"North Carolina-1993";789;11,199
+"North Carolina-1994";897;12,475
+"North Carolina-1995";908;12,358
+"North Carolina-1996";908;12,098
+"North Carolina-1997";906;11,826
+"North Carolina-1998";857;10,967
+"North Carolina-1999";884;11,12
+"North Carolina-2000";971;12,063
+"North Carolina-2001";997;12,144
+"North Carolina-2002";986;11,842
+"North Carolina-2003";953;11,315
+"North Carolina-2004";1025;11,984
+"North Carolina-2005";1008;11,579
+"North Carolina-2006";1098;12,313
+"North Carolina-2007";1074;11,779
+"North Carolina-2008";1160;12,46
+"North Carolina-2009";1173;12,413
+"North Carolina-2010";1172;12,291
+"North Carolina-2011";1213;12,569
+"North Carolina-2012";1283;13,164
+"North Carolina-2013";1279;12,996
+"North Carolina-2014";1352;13,609
+"North Carolina-2015";1403;13,981
+"North Carolina-2016";1370;13,502
+"North Dakota-1990";73;11,436
+"North Dakota-1991";74;11,632
+"North Dakota-1992";65;10,179
+"North Dakota-1993";79;12,315
+"North Dakota-1994";80;12,403
+"North Dakota-1995";94;14,506
+"North Dakota-1996";77;11,836
+"North Dakota-1997";80;12,309
+"North Dakota-1998";72;11,118
+"North Dakota-1999";73;11,331
+"North Dakota-2000";68;10,589
+"North Dakota-2001";79;12,362
+"North Dakota-2002";91;14,26
+"North Dakota-2003";81;12,68
+"North Dakota-2004";73;11,323
+"North Dakota-2005";92;14,24
+"North Dakota-2006";90;13,858
+"North Dakota-2007";95;14,552
+"North Dakota-2008";86;13,078
+"North Dakota-2009";90;13,534
+"North Dakota-2010";106;15,76
+"North Dakota-2011";101;14,734
+"North Dakota-2012";105;14,955
+"North Dakota-2013";128;17,679
+"North Dakota-2014";137;18,516
+"North Dakota-2015";124;16,384
+"North Dakota-2016";140;18,471
+"Ohio-1990";1188;10,949
+"Ohio-1991";1237;11,296
+"Ohio-1992";1194;10,824
+"Ohio-1993";1155;10,402
+"Ohio-1994";1101;9,87
+"Ohio-1995";1077;9,612
+"Ohio-1996";1054;9,373
+"Ohio-1997";1126;9,983
+"Ohio-1998";1108;9,792
+"Ohio-1999";1102;9,722
+"Ohio-2000";1087;9,574
+"Ohio-2001";1218;10,696
+"Ohio-2002";1285;11,264
+"Ohio-2003";1072;9,375
+"Ohio-2004";1316;11,491
+"Ohio-2005";1340;11,689
+"Ohio-2006";1319;11,488
+"Ohio-2007";1293;11,243
+"Ohio-2008";1410;12,244
+"Ohio-2009";1174;10,183
+"Ohio-2010";1436;12,447
+"Ohio-2011";1462;12,664
+"Ohio-2012";1537;13,306
+"Ohio-2013";1525;13,181
+"Ohio-2014";1491;12,86
+"Ohio-2015";1649;14,209
+"Ohio-2016";1705;14,68
+"Oklahoma-1990";392;12,46
+"Oklahoma-1991";442;13,914
+"Oklahoma-1992";472;14,652
+"Oklahoma-1993";491;15,092
+"Oklahoma-1994";451;13,741
+"Oklahoma-1995";502;15,167
+"Oklahoma-1996";467;13,975
+"Oklahoma-1997";497;14,728
+"Oklahoma-1998";471;13,823
+"Oklahoma-1999";492;14,314
+"Oklahoma-2000";497;14,403
+"Oklahoma-2001";515;14,854
+"Oklahoma-2002";501;14,359
+"Oklahoma-2003";475;13,552
+"Oklahoma-2004";505;14,325
+"Oklahoma-2005";513;14,456
+"Oklahoma-2006";535;14,886
+"Oklahoma-2007";530;14,583
+"Oklahoma-2008";574;15,645
+"Oklahoma-2009";566;15,225
+"Oklahoma-2010";617;16,447
+"Oklahoma-2011";691;18,25
+"Oklahoma-2012";667;17,474
+"Oklahoma-2013";665;17,262
+"Oklahoma-2014";733;18,904
+"Oklahoma-2015";790;20,218
+"Oklahoma-2016";821;20,925
+"Oregon-1990";449;15,792
+"Oregon-1991";453;15,466
+"Oregon-1992";488;16,308
+"Oregon-1993";465;15,189
+"Oregon-1994";512;16,4
+"Oregon-1995";497;15,604
+"Oregon-1996";520;16,008
+"Oregon-1997";534;16,158
+"Oregon-1998";545;16,248
+"Oregon-1999";477;14,054
+"Oregon-2000";493;14,409
+"Oregon-2001";503;14,504
+"Oregon-2002";517;14,715
+"Oregon-2003";591;16,66
+"Oregon-2004";554;15,521
+"Oregon-2005";559;15,471
+"Oregon-2006";576;15,691
+"Oregon-2007";590;15,85
+"Oregon-2008";571;15,151
+"Oregon-2009";642;16,857
+"Oregon-2010";684;17,854
+"Oregon-2011";654;16,908
+"Oregon-2012";723;18,543
+"Oregon-2013";695;17,704
+"Oregon-2014";781;19,681
+"Oregon-2015";760;18,884
+"Oregon-2016";771;18,835
+"Pennsylvania-1990";1452;12,215
+"Pennsylvania-1991";1397;11,653
+"Pennsylvania-1992";1389;11,524
+"Pennsylvania-1993";1412;11,647
+"Pennsylvania-1994";1326;10,896
+"Pennsylvania-1995";1459;11,958
+"Pennsylvania-1996";1428;11,681
+"Pennsylvania-1997";1412;11,545
+"Pennsylvania-1998";1370;11,183
+"Pennsylvania-1999";1284;10,47
+"Pennsylvania-2000";1356;11,041
+"Pennsylvania-2001";1270;10,326
+"Pennsylvania-2002";1336;10,834
+"Pennsylvania-2003";1338;10,812
+"Pennsylvania-2004";1410;11,361
+"Pennsylvania-2005";1426;11,454
+"Pennsylvania-2006";1390;11,11
+"Pennsylvania-2007";1435;11,422
+"Pennsylvania-2008";1536;12,179
+"Pennsylvania-2009";1628;12,852
+"Pennsylvania-2010";1574;12,391
+"Pennsylvania-2011";1745;13,692
+"Pennsylvania-2012";1646;12,888
+"Pennsylvania-2013";1786;13,973
+"Pennsylvania-2014";1812;14,167
+"Pennsylvania-2015";1894;14,806
+"Pennsylvania-2016";1967;15,386
+"Rhode Island-1990";127;12,649
+"Rhode Island-1991";82;8,112
+"Rhode Island-1992";73;7,209
+"Rhode Island-1993";90;8,867
+"Rhode Island-1994";82;8,072
+"Rhode Island-1995";89;8,756
+"Rhode Island-1996";83;8,133
+"Rhode Island-1997";72;7,025
+"Rhode Island-1998";86;8,339
+"Rhode Island-1999";96;9,227
+"Rhode Island-2000";75;7,154
+"Rhode Island-2001";87;8,23
+"Rhode Island-2002";86;8,068
+"Rhode Island-2003";84;7,841
+"Rhode Island-2004";84;7,817
+"Rhode Island-2005";70;6,555
+"Rhode Island-2006";90;8,466
+"Rhode Island-2007";96;9,08
+"Rhode Island-2008";110;10,427
+"Rhode Island-2009";117;11,104
+"Rhode Island-2010";128;12,161
+"Rhode Island-2011";100;9,502
+"Rhode Island-2012";105;9,972
+"Rhode Island-2013";132;12,535
+"Rhode Island-2014";111;10,527
+"Rhode Island-2015";126;11,936
+"Rhode Island-2016";126;11,927
+"South Carolina-1990";434;12,437
+"South Carolina-1991";420;11,758
+"South Carolina-1992";465;12,838
+"South Carolina-1993";491;13,399
+"South Carolina-1994";468;12,626
+"South Carolina-1995";436;11,628
+"South Carolina-1996";497;13,088
+"South Carolina-1997";432;11,19
+"South Carolina-1998";449;11,452
+"South Carolina-1999";418;10,517
+"South Carolina-2000";442;11,017
+"South Carolina-2001";467;11,488
+"South Carolina-2002";437;10,638
+"South Carolina-2003";475;11,445
+"South Carolina-2004";480;11,399
+"South Carolina-2005";510;11,943
+"South Carolina-2006";524;12,024
+"South Carolina-2007";528;11,881
+"South Carolina-2008";565;12,475
+"South Carolina-2009";616;13,421
+"South Carolina-2010";637;13,772
+"South Carolina-2011";658;14,082
+"South Carolina-2012";673;14,256
+"South Carolina-2013";695;14,577
+"South Carolina-2014";753;15,595
+"South Carolina-2015";739;15,098
+"South Carolina-2016";815;16,428
+"South Dakota-1990";91;13,078
+"South Dakota-1991";95;13,494
+"South Dakota-1992";79;11,078
+"South Dakota-1993";117;16,194
+"South Dakota-1994";97;13,267
+"South Dakota-1995";86;11,647
+"South Dakota-1996";124;16,696
+"South Dakota-1997";127;17,06
+"South Dakota-1998";115;15,405
+"South Dakota-1999";103;13,726
+"South Dakota-2000";95;12,585
+"South Dakota-2001";105;13,853
+"South Dakota-2002";94;12,368
+"South Dakota-2003";102;13,356
+"South Dakota-2004";111;14,408
+"South Dakota-2005";121;15,603
+"South Dakota-2006";125;15,964
+"South Dakota-2007";100;12,632
+"South Dakota-2008";123;15,392
+"South Dakota-2009";129;15,984
+"South Dakota-2010";140;17,195
+"South Dakota-2011";128;15,526
+"South Dakota-2012";141;16,898
+"South Dakota-2013";147;17,398
+"South Dakota-2014";141;16,538
+"South Dakota-2015";172;20,049
+"South Dakota-2016";163;18,834
+"Tennessee-1990";653;13,379
+"Tennessee-1991";662;13,323
+"Tennessee-1992";650;12,868
+"Tennessee-1993";673;13,095
+"Tennessee-1994";660;12,611
+"Tennessee-1995";681;12,779
+"Tennessee-1996";691;12,75
+"Tennessee-1997";729;13,251
+"Tennessee-1998";744;13,348
+"Tennessee-1999";726;12,875
+"Tennessee-2000";728;12,796
+"Tennessee-2001";710;12,346
+"Tennessee-2002";778;13,423
+"Tennessee-2003";761;13,013
+"Tennessee-2004";792;13,399
+"Tennessee-2005";856;14,288
+"Tennessee-2006";871;14,305
+"Tennessee-2007";842;13,634
+"Tennessee-2008";973;15,574
+"Tennessee-2009";941;14,922
+"Tennessee-2010";941;14,828
+"Tennessee-2011";954;14,912
+"Tennessee-2012";977;15,137
+"Tennessee-2013";1028;15,828
+"Tennessee-2014";996;15,219
+"Tennessee-2015";1068;16,194
+"Tennessee-2016";1108;16,659
+"Texas-1990";2206;12,97
+"Texas-1991";2249;12,921
+"Texas-1992";2258;12,709
+"Texas-1993";2266;12,471
+"Texas-1994";2337;12,583
+"Texas-1995";2234;11,778
+"Texas-1996";2223;11,487
+"Texas-1997";2146;10,865
+"Texas-1998";2133;10,574
+"Texas-1999";2004;9,748
+"Texas-2000";2048;9,822
+"Texas-2001";2221;10,418
+"Texas-2002";2307;10,636
+"Texas-2003";2358;10,703
+"Texas-2004";2293;10,239
+"Texas-2005";2410;10,58
+"Texas-2006";2344;10,034
+"Texas-2007";2432;10,205
+"Texas-2008";2547;10,478
+"Texas-2009";2806;11,314
+"Texas-2010";2886;11,477
+"Texas-2011";2887;11,257
+"Texas-2012";3029;11,618
+"Texas-2013";3054;11,536
+"Texas-2014";3248;12,054
+"Texas-2015";3400;12,395
+"Texas-2016";3477;12,479
+"Utah-1990";264;15,319
+"Utah-1991";286;16,065
+"Utah-1992";256;13,929
+"Utah-1993";260;13,692
+"Utah-1994";291;14,839
+"Utah-1995";288;14,295
+"Utah-1996";287;13,868
+"Utah-1997";301;14,196
+"Utah-1998";336;15,5
+"Utah-1999";281;12,753
+"Utah-2000";298;13,344
+"Utah-2001";319;13,968
+"Utah-2002";340;14,625
+"Utah-2003";336;14,236
+"Utah-2004";376;15,656
+"Utah-2005";344;13,997
+"Utah-2006";362;14,334
+"Utah-2007";378;14,551
+"Utah-2008";390;14,645
+"Utah-2009";448;16,45
+"Utah-2010";471;17,041
+"Utah-2011";500;17,755
+"Utah-2012";549;19,224
+"Utah-2013";579;19,947
+"Utah-2014";559;19,002
+"Utah-2015";629;21,032
+"Utah-2016";619;20,287
+"Vermont-1990";84;14,934
+"Vermont-1991";92;16,178
+"Vermont-1992";80;13,963
+"Vermont-1993";92;15,919
+"Vermont-1994";58;9,93
+"Vermont-1995";76;12,904
+"Vermont-1996";66;11,113
+"Vermont-1997";73;12,219
+"Vermont-1998";86;14,317
+"Vermont-1999";63;10,419
+"Vermont-2000";77;12,647
+"Vermont-2001";72;11,76
+"Vermont-2002";90;14,624
+"Vermont-2003";83;13,434
+"Vermont-2004";93;15,002
+"Vermont-2005";77;12,395
+"Vermont-2006";81;13,004
+"Vermont-2007";89;14,275
+"Vermont-2008";94;15,06
+"Vermont-2009";87;13,924
+"Vermont-2010";106;16,94
+"Vermont-2011";120;19,147
+"Vermont-2012";87;13,888
+"Vermont-2013";111;17,699
+"Vermont-2014";124;19,777
+"Vermont-2015";103;16,451
+"Vermont-2016";117;18,732
+"Virginia-1990";799;12,905
+"Virginia-1991";793;12,58
+"Virginia-1992";812;12,653
+"Virginia-1993";783;12,023
+"Virginia-1994";821;12,445
+"Virginia-1995";827;12,392
+"Virginia-1996";829;12,273
+"Virginia-1997";762;11,154
+"Virginia-1998";827;11,977
+"Virginia-1999";791;11,3
+"Virginia-2000";768;10,85
+"Virginia-2001";796;11,058
+"Virginia-2002";799;10,965
+"Virginia-2003";807;10,954
+"Virginia-2004";828;11,076
+"Virginia-2005";865;11,416
+"Virginia-2006";874;11,39
+"Virginia-2007";878;11,328
+"Virginia-2008";947;12,089
+"Virginia-2009";962;12,137
+"Virginia-2010";961;12,011
+"Virginia-2011";1053;12,984
+"Virginia-2012";1062;12,964
+"Virginia-2013";1068;12,926
+"Virginia-2014";1121;13,478
+"Virginia-2015";1116;13,337
+"Virginia-2016";1163;13,826
+"Washington-1990";677;13,906
+"Washington-1991";692;13,767
+"Washington-1992";694;13,446
+"Washington-1993";690;13,067
+"Washington-1994";759;14,117
+"Washington-1995";781;14,245
+"Washington-1996";773;13,872
+"Washington-1997";728;12,826
+"Washington-1998";708;12,267
+"Washington-1999";815;13,949
+"Washington-2000";726;12,317
+"Washington-2001";711;11,878
+"Washington-2002";811;13,4
+"Washington-2003";801;13,122
+"Washington-2004";829;13,417
+"Washington-2005";820;13,105
+"Washington-2006";808;12,683
+"Washington-2007";862;13,34
+"Washington-2008";885;13,486
+"Washington-2009";919;13,783
+"Washington-2010";955;14,202
+"Washington-2011";1020;14,95
+"Washington-2012";1038;15,054
+"Washington-2013";1025;14,71
+"Washington-2014";1114;15,792
+"Washington-2015";1134;15,837
+"Washington-2016";1134;15,56
+"West Virginia-1990";219;12,206
+"West Virginia-1991";240;13,337
+"West Virginia-1992";240;13,283
+"West Virginia-1993";269;14,797
+"West Virginia-1994";258;14,17
+"West Virginia-1995";276;15,132
+"West Virginia-1996";279;15,303
+"West Virginia-1997";262;14,398
+"West Virginia-1998";232;12,773
+"West Virginia-1999";229;12,639
+"West Virginia-2000";244;13,493
+"West Virginia-2001";282;15,654
+"West Virginia-2002";276;15,287
+"West Virginia-2003";266;14,678
+"West Virginia-2004";285;15,69
+"West Virginia-2005";254;13,952
+"West Virginia-2006";265;14,497
+"West Virginia-2007";300;16,357
+"West Virginia-2008";261;14,182
+"West Virginia-2009";251;13,584
+"West Virginia-2010";279;15,057
+"West Virginia-2011";306;16,496
+"West Virginia-2012";326;17,559
+"West Virginia-2013";323;17,429
+"West Virginia-2014";359;19,421
+"West Virginia-2015";340;18,468
+"West Virginia-2016";361;19,715
+"Wisconsin-1990";620;12,676
+"Wisconsin-1991";573;11,536
+"Wisconsin-1992";586;11,654
+"Wisconsin-1993";589;11,574
+"Wisconsin-1994";592;11,522
+"Wisconsin-1995";622;11,984
+"Wisconsin-1996";601;11,477
+"Wisconsin-1997";576;10,924
+"Wisconsin-1998";594;11,2
+"Wisconsin-1999";593;11,12
+"Wisconsin-2000";590;11
+"Wisconsin-2001";638;11,8
+"Wisconsin-2002";624;11,46
+"Wisconsin-2003";645;11,772
+"Wisconsin-2004";662;12,006
+"Wisconsin-2005";641;11,558
+"Wisconsin-2006";667;11,958
+"Wisconsin-2007";729;12,993
+"Wisconsin-2008";740;13,118
+"Wisconsin-2009";722;12,735
+"Wisconsin-2010";790;13,891
+"Wisconsin-2011";745;13,048
+"Wisconsin-2012";723;12,626
+"Wisconsin-2013";850;14,801
+"Wisconsin-2014";767;13,32
+"Wisconsin-2015";874;15,153
+"Wisconsin-2016";865;14,969
+"Wyoming-1990";81;17,859
+"Wyoming-1991";87;18,941
+"Wyoming-1992";84;18,009
+"Wyoming-1993";105;22,188
+"Wyoming-1994";107;22,274
+"Wyoming-1995";82;16,901
+"Wyoming-1996";88;18,027
+"Wyoming-1997";95;19,403
+"Wyoming-1998";87;17,721
+"Wyoming-1999";98;19,928
+"Wyoming-2000";83;16,809
+"Wyoming-2001";83;16,779
+"Wyoming-2002";105;20,999
+"Wyoming-2003";109;21,65
+"Wyoming-2004";88;17,285
+"Wyoming-2005";90;17,504
+"Wyoming-2006";116;22,194
+"Wyoming-2007";101;18,883
+"Wyoming-2008";124;22,709
+"Wyoming-2009";111;19,827
+"Wyoming-2010";131;23,242
+"Wyoming-2011";131;23,075
+"Wyoming-2012";171;29,648
+"Wyoming-2013";129;22,139
+"Wyoming-2014";120;20,561
+"Wyoming-2015";157;26,766
+"Wyoming-2016";144;24,594

@@ -639,4 +639,22 @@ cat(kable(SumStats, format="html"),file = "Treatment summary Statistics.html")
 ### * implement a timing control ydelta basically
 ### * It's not just the LBD but also states 2006_2021 that need to be appended together. 
 ### Removed all state related dataframes that were already in the Masterdataset. 
+### The rest of this script will be decicated to finsihing the masterdataset
+
+
+path <- "C:/Users/danie/OneDrive/Documents/Casual Inf Main paper/Casual Inf Main paper/us_state_totals_2007-2021.xlsx"
+
+
+Firmdata2007_2021 <- path |>
+  excel_sheets() |>
+  set_names() |>
+  purrr::map(read_excel,path=path,skip=5,col_names = T) |>
+  list_rbind()
+
+
+sheetnamesFirmdata <- excel_sheets(path)
+lapply(read_xlsx(path,SheetnamesFirmdata))
+
+
+
 
