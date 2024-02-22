@@ -645,16 +645,17 @@ cat(kable(SumStats, format="html"),file = "Treatment summary Statistics.html")
 path <- "C:/Users/danie/OneDrive/Documents/Casual Inf Main paper/Casual Inf Main paper/us_state_totals_2007-2021.xlsx"
 
 
-Firmdata2007_2021 <- path |>
+Firmdata <- path |>
   excel_sheets() |>
   set_names() |>
-  purrr::map(read_excel,path=path,skip=5,col_names = T) |>
+  purrr::map(read_excel,path=path,skip=4,col_names = T) |>
   list_rbind()
-
+           
+remove(list = 2007:2021)
 
 sheetnamesFirmdata <- excel_sheets(path)
 lapply(read_xlsx(path,SheetnamesFirmdata))
-
+list2
 
 
 
