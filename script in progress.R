@@ -649,13 +649,10 @@ Firmdata <- path |>
   excel_sheets() |>
   set_names() |>
   purrr::map(read_excel,path=path,skip=4,col_names = T) |>
-  list_rbind()
-           
-remove(list = 2007:2021)
-
-sheetnamesFirmdata <- excel_sheets(path)
-lapply(read_xlsx(path,SheetnamesFirmdata))
-list2
+  map(rename,"Fips" =1,"State"=2,"Enterprise Size"=3,"Firms"=4,"Establishments"=5,"Employment"=6) |>
+  map(select,1:6) |>
+  map(cbind,ls.str(mode = "Firmdata"))
+  
 
 
 
