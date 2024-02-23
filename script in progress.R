@@ -642,17 +642,37 @@ cat(kable(SumStats, format="html"),file = "Treatment summary Statistics.html")
 ### The rest of this script will be decicated to finsihing the masterdataset
 
 
-path <- "C:/Users/danie/OneDrive/Documents/Casual Inf Main paper/Casual Inf Main paper/us_state_totals_2007-2021.xlsx"
+path <- "us_state_totals_2007-2021.xlsx"
 
+yeartitle <- as.character(c(2007:2021))
 
 Firmdata <- path |>
   excel_sheets() |>
-  set_names() |>
+  purrr::set_names() |>
   purrr::map(read_excel,path=path,skip=4,col_names = T) |>
   map(rename,"Fips" =1,"State"=2,"Enterprise Size"=3,"Firms"=4,"Establishments"=5,"Employment"=6) |>
-  map(select,1:6) |>
-  map(cbind,ls.str(mode = "Firmdata"))
-  
+  map(select,1:6) 
 
+Firmdata <-  mapply(cbind, Firmdata, "Year"=yeartitle, SIMPLIFY=F) 
 
+Firmdata<- Firmdata |>
+  list_rbind()
+Firmdata2 <- Firmdata |>
+  filter(grepl(Firmdata$`Enterprise Size`,pattern = "9:"))
+## Hard Part Get
+Pastyeartitle <- c(1988:2006)
+path2 <- "FirmSizeData.xlsx"
+FirmData86_06 <-path2 |>
+  excel_sheets() |>
+  purrr::set_names() |>
+  purrr::map(read_excel,path=path2,skip=2,col_names = T) |>
+  list_rbind(names_to = "Year") 
 
+  FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
+## For 1990 and 1991 You have to filter for "United States".
+## This also goes for Firms Or "Grand Total"
+  ## NEed to create line to make the united states column a total column for each 
+  ## Year
+ FirmData86_06 <- FirmData86_06 |>
+   filter(!(`Row Labels` %in% c("Firms","United States","Grand Total"))) |>
+   rename("State"= `Row Labels`,"Firms"=`Sum of 500+`)
