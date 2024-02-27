@@ -656,16 +656,32 @@ Firmdata <- path |>
 Firmdata <-  mapply(cbind, Firmdata, "Year"=yeartitle, SIMPLIFY=F) 
 
 Firmdata<- Firmdata |>
-  list_rbind()
-Firmdata2 <- Firmdata |>
-  filter(grepl(Firmdata$`Enterprise Size`,pattern = "9:"))
-## Hard Part Get
-Pastyeartitle <- c(1988:2006)
-path2 <- "FirmSizeData.xlsx"
+  list_rbind() 
+#Firmdata <-Firmdata |>
+ # filter(grepl(Firmdata$`Enterprise Size`,pattern = "1:")|
+  #       grepl(Firmdata$`Enterprise Size`,pattern = "9:")) 
+Firmdata <- Firmdata |>
+  filter(grepl(Firmdata$`Enterprise Size`,pattern = "1:"))
+FirmdataWperc <- 
+  ## above Produces 1560 ob dataset with each 500+ and Total Entry
+
+
+Firmdata500 <- Firmdata |>
+  filter(grepl(Firmdata$`Enterprise Size`,pattern = "9:")) 
+FirmdataWperc <- Firmdata500$Employment /Firmdata$Employment 
+
+
+## You need just need to get the percentage of W out of this sheet. 
+#Filter for 500+ and Total. 
+#Fill down for State
+# Calc Percentage
+# Creat it's down dataset with Year and State asssoc w it
+Pastyeartitle <- as.character(c(1988:2006))
+path2 <- "us_state_totals_1988-2006.xlsx"
 FirmData86_06 <-path2 |>
   excel_sheets() |>
   purrr::set_names() |>
-  purrr::map(read_excel,path=path2,skip=2,col_names = T) |>
+  purrr::map(read_excel,path=path2,skip=7,col_names = T) |>
   list_rbind(names_to = "Year") 
 
   FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
