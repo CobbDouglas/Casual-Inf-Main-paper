@@ -660,9 +660,8 @@ Firmdata<- Firmdata |>
 #Firmdata <-Firmdata |>
  # filter(grepl(Firmdata$`Enterprise Size`,pattern = "1:")|
   #       grepl(Firmdata$`Enterprise Size`,pattern = "9:")) 
-Firmdata <- Firmdata |>
+FirmdataTotal <- Firmdata |>
   filter(grepl(Firmdata$`Enterprise Size`,pattern = "1:"))
-FirmdataWperc <- 
   ## above Produces 1560 ob dataset with each 500+ and Total Entry
 
 
@@ -681,7 +680,8 @@ path2 <- "us_state_totals_1988-2006.xlsx"
 FirmData86_06 <-path2 |>
   excel_sheets() |>
   purrr::set_names() |>
-  purrr::map(read_excel,path=path2,skip=7,col_names = T) |>
+  purrr::map(read_excel,path=path2,skip=7,col_names = T,col_types ="text") |>
+  purrr::map(select(c('AREA','DATA TYPE','TOTAL','500+')))
   list_rbind(names_to = "Year") 
 
   FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
