@@ -688,6 +688,7 @@ FirmData88_06 <-path2 |>
 
 # Here we have the list of dataframes, we need to get use a loop to drop columns from each dataset
 ColIneed <- c("AREA","DATA TYPE","TOTAL","500+")
+## This fixes the col problem dont lose this
 FirmData88_06 <- lapply(FirmData88_06, subset,select= ColIneed)
 #FirmData88_06 <- lapply(FirmData88_06)
 ## save this for later
