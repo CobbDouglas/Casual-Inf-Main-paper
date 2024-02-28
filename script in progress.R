@@ -640,7 +640,10 @@ cat(kable(SumStats, format="html"),file = "Treatment summary Statistics.html")
 ### * It's not just the LBD but also states 2006_2021 that need to be appended together. 
 ### Removed all state related dataframes that were already in the Masterdataset. 
 ### The rest of this script will be decicated to finsihing the masterdataset
-
+library(data.table)
+library(tidyverse)
+library(readxl)
+library(readr)
 
 path <- "us_state_totals_2007-2021.xlsx"
 
@@ -667,7 +670,7 @@ FirmdataTotal <- Firmdata |>
 
 Firmdata500 <- Firmdata |>
   filter(grepl(Firmdata$`Enterprise Size`,pattern = "9:")) 
-FirmdataWperc <- Firmdata500$Employment /Firmdata$Employment 
+FirmdataWperc <- Firmdata500$Employment /FirmdataTotal$Employment 
 
 
 ## You need just need to get the percentage of W out of this sheet. 
@@ -675,13 +678,19 @@ FirmdataWperc <- Firmdata500$Employment /Firmdata$Employment
 #Fill down for State
 # Calc Percentage
 # Creat it's down dataset with Year and State asssoc w it
+
 Pastyeartitle <- as.character(c(1988:2006))
 path2 <- "us_state_totals_1988-2006.xlsx"
-FirmData86_06 <-path2 |>
+FirmData88_06 <-path2 |>
   excel_sheets() |>
   purrr::set_names() |>
-  purrr::map(read_excel,path=path2,skip=7,col_names = T,col_types ="text") |>
-  purrr::map(select(c('AREA','DATA TYPE','TOTAL','500+')))
+  purrr::map(read_excel,path=path2,skip=7,col_names = T)
+
+# Here we have the list of dataframes, we need to get use a loop to drop columns from each dataset
+ColIneed <- c("AREA","DATA TYPE","TOTAL","500+")
+FirmData88_06 <- lapply(FirmData88_06, subset,select= ColIneed)
+#FirmData88_06 <- lapply(FirmData88_06)
+## save this for later
   list_rbind(names_to = "Year") 
 
   FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
