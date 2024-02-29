@@ -692,13 +692,62 @@ ColIneed <- c("AREA","DATA TYPE","TOTAL","500+")
 FirmData88_06 <- lapply(FirmData88_06, subset,select= ColIneed)
 #FirmData88_06 <- lapply(FirmData88_06)
 ## save this for later
-  list_rbind(names_to = "Year") 
-
-  FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
+library(readr)
+Statenames <- read_delim("Statenames.csv", 
+                         delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(Statenames)
+##
+FirmData88_06 <- FirmData88_06 |> 
+  list_rbind(names_to = "Year") |>
+  fill(AREA) |>
+  filter(`DATA TYPE` == "Employment") |>
+  mutate(PercW = `500+`/TOTAL) |>
+  filter(!(AREA=="United States")) |>
+  mutate(FIPS = ifelse(AREA %in% Statenames$Name,Statenames$...1,0))
+  # Dont think I need the below code, commented out just in case.
+  #FirmData86_06$Year <-substr(FirmData86_06$Year,2,6)
 ## For 1990 and 1991 You have to filter for "United States".
 ## This also goes for Firms Or "Grand Total"
   ## NEed to create line to make the united states column a total column for each 
   ## Year
- FirmData86_06 <- FirmData86_06 |>
-   filter(!(`Row Labels` %in% c("Firms","United States","Grand Total"))) |>
-   rename("State"= `Row Labels`,"Firms"=`Sum of 500+`)
+
+
+ 
+
+
+## We need to rename columns in both sets of pre06 datasets to match with post 07 datasets. 
+## We then can combine and work it 
+## updated Cols I need
+## Cleaning FirmdataTotal
+ColIneed <- c("Fips","Year","AREA","DATA TYPE","TOTAL")
+FirmTotaltemp <-FirmdataTotal |> 
+  mutate(TOTAL = Employment) |>
+  mutate(`DATA TYPE`= `Enterprise Size`) |>
+  mutate( `AREA`= State) |>
+  select(ColIneed)
+## Cleaning Firmdata500+
+ColIneed <- c("Fips","Year","AREA","DATA TYPE","500+")
+Firm500temp <- Firmdata500 |> 
+  mutate(`500+` = Employment) |>
+  mutate(`DATA TYPE`= `Enterprise Size`) |>
+  mutate( `AREA`= State) |>
+  select(ColIneed)
+
+FinalFirm <-Firm500temp |> 
+  mutate(`TOTAL`= FirmTotaltemp$TOTAL) |>
+  mutate(PercW = `500+`/`TOTAL`) |>
+  rename(FIPS = Fips) |>
+  mutate_at(c(1),as.numeric) |>
+  filter(!(AREA=="United States"))
+## Fixing Fips shit
+FirmData88_06 <-FirmData88_06 |>
+  select(!(FIPS))|>
+  mutate(FIPS = ifelse(FirmData88_06$AREA %in% FinalFirm$AREA,FinalFirm$FIPS,0))|>
+  print(n=56)
+
+FinalFirm <- rbind(FirmData88_06,FinalFirm)
+FinalFirm$ID <- paste0(FinalFirm$AREA,"_",FinalFirm$Year)
+write.csv(FinalFirm,file = "PercntWrkrData.csv")
+
+`US1` |>
+  left_join(FinalFirm,by="ID")
