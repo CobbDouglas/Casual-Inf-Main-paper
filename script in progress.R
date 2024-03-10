@@ -746,8 +746,24 @@ FirmData88_06 <-FirmData88_06 |>
   print(n=56)
 
 FinalFirm <- rbind(FirmData88_06,FinalFirm)
-FinalFirm$ID <- paste0(FinalFirm$AREA,"_",FinalFirm$Year)
+FinalFirm$Id <- paste0(FinalFirm$AREA,"_",FinalFirm$Year)
 write.csv(FinalFirm,file = "PercntWrkrData.csv")
 
-`US1` |>
-  left_join(FinalFirm,by="ID")
+Deletethis <-`US1` |>
+  left_join(FinalFirm,by="Id") |>
+  mutate(IncidenceRate= `TOTAL FILINGS`/ population) |>
+  mutate(BankrupcyP100k = IncidenceRate * 100000) |>
+  mutate(TimingCntrl = lag(`Crude Rate`,n=1,default = NA))|>
+  mutate(Delta = `Crude Rate`- TimingCntrl)
+
+write.csv(Deletethis,"Masterdataset.csv")
+remove(Deletethis)  
+Masterdata<-read_csv("Masterdataset.csv")
+
+
+
+
+
+
+
+
