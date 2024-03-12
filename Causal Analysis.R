@@ -255,6 +255,62 @@ Masterdata1998 |>
 ## Each group will be turned into dummies using ifelse statement to match when they turn on
 ## Check if group sum to their totals
 lapply(Masterdata1998[,41:47], sum)
+### Let's use Matchit
+library(MatchIt)
+# No matching; constructing a pre-match matchit object
+m.out0 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = NULL, distance = "glm")
+summary(m.out0)
+## Nearest Neighbor
+m.out1 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "nearest", distance = "glm")
+summary(m.out1, un =FALSE)
+plot(m.out1)
+
+plot(m.out1, type = "density", interactive = FALSE,
+     which.xs = ~`unemployment rate` 
+     + `BankrupcyP100k` 
+     + `PercW`)
+
+plot(summary(m.out1),var.order = "unmatched",abs = F)
+
+## Probit
+m.out2 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "full",link = "probit")
+m.out2
+summary(m.out2, un=F)
+plot(summary(m.out2),var.order = "unmatched",abs = F)
+
+
+## True PS matching 
+m.out3 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "full", distance = "glm")
+m.out3
+summary(m.out3, un=F)
+plot(summary(m.out3),var.order = "unmatched",abs = F)
+
+## Introducing Sampling Weight is chaos. Going to try this to get robust clustered standerrs
+m.data <- match.data(m.out2)
+
+library("marginaleffects")
+
+fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate` 
+                                           + `BankrupcyP100k` 
+                                           + `PercW`), data = m.data)
+
+avg_comparisons(fit,
+                variables = "D_AccessToParity",
+                vcov = ~subclass,
+                newdata = subset(m.data, D_AccessToParity == 1),
+                wts = "population")
 # try fixest
 library(fixest)
 fixestmodelcol1 = feols(lcruderate ~ `D_AccessToParity`
@@ -306,15 +362,43 @@ fixestmodel1stDifcol2 = feols(`lDelta` ~ `D_AccessToParity`
 
 summary(fixestmodel1stDifcol2, cluster = "State")
 
+
+
+
+
+## Fixest has the Sun aberham option, let's use it
+Sunabmodel = feols(lcruderate ~ `unemployment rate`
+                   +`BankrupcyP100k`
+                   +`PercW`
+                   + sunab(`AccesstoParity`,Year.x)
+                   | State + Year.x, 
+                   Masterdata1998, 
+                   weights = Masterdata1998$population)
+
+summary(Sunabmodel, cluster = "State")
+Sunabmodelref = feols(lcruderate ~ `unemployment rate`
+                   +`BankrupcyP100k`
+                   +`PercW`
+                   + sunab(`AccesstoParity`,Year.x,
+                   ref.p = c(.F + 0:2,-1))
+                   | State + Year.x,
+                   Masterdata1998, 
+                   weights = Masterdata1998$population)
+iplot(list(Sunabmodel,Sunabmodelref))
+iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
+
+summary(Sunabmodel,agg = "ATT")
 ##
 ## event study. 
 ## Here we are going to use DiD
 ## We need to create two different variables for groups. One 2x2 
 
-
+Masterdata1998 <-Masterdata1998 |>
+  mutate(simpledid=if_else(State %in% TreatedStates1998,1998,0))
+                           
 
 Masterdata1998 <-Masterdata1998 |>
-  mutate(simpledid=if_else(State %in% TreatedStates1998 &AccesstoParity < 1998,1998,
+  mutate(simple3did=if_else(State %in% TreatedStates1998 &AccesstoParity < 1998,1998,
           if_else(State %in% TreatedStates1998 &AccesstoParity >= 1998 & AccesstoParity < 2000,2000,
                    if_else(State %in% TreatedStates1998& AccesstoParity >= 2000,2002,0))))
 
@@ -322,7 +406,7 @@ Masterdata1998 <-Masterdata1998 |>
 
 library(did)
 out <- att_gt(yname = "lcruderate",
-              gname = "simpledid",
+              gname = "simple3did",
               tname = "Year.x",
               idname = "FIPS",
               xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
@@ -340,3 +424,44 @@ agg.dynamic <- aggte(out,type = "dynamic", na.rm =T)
 summary(agg.simple)
 ggdid(agg.simple)
 summary(agg.dynamic)
+
+
+
+out2 <- att_gt(yname = "lcruderate",
+              gname = "simpledid",
+              tname = "Year.x",
+              idname = "FIPS",
+              xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+              data = Masterdata1998,
+              weightsname = "population",
+              bstrap = T,
+              base_period = "universal",
+              control_group = "notyettreated",
+              est_method = "reg"
+              
+)
+summary(out2)
+ggdid(out2)
+agg.simple2 <- aggte(out2,type = "simple",na.rm = T)
+agg.dynamic2 <- aggte(out2,type = "dynamic", na.rm =T)
+summary(agg.simple2)
+ggdid(agg.simple2)
+summary(agg.dynamic2)
+
+
+
+
+library(bacondecomp)
+df_bacon <- bacon(lcruderate ~ Treat+Post+TreatPost+,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x")
+
+df_bacon <- bacon(Masterdata1998$lcruderate ~ Treat+Post+TreatPost+ Masterdata1998$`unemployment rate`
+                  + Masterdata1998$BankrupcyP100k  
+                  + Masterdata1998$PercW,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x"
+)
+
