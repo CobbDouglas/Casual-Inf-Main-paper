@@ -2,6 +2,7 @@
 title: "Insurance Parity Laws and Reducing Suicides: Replicating Lang (2013)"
 subtitle: Daniel Ownby
 output: pdf_document
+
 date: "`r format(Sys.Date(),'%m/%d/%Y')`"
 abstract: Over the past two decades, despite efforts from psychologists and mental health professionals alike, the United States has seen a steady growth of suicides despite nearly all other Western countries experiencing the contrary. Apart of this growth could be attributed to the lagging implementation of mental health care pairty. The Mental Health Parity Act of 1996 (MHPA) was critized during the turn of the century for not doing enough to restrict insurance companies ability to discrimate between treating bodily and mental injury. In this study, I attempt to replicate and build upon results from Lang (2013) using additional data, propensity score matching methods along with heterogenous difference in difference.
 bibliography: references.bib
@@ -11,6 +12,7 @@ header-includes: \usepackage{setspace}\doublespacing
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(kableExtra)
 ```
 
 \newpage
@@ -44,3 +46,126 @@ My dataset pulls from the same sources from @lang2013 with the exception of one 
 ## Discussion
 
 ## Conclusion
+
+## Figures
+
+
+
+\newpage
+```{=latex}
+\begin{table}[!htbp] \centering \renewcommand*{\arraystretch}{1.1}\caption{Summary Statistics}\resizebox{\textwidth}{!}{
+\begin{tabular}{lrrrrrrr}
+\hline
+\hline
+Variable & N & Wt. Mean & Wt. SD & Min & Pctl. 25 & Pctl. 75 & Max \\ 
+\hline
+Suicide Rate & 765 & 11.32 & 2.681 & 4.021 & 10.59 & 13.98 & 24.97 \\ 
+Log suicide rate & 765 & 2.398 & 0.2415 & 1.392 & 2.36 & 2.638 & 3.218 \\ 
+Unemployment rate & 765 & 5.573 & 1.421 & 2.108 & 4.267 & 6.192 & 11.23 \\ 
+Bankrupcy rate per 100k & 765 & 435.6 & 169.5 & 79.46 & 287.6 & 516.5 & 1117 \\ 
+Percent of workers in large Firms & 765 & 0.483 & 0.03803 & 0.2699 & 0.4291 & 0.5025 & 0.5711\\ 
+\hline
+\hline
+\end{tabular}
+}
+\end{table}
+```
+
+```{=latex}
+\begin{table}[!htbp] \centering \renewcommand*{\arraystretch}{1.1}\caption{Summary Statistics}\resizebox{\textwidth}{!}{
+\begin{tabular}{lrrrrrrrrr}
+\hline
+\hline
+Pre\_Post\_Parity & \multicolumn{3}{c}{No-Parity} & \multicolumn{3}{c}{Post-Parity} & \multicolumn{3}{c}{Pre-Pairty}  \\ 
+ Variable & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Wt. Mean} & \multicolumn{1}{c}{Wt. SD} & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Wt. Mean} & \multicolumn{1}{c}{Wt. SD} & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Wt. Mean} & \multicolumn{1}{c}{Wt. SD} \\ 
+\hline
+Suicide Rate & 330 & 12.57 & 2.263 & 178 & 9.848 & 2.583 & 257 & 10.85 & 2.548 \\ 
+Log suicide rate & 330 & 2.517 & 0.1696 & 178 & 2.255 & 0.2545 & 257 & 2.356 & 0.2385 \\ 
+Unemployment rate & 330 & 5.338 & 1.288 & 178 & 5.134 & 1.113 & 257 & 6.131 & 1.568 \\ 
+Bankrupcy rate per 100k & 330 & 442.5 & 188.5 & 178 & 476.1 & 169.3 & 257 & 401.3 & 137.3 \\ 
+Percent of workers in large Firms & 330 & 0.4887 & 0.03845 & 178 & 0.4886 & 0.03846 & 257 & 0.4727 & 0.03511\\ 
+\hline
+\hline
+\end{tabular}
+}
+\end{table}
+```
+
+```{=latex}
+
+\begin{table}
+
+
+\caption{Weighted Means of Treated States, Pre and Post Period}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+TreatPrePostPeriod1998 & mean & st.err & sd & n\\
+\midrule
+Post-Period & 9.7867 & 0.2927 & 2.5778 & 203\\
+Pre-Period & 11.9407 & 0.1484 & 2.4668 & 562\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+```
+
+
+```{=latex}
+\begin{table}
+
+\caption{Weighted Means of Non-Treated States, Pre and Post Period}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+NonTreatPrePostPeriod1998 & mean & st.err & sd & n\\
+\midrule
+NoTreatPost-Period & 12.2426 & 0.2118 & 2.0905 & 154\\
+NoTreatPre-Period & 11.0899 & 0.1726 & 2.7634 & 611\\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+
+```{=latex}
+\begin{table}
+
+\caption{Weighted Mean Suicide Rates of Treated and Nontreated States, Pre and Post Period}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+TreatPrePostPeriod1998 & mean & st.err & sd & n\\
+\midrule
+NoTreatPost-Period & 12.2426 & 0.2118 & 2.0905 & 154\\
+NoTreatPre-Period & 12.8921 & 0.2264 & 2.3786 & 176\\
+Post-Period & 9.7867 & 0.2927 & 2.5778 & 203\\
+Pre-Period & 11.0831 & 0.2616 & 2.4765 & 232\\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+
+```{=latex}
+\begin{table}
+
+\caption{Weighted Mean Log Suicide Rates of Treated and Nontreated States, Pre and Post Period}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+TreatPrePostPeriod1998 & mean & st.err & sd & n\\
+\midrule
+NoTreatPost-Period & 2.4915 & 0.0165 & 0.1625 & 154\\
+NoTreatPre-Period & 2.5413 & 0.0165 & 0.1732 & 176\\
+Post-Period & 2.2485 & 0.0288 & 0.2537 & 203\\
+Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+
+\newpage
+
+## References

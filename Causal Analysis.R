@@ -71,8 +71,23 @@ Covariates <- c("Crude Rate",
 "unemployment rate",
 "BankrupcyP100k",
 "PercW")
-sumtable(Masterdata1998,vars = Covariates,digits = 3 )
-sumtable(Masterdata1998,vars = Covariates,group = "Pre_Post_Parity",digits = 3,group.weights = Masterdata1998$population )
+table2labs <- c("Suicide Rate",
+                "Log suicide rate",
+                "Unemployment rate", 
+                "Bankrupcy rate per 100k",
+                "Percent of workers in large Firms")
+table2all <-sumtable(Masterdata1998,vars = Covariates,digits = 4,
+         labels = table2labs,
+         group.weights = Masterdata1998$population,
+         out = "latex"
+         )
+table2pairity <- sumtable(Masterdata1998,vars = Covariates,
+         group = "Pre_Post_Parity",digits = 4,
+         group.weights = Masterdata1998$population,
+         labels = table2labs,
+         group.long = F,
+         out = "latex")
+kable(list(table2all,table2pairity))
 ## So there are 8 observations we need to fix outta this. If we allow one observation from each state that had a late adaoption
 ## It should work.  ACTUALLY DONT BOTHER THIS ISNT WORTH IT JUST REPORT YOUR FINDINGS 
 
@@ -89,7 +104,7 @@ wtd.stderror <- function(x, weights){
   sqrt(var*weights)
 }
 
-Masterdata1998 |>
+TestFigure1 <-Masterdata1998 |>
   mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period","Pre-Period"))|>
   group_by(TreatPrePostPeriod1998)|>
   summarise(mean = weighted.mean( x= `Crude Rate`, w = population),
@@ -97,7 +112,7 @@ Masterdata1998 |>
             sd   = weighted.sd(x=`Crude Rate`,w=population),
             n = n())
 
-Masterdata1998 |>
+TestFigure2 <-Masterdata1998 |>
 mutate(NonTreatPrePostPeriod1998= if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period")) |>
   group_by(NonTreatPrePostPeriod1998) |>
   summarise(mean = weighted.mean( x= `Crude Rate`, w = population),
@@ -105,8 +120,17 @@ mutate(NonTreatPrePostPeriod1998= if_else(State %in% NotTreatedStates1998 & Year
             sd   = weighted.sd(x=`Crude Rate`,w=population),
             n = n())
 
+kable(TestFigure1,format = "latex",digits = 4,
+      caption = "Weighted Means of Treated States, Pre and Post Period",
+      booktabs = T
+      )
+kable(TestFigure2,format = "latex",digits = 4,
+      caption = "Weighted Means of Non-Treated States, Pre and Post Period",
+      booktabs = T)
+
+
 ## TABLE 3 DONE 
-Masterdata1998 |>
+Table3crude <- Masterdata1998 |>
 mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period",
                                        if_else(State %in% TreatedStates1998 & Year.x < 1998,"Pre-Period",
                                                if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period"))))|>
@@ -116,7 +140,7 @@ mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 
             sd   = weighted.sd(x=`Crude Rate`,w=population),
             n = n())
 ## Log Suicide Rate
-Masterdata1998 |>
+Table3log <- Masterdata1998 |>
   mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period",
                                          if_else(State %in% TreatedStates1998 & Year.x <= 1998,"Pre-Period",
                                                  if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period"))))|>
@@ -126,8 +150,18 @@ Masterdata1998 |>
             sd   = weighted.sd(x=lcruderate,w=population),
             n = n())
 
+## Create Tables
+kable(Table3crude,format = "latex",digits = 4,
+      caption = "Weighted Mean Suicide Rates of Treated and Nontreated States, Pre and Post Period",
+      booktabs = T
+)
 
+kable(Table3log,format = "latex",digits = 4,
+      caption = "Weighted Mean Log Suicide Rates of Treated and Nontreated States, Pre and Post Period",
+      booktabs = T
+)
 
+## Idk what this is
 Masterdata1998 |>
   group_by(State) |>
   count(Treat)|>
@@ -452,16 +486,89 @@ summary(agg.dynamic2)
 
 
 library(bacondecomp)
-df_bacon <- bacon(lcruderate ~ Treat+Post+TreatPost+,
+df_bacon <- bacon(lcruderate ~ Treat+Post+TreatPost,
                   data = Masterdata1998,
                   id_var = "FIPS",
                   time_var = "Year.x")
 
-df_bacon <- bacon(Masterdata1998$lcruderate ~ Treat+Post+TreatPost+ Masterdata1998$`unemployment rate`
-                  + Masterdata1998$BankrupcyP100k  
-                  + Masterdata1998$PercW,
+df_bacon <- bacon(`lcruderate` ~ Treat+ Post+ TreatPost+ `unemployment rate`
+                  +  `BankrupcyP100k`  
+                  +  `PercW`,
                   data = Masterdata1998,
                   id_var = "FIPS",
-                  time_var = "Year.x"
+                  time_var = "Year.x",
+                  
 )
+
+
+
+
+df_bacon <- bacon(lcruderate ~ D_AccessToParity,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x")
+
+df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
+                  + `unemployment rate`
+                  +  `BankrupcyP100k`  
+                  +  `PercW`,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x",
+                  
+)
+
+
+ggplot(df_bacon$two_by_twos) +
+  aes(x = weight, y = estimate, shape = factor(type)) +
+  geom_point() +
+  geom_hline(yintercept = 0) + 
+  theme_minimal() +
+  labs(x = "Weight", y = "Estimate", shape = "Type")
+
+ggplot(df_bacon) +
+  aes(x = weight, y = estimate, shape = factor(type)) +
+  geom_point() +
+  geom_hline(yintercept = 0) + 
+  theme_minimal() +
+  labs(x = "Weight", y = "Estimate", shape = "Type")
+
+
+
+df_bacon %>% 
+  mutate(subgroup = paste0(treated, "_", untreated),
+         subgroup = factor(subgroup),
+         subgroup = forcats::fct_reorder(subgroup, estimate)) %>% 
+  ggplot(aes(x = estimate, 
+             y = subgroup,
+             size = weight)) +
+  geom_point() +
+  geom_vline(xintercept = weighted.mean(df_bacon$estimate, df_bacon$weight),
+             linetype = "longdash") +
+  theme_minimal() +
+  labs(size = "Weight",
+       y = "Subgroup",
+       x = "Estimate",
+       title = "Goodman-Bacon diff in diff decomposition",
+       subtitle = "Dotted line indicates two-way FE estimate.",
+       caption = "Subgroups 99999 correspond to never treated groups")
+
+df_bacon$two_by_twos %>% 
+  mutate(subgroup = paste0(treated, "_", untreated),
+         subgroup = factor(subgroup),
+         subgroup = forcats::fct_reorder(subgroup, estimate)) %>% 
+  ggplot(aes(x = estimate, 
+             y = subgroup,
+             size = weight)) +
+  geom_point() +
+  geom_vline(xintercept = weighted.mean(df_bacon$two_by_twos$estimate, df_bacon$two_by_twos$weight),
+             linetype = "longdash") +
+  theme_minimal() +
+  labs(size = "Weight",
+       y = "Subgroup",
+       x = "Estimate",
+       title = "Goodman-Bacon diff in diff decomposition",
+       subtitle = "Dotted line indicates two-way FE estimate.",
+       caption = "Subgroups 99999 correspond to never treated groups")
+
 
