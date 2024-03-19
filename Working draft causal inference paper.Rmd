@@ -19,8 +19,6 @@ library(kableExtra)
 
 ## Introduction
 
-
-
 According to 2019 Survey for Drug use and Health, it was estimated that at least 51.5 million adults in the United States had some sort of mental illness. In the same year, 13.1 million were estimated to have a serious mental illness that resulted in serious functional impairment or interferes with at least one or more major life activity. Only 65.5% of those 13.1 million received any sort of mental health treatment in the past year. According to the Center for Disease Control's WISQARS Leading Causes of Death Report, Suicides are the second leading cause of death amongst people aged 10-34 and the fourth from 35-44 in the United States. Suicide rates have gradually increased over the past two decades, starting with 10.5 per 100,000 people to 14.2 per 10,000 in 2018. Suicide rates vary from state to state with both east and west coasts supporting low rates such as 7.4 per 100,000 while mid-western states suffer from rates as high as 25 per 100,000. Several Sources outline the negative effects not only through statistical life projections and productivity losses but more generally how devastating the preventable loss of life has on communities. [@klick2006; @lang2013]
 
 The Federal Mental Health Parity Act of 1996 prevented group health plan and insurance issuers from offering less mental health or substance abuse coverage benefits compared to regular medical coverage. If a provider gave mental health services, they couldn't offer benefit limitations that they wouldn't otherwise give to their same medical/surgical coverage. Most states by 2002 instated mental health parity laws alongside further stipulations with varying degrees of restrictiveness and exemptions.
@@ -37,7 +35,7 @@ My seminal paper, @lang2013 attempts to identify causal effects using difference
 
 ## Data
 
-My dataset pulls from the same sources from @lang2013 with the exception of one variable.  
+My dataset pulls from the same sources from @lang2013 with the exception of one variable.
 
 ## Methods
 
@@ -49,9 +47,8 @@ My dataset pulls from the same sources from @lang2013 with the exception of one 
 
 ## Figures
 
-
-
 \newpage
+
 ```{=latex}
 \begin{table}[!htbp] \centering \renewcommand*{\arraystretch}{1.1}\caption{Summary Statistics}\resizebox{\textwidth}{!}{
 \begin{tabular}{lrrrrrrr}
@@ -70,7 +67,6 @@ Percent of workers in large Firms & 765 & 0.483 & 0.03803 & 0.2699 & 0.4291 & 0.
 }
 \end{table}
 ```
-
 ```{=latex}
 \begin{table}[!htbp] \centering \renewcommand*{\arraystretch}{1.1}\caption{Summary Statistics}\resizebox{\textwidth}{!}{
 \begin{tabular}{lrrrrrrrrr}
@@ -90,7 +86,6 @@ Percent of workers in large Firms & 330 & 0.4887 & 0.03845 & 178 & 0.4886 & 0.03
 }
 \end{table}
 ```
-
 ```{=latex}
 
 \begin{table}
@@ -107,10 +102,7 @@ Pre-Period & 11.9407 & 0.1484 & 2.4668 & 562\\
 \bottomrule
 \end{tabular}
 \end{table}
-
 ```
-
-
 ```{=latex}
 \begin{table}
 
@@ -126,8 +118,6 @@ NoTreatPre-Period & 11.0899 & 0.1726 & 2.7634 & 611\\
 \end{tabular}
 \end{table}
 ```
-
-
 ```{=latex}
 \begin{table}
 
@@ -145,8 +135,6 @@ Pre-Period & 11.0831 & 0.2616 & 2.4765 & 232\\
 \end{tabular}
 \end{table}
 ```
-
-
 ```{=latex}
 \begin{table}
 
@@ -164,8 +152,6 @@ Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
 \end{tabular}
 \end{table}
 ```
-
-
 \newpage
 
 ## References
