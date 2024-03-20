@@ -396,7 +396,20 @@ fixestmodel1stDifcol2 = feols(`lDelta` ~ `D_AccessToParity`
 
 summary(fixestmodel1stDifcol2, cluster = "State")
 
+## Let's run a simpel Did from Fixest
 
+fixestmodelDid1 = feols(`Crude Rate` ~ `Treat` + `Post` +`TreatPost`
+                        +`unemployment rate` 
+                        +`BankrupcyP100k`
+                        +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+
+summary(fixestmodelDid1, cluster = "State")
+
+fixestmodelDid2 = feols(lcruderate ~ Treat + Post +TreatPost
+                        +`unemployment rate` 
+                        +`BankrupcyP100k`
+                        +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+summary(fixestmodelDid2, cluster = "State")
 
 
 
@@ -456,7 +469,7 @@ ggdid(out)
 agg.simple <- aggte(out,type = "simple",na.rm = T)
 agg.dynamic <- aggte(out,type = "dynamic", na.rm =T)
 summary(agg.simple)
-ggdid(agg.simple)
+#ggdid(agg.simple)
 summary(agg.dynamic)
 
 
@@ -479,7 +492,7 @@ ggdid(out2)
 agg.simple2 <- aggte(out2,type = "simple",na.rm = T)
 agg.dynamic2 <- aggte(out2,type = "dynamic", na.rm =T)
 summary(agg.simple2)
-ggdid(agg.simple2)
+#ggdid(agg.simple2)
 summary(agg.dynamic2)
 
 
@@ -526,32 +539,7 @@ ggplot(df_bacon$two_by_twos) +
   theme_minimal() +
   labs(x = "Weight", y = "Estimate", shape = "Type")
 
-ggplot(df_bacon) +
-  aes(x = weight, y = estimate, shape = factor(type)) +
-  geom_point() +
-  geom_hline(yintercept = 0) + 
-  theme_minimal() +
-  labs(x = "Weight", y = "Estimate", shape = "Type")
 
-
-
-df_bacon %>% 
-  mutate(subgroup = paste0(treated, "_", untreated),
-         subgroup = factor(subgroup),
-         subgroup = forcats::fct_reorder(subgroup, estimate)) %>% 
-  ggplot(aes(x = estimate, 
-             y = subgroup,
-             size = weight)) +
-  geom_point() +
-  geom_vline(xintercept = weighted.mean(df_bacon$estimate, df_bacon$weight),
-             linetype = "longdash") +
-  theme_minimal() +
-  labs(size = "Weight",
-       y = "Subgroup",
-       x = "Estimate",
-       title = "Goodman-Bacon diff in diff decomposition",
-       subtitle = "Dotted line indicates two-way FE estimate.",
-       caption = "Subgroups 99999 correspond to never treated groups")
 
 df_bacon$two_by_twos %>% 
   mutate(subgroup = paste0(treated, "_", untreated),
