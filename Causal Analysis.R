@@ -53,10 +53,12 @@ Masterdata$NonTreat <- ifelse(Masterdata$State %in% TreatedStates1998 & Masterda
 Masterdata$Pre_Post_Parity <- ifelse(Masterdata$State %in% TreatedStates1998,
                                      ifelse(Masterdata$Year.x >= Masterdata$AccesstoParity,"Post-Parity","Pre-Pairty"),"No-Parity")
 ## Fixed. It was R recycling the shorter object length. The ifelse statement was masking it. 
-
+## Clean cruderate name 
+Masterdata <-Masterdata %>%
+  rename(crude_rate = `Crude Rate` )
 
 ## Forgot to add a logged crude rate variable
-Masterdata$lcruderate <- log(Masterdata$`Crude Rate`)
+Masterdata$lcruderate <- log(Masterdata$`crude_rate`)
 Masterdata$PercW
 Masterdata$BankrupcyP100k
 
@@ -66,7 +68,7 @@ Masterdata1998 <- Masterdata |>
   filter(Year.x <= 2004)
 ## Here we Create our first sum stats table
 library(vtable)
-Covariates <- c("Crude Rate",
+Covariates <- c("crude_rate",
 "lcruderate",
 "unemployment rate",
 "BankrupcyP100k",
@@ -107,17 +109,17 @@ wtd.stderror <- function(x, weights){
 TestFigure1 <-Masterdata1998 |>
   mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period","Pre-Period"))|>
   group_by(TreatPrePostPeriod1998)|>
-  summarise(mean = weighted.mean( x= `Crude Rate`, w = population),
-            st.err= wtd.stderror( x=`Crude Rate`,weights = population),
-            sd   = weighted.sd(x=`Crude Rate`,w=population),
+  summarise(mean = weighted.mean( x= `crude_rate`, w = population),
+            st.err= wtd.stderror( x=`crude_rate`,weights = population),
+            sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
 
 TestFigure2 <-Masterdata1998 |>
 mutate(NonTreatPrePostPeriod1998= if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period")) |>
   group_by(NonTreatPrePostPeriod1998) |>
-  summarise(mean = weighted.mean( x= `Crude Rate`, w = population),
-            st.err= wtd.stderror( x=`Crude Rate`,weights = population),
-            sd   = weighted.sd(x=`Crude Rate`,w=population),
+  summarise(mean = weighted.mean( x= `crude_rate`, w = population),
+            st.err= wtd.stderror( x=`crude_rate`,weights = population),
+            sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
 
 kable(TestFigure1,format = "latex",digits = 4,
@@ -135,9 +137,9 @@ mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 
                                        if_else(State %in% TreatedStates1998 & Year.x < 1998,"Pre-Period",
                                                if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period"))))|>
   group_by(TreatPrePostPeriod1998)|>
-  summarise(mean = as.numeric(weighted.mean( x= `Crude Rate`, w = population)),
-            st.err= wtd.stderror( x=`Crude Rate`,weights = population),
-            sd   = weighted.sd(x=`Crude Rate`,w=population),
+  summarise(mean = as.numeric(weighted.mean( x= `crude_rate`, w = population)),
+            st.err= wtd.stderror( x=`crude_rate`,weights = population),
+            sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
 ## Log Suicide Rate
 Table3log <- Masterdata1998 |>
@@ -186,7 +188,7 @@ write.csv(Treatment_times_, file= "Treatment times .csv", row.names = FALSE)
 
 ## Weighted Means?  PRINT THIS OUT
 Masterdata1998 |>
-  summarise(weighted.mean(x=Masterdata1998$`Crude Rate`, w= Masterdata1998$population)) |>
+  summarise(weighted.mean(x=Masterdata1998$`crude_rate`, w= Masterdata1998$population)) |>
   print(n=51)
 
 ## NEXT STEPS MODELING. CREATE TABLE 3, JUST USE DIFFERENCE MEANS
@@ -301,7 +303,7 @@ summary(m.out0)
 m.out1 <- matchit(D_AccessToParity ~ `unemployment rate` 
                   + `BankrupcyP100k` 
                   + `PercW`, data = Masterdata1998,
-                  method = "nearest", distance = "glm")
+                  method = "nearest", distance = "glm", replace = T)
 summary(m.out1, un =FALSE)
 plot(m.out1)
 
@@ -316,7 +318,7 @@ plot(summary(m.out1),var.order = "unmatched",abs = F)
 m.out2 <- matchit(D_AccessToParity ~ `unemployment rate` 
                   + `BankrupcyP100k` 
                   + `PercW`, data = Masterdata1998,
-                  method = "full",link = "probit")
+                  method = "full",link = "probit", estimand = "ATE")
 m.out2
 summary(m.out2, un=F)
 plot(summary(m.out2),var.order = "unmatched",abs = F)
@@ -326,7 +328,7 @@ plot(summary(m.out2),var.order = "unmatched",abs = F)
 m.out3 <- matchit(D_AccessToParity ~ `unemployment rate` 
                   + `BankrupcyP100k` 
                   + `PercW`, data = Masterdata1998,
-                  method = "full", distance = "glm")
+                  method = "full", distance = "glm",estimand = "ATE")
 m.out3
 summary(m.out3, un=F)
 plot(summary(m.out3),var.order = "unmatched",abs = F)
@@ -342,7 +344,7 @@ fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate`
 
 avg_comparisons(fit,
                 variables = "D_AccessToParity",
-                vcov = ~subclass,
+                vcov = ~State,
                 newdata = subset(m.data, D_AccessToParity == 1),
                 wts = "population")
 # try fixest
@@ -398,14 +400,14 @@ summary(fixestmodel1stDifcol2, cluster = "State")
 
 ## Let's run a simpel Did from Fixest
 
-fixestmodelDid1 = feols(`Crude Rate` ~ `Treat` + `Post` +`TreatPost`
+fixestmodelDid1 = feols(`crude_rate` ~  `TreatPost`
                         +`unemployment rate` 
                         +`BankrupcyP100k`
                         +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
 
 summary(fixestmodelDid1, cluster = "State")
 
-fixestmodelDid2 = feols(lcruderate ~ Treat + Post +TreatPost
+fixestmodelDid2 = feols(lcruderate ~TreatPost
                         +`unemployment rate` 
                         +`BankrupcyP100k`
                         +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
