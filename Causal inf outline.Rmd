@@ -1,0 +1,27 @@
+---
+title: "Causal inf outline"
+output: pdf_document
+date: "2024-03-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Introduction -It's own thing, a quick intro, not too long
+  Lang 2013- Use this section as a theorical framework/ Intro Talk about Legislation
+  Pairity Laws- Use this is more detail about pairity laws
+Literature- More detail for paper surrounding mental health/ pairity laws
+  Pairity Laws
+  "Toothless Bill"
+Data and Describtive Statitistics
+Methods
+  Diff in Diff
+  Matching / IPW with doubly robust estimators
+  Hetero Diff in Diff
+Results
+Discussion
+What does the balance of evidence come up to? It's probably close to Zero the percentage reduction. 
+Conclusions
+Figures
+References
