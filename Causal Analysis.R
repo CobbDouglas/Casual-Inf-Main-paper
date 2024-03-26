@@ -105,23 +105,23 @@ wtd.stderror <- function(x, weights){
   
   sqrt(var*weights)
 }
-
+## Hey I don't think These are trust worthy they group the rest of the data into the pre preiod bucket here
 TestFigure1 <-Masterdata1998 |>
-  mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period","Pre-Period"))|>
-  group_by(TreatPrePostPeriod1998)|>
+  mutate(Group_Time_Period= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period","Pre-Period"))|>
+  group_by(Group_Time_Period)|>
   summarise(mean = weighted.mean( x= `crude_rate`, w = population),
             st.err= wtd.stderror( x=`crude_rate`,weights = population),
             sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
-
+### !!!!!!!!!!!!
 TestFigure2 <-Masterdata1998 |>
-mutate(NonTreatPrePostPeriod1998= if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period")) |>
-  group_by(NonTreatPrePostPeriod1998) |>
+mutate(Group_Time_Period= if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"NoTreatPost-Period","NoTreatPre-Period")) |>
+  group_by(Group_Time_Period) |>
   summarise(mean = weighted.mean( x= `crude_rate`, w = population),
             st.err= wtd.stderror( x=`crude_rate`,weights = population),
             sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
-
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!
 kable(TestFigure1,format = "latex",digits = 4,
       caption = "Weighted Means of Treated States, Pre and Post Period",
       booktabs = T
@@ -129,8 +129,18 @@ kable(TestFigure1,format = "latex",digits = 4,
 kable(TestFigure2,format = "latex",digits = 4,
       caption = "Weighted Means of Non-Treated States, Pre and Post Period",
       booktabs = T)
-
-
+## Testing kable god help me
+kable(TestFigure1,digits =4,
+      caption = "Weighted Means of Treated States, Pre and Post Period")
+## let's create the diff in diff table 3 
+## OKay Here's what I've done so far with Table 3. There's a Overleaf table that I'm working on
+## 
+ttestlm <- lm(crude_rate ~ (Treat*Post), 
+                         weights = Masterdata1998$population,
+                         data = Masterdata1998)
+summary(ttestlm)
+## This is me trying to use regression as a way to run a ttest for myself
+## 3/26/24- Please use Overleaf and Check if Treat is good. Table 3 looks good but need work
 ## TABLE 3 DONE 
 Table3crude <- Masterdata1998 |>
 mutate(TreatPrePostPeriod1998= if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Post-Period",
@@ -162,8 +172,38 @@ kable(Table3log,format = "latex",digits = 4,
       caption = "Weighted Mean Log Suicide Rates of Treated and Nontreated States, Pre and Post Period",
       booktabs = T
 )
+## I wanna try and add columns to this tibble
+Table3crude |>
+  
 
-## Idk what this is
+## We're going to use gt summary here to create good tables. Just using Kable is ugly and I wanna cry
+## I gave up on this, idk why it wont work
+library(gtsummary)
+
+summaryfunc <- function(data,variable,...) {
+  
+  weightedmean <- weighted.mean(data[[paste0(variable)]], Masterdata1998$population, na.rm =T)
+  st.err <-     wtd.stderror(data[[paste0(variable)]],    Masterdata1998$population)
+  weightedsd <-  weighted.sd(data[[paste0(variable)]],    Masterdata1998$population, na.rm =T)
+  
+  dplyr::tibble(
+    weightedmean = weightedmean,
+    st.err= st.err,
+    weightedsd = weightedsd
+  )
+}
+
+
+Masterdata1998 |>
+  rename(unemployment_rate =`unemployment rate`) |>
+  select(crude_rate,unemployment_rate,BankrupcyP100k,PercW,Pre_Post_Parity) |>
+  tbl_custom_summary(by= "Pre_Post_Parity",
+              stat_fns = ~ summaryfunc,
+              statistic = ~ "{weightedmean} {st.err} {weightedsd}"
+              )
+
+
+## Idk what this is / I think this was check what states were treated in the data
 Masterdata1998 |>
   group_by(State) |>
   count(Treat)|>
@@ -314,6 +354,63 @@ plot(m.out1, type = "density", interactive = FALSE,
 
 plot(summary(m.out1),var.order = "unmatched",abs = F)
 
+## Nearest Neighbhor with Probit
+m.out1.2 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "nearest", link = "probit", replace = T)
+summary(m.out1.2, un =FALSE)
+
+plot(summary(m.out1.2),var.order = "unmatched",abs = F)
+
+## Quick check with this.
+m.data <- match.data(m.out1.2)
+
+MatchedDid0 = feols(lcruderate ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid0, cluster = "State")
+## Mahalaobis
+m.out1.3 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                    + `BankrupcyP100k` 
+                    + `PercW`, data = Masterdata1998,
+                    method = "nearest", distance  = "glm",
+                    mahvars = ~ `unemployment rate`+ `BankrupcyP100k`+ `PercW`
+                    ,replace = T)
+summary(m.out1.3, un =FALSE)
+
+plot(summary(m.out1.3),var.order = "unmatched",abs = F)
+## Mahal- ATT Estimate
+m.data <- match.data(m.out1.3)
+
+library("marginaleffects")
+
+fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate` 
+                                           + `BankrupcyP100k` 
+                                           + `PercW`), data = m.data)
+
+avg_comparisons(fit,
+                variables = "D_AccessToParity",
+                vcov = "stata",
+                newdata = subset(m.data, D_AccessToParity == 1),
+                wts = "population")
+## Mala- Let's use it in a twfe
+MatchedDid = feols(`crude_rate` ~  `TreatPost`
+                        +`unemployment rate` 
+                        +`BankrupcyP100k`
+                        +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid, cluster = "State")
+#lcrude
+MatchedDid2 = feols(lcruderate ~  `TreatPost`
+                   +`unemployment rate` 
+                   +`BankrupcyP100k`
+                   +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid2, cluster = "State")
+
 ## Probit
 m.out2 <- matchit(D_AccessToParity ~ `unemployment rate` 
                   + `BankrupcyP100k` 
@@ -322,7 +419,35 @@ m.out2 <- matchit(D_AccessToParity ~ `unemployment rate`
 m.out2
 summary(m.out2, un=F)
 plot(summary(m.out2),var.order = "unmatched",abs = F)
+## We try to get the ATE 
+m.data <- match.data(m.out2)
 
+library("marginaleffects")
+
+fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate` 
+                                           + `BankrupcyP100k` 
+                                           + `PercW`), data = m.data)
+
+avg_comparisons(fit,
+                variables = "D_AccessToParity",
+                vcov = ~subclass,
+                newdata = subset(m.data, D_AccessToParity == 1),
+                wts = "population")
+# Simple Did With the Probit
+MatchedDid3 = feols(`crude_rate` ~  `TreatPost`
+                   +`unemployment rate` 
+                   +`BankrupcyP100k`
+                   +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid3, cluster = "State")
+#lcruderate
+MatchedDid4 = feols(`lcruderate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid4, cluster = "State")
+## FULL PS w/Matching DID
 
 ## True PS matching 
 m.out3 <- matchit(D_AccessToParity ~ `unemployment rate` 
@@ -334,19 +459,95 @@ summary(m.out3, un=F)
 plot(summary(m.out3),var.order = "unmatched",abs = F)
 
 ## Introducing Sampling Weight is chaos. Going to try this to get robust clustered standerrs
-m.data <- match.data(m.out2)
+## Now the Did
+# Simple Did With the Probit
+m.data <- match.data(m.out3)
+MatchedDid5 = feols(`crude_rate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
 
-library("marginaleffects")
+summary(MatchedDid5, cluster = "State")
+#lcruderate
+MatchedDid6 = feols(`lcruderate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
 
-fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate` 
-                                           + `BankrupcyP100k` 
-                                           + `PercW`), data = m.data)
+summary(MatchedDid6, cluster = "State")
+## We're going to try cardinality
+m.out4 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "cardinality", distance = "glm",estimand = "ATE")
+m.out4
+summary(m.out4, un=F)
+plot(summary(m.out4),var.order = "unmatched",abs = F)
 
-avg_comparisons(fit,
-                variables = "D_AccessToParity",
-                vcov = ~State,
-                newdata = subset(m.data, D_AccessToParity == 1),
-                wts = "population")
+## Did
+m.data <- match.data(m.out4)
+MatchedDid7 = feols(`crude_rate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid7, cluster = "State")
+#lcruderate
+MatchedDid8 = feols(`lcruderate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid8, cluster = "State")
+
+
+## Let's try Coarsened exact matching
+m.out5 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "cem", distance = "glm",estimand = "ATE")
+m.out5
+summary(m.out5, un=F)
+plot(summary(m.out5),var.order = "unmatched",abs = F)
+
+## Did
+m.data <- match.data(m.out5)
+MatchedDid9 = feols(`crude_rate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid9, cluster = "State")
+#lcruderate
+MatchedDid10 = feols(`lcruderate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid10, cluster = "State")
+## Let's try subclass
+m.out6 <- matchit(D_AccessToParity ~ `unemployment rate` 
+                  + `BankrupcyP100k` 
+                  + `PercW`, data = Masterdata1998,
+                  method = "subclass", distance = "glm",estimand = "ATE")
+m.out6
+summary(m.out6, un=F)
+plot(summary(m.out6),var.order = "unmatched",abs = F)
+
+# Did
+m.data <- match.data(m.out6)
+MatchedDid11 = feols(`crude_rate` ~  `TreatPost`
+                    +`unemployment rate` 
+                    +`BankrupcyP100k`
+                    +`PercW`| State + Year.x, m.data, weights = ~population )
+
+summary(MatchedDid11, cluster = "State")
+#lcruderate
+MatchedDid12 = feols(`lcruderate` ~  `TreatPost`
+                     +`unemployment rate` 
+                     +`BankrupcyP100k`
+                     +`PercW`| State + Year.x, m.data, weights = ~population )
+summary(MatchedDid12, cluster = "State")
 # try fixest
 library(fixest)
 fixestmodelcol1 = feols(lcruderate ~ `D_AccessToParity`
@@ -398,7 +599,7 @@ fixestmodel1stDifcol2 = feols(`lDelta` ~ `D_AccessToParity`
 
 summary(fixestmodel1stDifcol2, cluster = "State")
 
-## Let's run a simpel Did from Fixest
+## Let's run a simple Did from Fixest
 
 fixestmodelDid1 = feols(`crude_rate` ~  `TreatPost`
                         +`unemployment rate` 
@@ -412,6 +613,28 @@ fixestmodelDid2 = feols(lcruderate ~TreatPost
                         +`BankrupcyP100k`
                         +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
 summary(fixestmodelDid2, cluster = "State")
+
+fixestmodelDid3 = feols(`crude_rate` ~  `D_AccessToParity`
+                        +`unemployment rate` 
+                        +`BankrupcyP100k`
+                        +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+
+summary(fixestmodelDid3, cluster = "State")
+
+fixestmodelDid3.1 = feols(`crude_rate` ~  `D_AccessToParity`
+                        | State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+
+summary(fixestmodelDid3.1, cluster = "State")
+
+fixestmodelDid4 = feols(lcruderate ~D_AccessToParity
+                        +`unemployment rate` 
+                        +`BankrupcyP100k`
+                        +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+summary(fixestmodelDid4, cluster = "State")
+
+fixestmodelDid4.1 = feols(lcruderate ~D_AccessToParity
+                        | State + Year.x, Masterdata1998, weights = Masterdata1998$population )
+summary(fixestmodelDid4.1, cluster = "State")
 
 
 
@@ -437,6 +660,7 @@ iplot(list(Sunabmodel,Sunabmodelref))
 iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
 
 summary(Sunabmodel,agg = "ATT")
+summary(Sunabmodelref, agg = "ATT")
 ##
 ## event study. 
 ## Here we are going to use DiD
@@ -454,6 +678,27 @@ Masterdata1998 <-Masterdata1998 |>
 
 
 library(did)
+out0 <- att_gt(yname = "lcruderate",
+               gname = "AccesstoParity",
+               tname = "Year.x",
+               idname = "FIPS",
+               data = Masterdata1998,
+               weightsname = "population",
+               bstrap = T,
+               base_period = "universal",
+               control_group = "notyettreated",
+)
+summary(out0)
+ggdid(out0)
+agg.simple0 <- aggte(out0,type = "simple",na.rm = T)
+agg.dynamic0 <- aggte(out0,type = "dynamic", na.rm =T)
+agg.gs0 <- aggte(out0,type = "group",na.rm=T)
+summary(agg.simple0)
+#ggdid(agg.simple)
+summary(agg.dynamic0)
+summary(agg.gs0)
+ggdid(agg.dynamic0)
+
 out <- att_gt(yname = "lcruderate",
               gname = "simple3did",
               tname = "Year.x",
@@ -463,21 +708,22 @@ out <- att_gt(yname = "lcruderate",
               weightsname = "population",
               bstrap = T,
               base_period = "universal",
-              control_group = "nevertreated",
-              
+              control_group = "notyettreated",
               )
 summary(out)
 ggdid(out)
 agg.simple <- aggte(out,type = "simple",na.rm = T)
 agg.dynamic <- aggte(out,type = "dynamic", na.rm =T)
+agg.gs <- aggte(out,type = "group",na.rm=T)
 summary(agg.simple)
 #ggdid(agg.simple)
 summary(agg.dynamic)
-
+summary(agg.gs)
+ggdid(agg.dynamic)
 
 
 out2 <- att_gt(yname = "lcruderate",
-              gname = "simpledid",
+              gname = "AccesstoParity",
               tname = "Year.x",
               idname = "FIPS",
               xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
@@ -493,37 +739,53 @@ summary(out2)
 ggdid(out2)
 agg.simple2 <- aggte(out2,type = "simple",na.rm = T)
 agg.dynamic2 <- aggte(out2,type = "dynamic", na.rm =T)
+agg.gs2 <- aggte(out2,type = "group",na.rm=T)
 summary(agg.simple2)
 #ggdid(agg.simple2)
 summary(agg.dynamic2)
+summary(agg.gs2)
+ggdid(agg.gs2)
+ggdid(agg.dynamic2)
+
+## Try again with the CS Did
+out3 <- att_gt(yname = "lcruderate",
+               gname = "AccesstoParity",
+               tname = "Year.x",
+               idname = "FIPS",
+               xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+               data = Masterdata1998,
+               bstrap = T,
+               base_period = "universal",
+               control_group = "notyettreated"
+               
+               
+)
+testlm <- lm(lcruderate  ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`+ `population`,Masterdata1998)
+summary(testlm)
+summary(out3)
+ggdid(out3)
+agg.simple3 <- aggte(out3,type = "simple",na.rm = T)
+agg.dynamic3 <- aggte(out3,type = "dynamic", na.rm =T)
+agg.gs3 <- aggte(out3,type = "group",na.rm=T)
+summary(agg.simple3)
+#ggdid(agg.simple2)
+summary(agg.dynamic3)
+summary(agg.gs3)
+ggdid(agg.gs3)
+ggdid(agg.dynamic3)
 
 
+
+#below is bacon decomp
 
 
 library(bacondecomp)
-df_bacon <- bacon(lcruderate ~ Treat+Post+TreatPost,
+df_bacon <- bacon(lcruderate ~ TreatPost,
                   data = Masterdata1998,
                   id_var = "FIPS",
                   time_var = "Year.x")
 
-df_bacon <- bacon(`lcruderate` ~ Treat+ Post+ TreatPost+ `unemployment rate`
-                  +  `BankrupcyP100k`  
-                  +  `PercW`,
-                  data = Masterdata1998,
-                  id_var = "FIPS",
-                  time_var = "Year.x",
-                  
-)
-
-
-
-
-df_bacon <- bacon(lcruderate ~ D_AccessToParity,
-                  data = Masterdata1998,
-                  id_var = "FIPS",
-                  time_var = "Year.x")
-
-df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
+df_bacon <- bacon(`lcruderate` ~ TreatPost
                   + `unemployment rate`
                   +  `BankrupcyP100k`  
                   +  `PercW`,
@@ -532,7 +794,30 @@ df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
                   time_var = "Year.x",
                   
 )
+df_bacon <- bacon(lcruderate ~ D_AccessToParity,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x")
 
+
+
+df_bacon <- bacon(lcruderate ~ D_AccessToParity,
+                  data = Masterdata1998,
+                  id_var = "FIPS",
+                  time_var = "Year.x")
+coef_bacon <- sum(df_bacon$estimate * df_bacon$weight)
+print(paste("Weighted sum of decomposition =", round(coef_bacon, 4)))
+
+df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
+                  + `unemployment rate`
+                  +  `BankrupcyP100k`  
+                  +  `PercW`
+                  + population,
+                  data = Masterdata1998,
+                  id_var = "State",
+                  time_var = "Year.x",)
+coef_bacon <- sum(df_bacon$two_by_twos$estimate * df_bacon$two_by_twos$weight)
+print(paste("Weighted sum of decomposition =", round(coef_bacon, 4)))
 
 ggplot(df_bacon$two_by_twos) +
   aes(x = weight, y = estimate, shape = factor(type)) +
@@ -541,6 +826,12 @@ ggplot(df_bacon$two_by_twos) +
   theme_minimal() +
   labs(x = "Weight", y = "Estimate", shape = "Type")
 
+ggplot(df_bacon) +
+  aes(x = weight, y = estimate, shape = factor(type)) +
+  geom_point() +
+  geom_hline(yintercept = 0) + 
+  theme_minimal() +
+  labs(x = "Weight", y = "Estimate", shape = "Type")
 
 
 df_bacon$two_by_twos %>% 
@@ -560,5 +851,10 @@ df_bacon$two_by_twos %>%
        title = "Goodman-Bacon diff in diff decomposition",
        subtitle = "Dotted line indicates two-way FE estimate.",
        caption = "Subgroups 99999 correspond to never treated groups")
+
+
+Masterdata1998 %>%
+  select(Year.x,State,TreatPost,D_AccessToParity) %>%
+  print(n=100)
 
 

@@ -86,38 +86,7 @@ Percent of workers in large Firms & 330 & 0.4887 & 0.03845 & 178 & 0.4886 & 0.03
 }
 \end{table}
 ```
-```{=latex}
 
-\begin{table}
-
-
-\caption{Weighted Means of Treated States, Pre and Post Period}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-TreatPrePostPeriod1998 & mean & st.err & sd & n\\
-\midrule
-Post-Period & 9.7867 & 0.2927 & 2.5778 & 203\\
-Pre-Period & 11.9407 & 0.1484 & 2.4668 & 562\\
-\bottomrule
-\end{tabular}
-\end{table}
-```
-```{=latex}
-\begin{table}
-
-\caption{Weighted Means of Non-Treated States, Pre and Post Period}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-NonTreatPrePostPeriod1998 & mean & st.err & sd & n\\
-\midrule
-NoTreatPost-Period & 12.2426 & 0.2118 & 2.0905 & 154\\
-NoTreatPre-Period & 11.0899 & 0.1726 & 2.7634 & 611\\
-\bottomrule
-\end{tabular}
-\end{table}
-```
 ```{=latex}
 \begin{table}
 
@@ -125,7 +94,7 @@ NoTreatPre-Period & 11.0899 & 0.1726 & 2.7634 & 611\\
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
-TreatPrePostPeriod1998 & mean & st.err & sd & n\\
+Time Period Group & mean & st.err & sd & n\\
 \midrule
 NoTreatPost-Period & 12.2426 & 0.2118 & 2.0905 & 154\\
 NoTreatPre-Period & 12.8921 & 0.2264 & 2.3786 & 176\\
@@ -142,7 +111,7 @@ Pre-Period & 11.0831 & 0.2616 & 2.4765 & 232\\
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
-TreatPrePostPeriod1998 & mean & st.err & sd & n\\
+Time Period Group & mean & st.err & sd & n\\
 \midrule
 NoTreatPost-Period & 2.4915 & 0.0165 & 0.1625 & 154\\
 NoTreatPre-Period & 2.5413 & 0.0165 & 0.1732 & 176\\
