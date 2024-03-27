@@ -133,12 +133,7 @@ kable(TestFigure2,format = "latex",digits = 4,
 kable(TestFigure1,digits =4,
       caption = "Weighted Means of Treated States, Pre and Post Period")
 ## let's create the diff in diff table 3 
-## OKay Here's what I've done so far with Table 3. There's a Overleaf table that I'm working on
-## 
-ttestlm <- lm(crude_rate ~ (Treat*Post), 
-                         weights = Masterdata1998$population,
-                         data = Masterdata1998)
-summary(ttestlm)
+
 ## This is me trying to use regression as a way to run a ttest for myself
 ## 3/26/24- Please use Overleaf and Check if Treat is good. Table 3 looks good but need work
 ## TABLE 3 DONE 
@@ -162,6 +157,32 @@ Table3log <- Masterdata1998 |>
             sd   = weighted.sd(x=lcruderate,w=population),
             n = n())
 
+
+
+
+
+## here we create the figures for the differences between means 
+## OKay Here's what I've done so far with Table 3. There's a Overleaf table that I'm working on
+## 
+## Redfine what it means here to be Treated and post
+Masterdata1998 <- Masterdata1998|> mutate(
+  Expr=if_else(State %in% TreatedStates1998 & Year.x >= 1998,"Treated-Post-Period",
+                           if_else(State %in% TreatedStates1998 & Year.x < 1998,"Treated-Pre-Period",
+                           if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,"No-TreatPost-Period","No-TreatPre-Period")))) 
+  
+Masterdata1998 <- fastDummies::dummy_cols(Masterdata1998,select_columns = "Expr") 
+
+
+ttestlm <- lm(crude_rate ~ Masterdata1998$`Expr_No-TreatPost-Period`+
+                Masterdata1998$`Expr_Treated-Post-Period`+
+                Masterdata1998$`Expr_Treated-Pre-Period`, 
+              weights = Masterdata1998$population,
+              data = Masterdata1998)
+
+summary(ttestlm)
+
+## In order to get all Difference estimates you have to take away one from each group for a total of three regressions, and that coef is the diference
+
 ## Create Tables
 kable(Table3crude,format = "latex",digits = 4,
       caption = "Weighted Mean Suicide Rates of Treated and Nontreated States, Pre and Post Period",
@@ -173,34 +194,34 @@ kable(Table3log,format = "latex",digits = 4,
       booktabs = T
 )
 ## I wanna try and add columns to this tibble
-Table3crude |>
+
   
 
 ## We're going to use gt summary here to create good tables. Just using Kable is ugly and I wanna cry
 ## I gave up on this, idk why it wont work
-library(gtsummary)
+#library(gtsummary)
 
-summaryfunc <- function(data,variable,...) {
+#summaryfunc <- function(data,variable,...) {
   
-  weightedmean <- weighted.mean(data[[paste0(variable)]], Masterdata1998$population, na.rm =T)
-  st.err <-     wtd.stderror(data[[paste0(variable)]],    Masterdata1998$population)
-  weightedsd <-  weighted.sd(data[[paste0(variable)]],    Masterdata1998$population, na.rm =T)
+#  weightedmean <- weighted.mean(data[[paste0(variable)]], Masterdata1998$population, na.rm =T)
+#  st.err <-     wtd.stderror(data[[paste0(variable)]],    Masterdata1998$population)
+#  weightedsd <-  weighted.sd(data[[paste0(variable)]],    Masterdata1998$population, na.rm =T)
   
-  dplyr::tibble(
-    weightedmean = weightedmean,
-    st.err= st.err,
-    weightedsd = weightedsd
-  )
-}
+#  dplyr::tibble(
+ #   weightedmean = weightedmean,
+#    st.err= st.err,
+#    weightedsd = weightedsd
+ # )
+#}
 
 
-Masterdata1998 |>
-  rename(unemployment_rate =`unemployment rate`) |>
-  select(crude_rate,unemployment_rate,BankrupcyP100k,PercW,Pre_Post_Parity) |>
-  tbl_custom_summary(by= "Pre_Post_Parity",
-              stat_fns = ~ summaryfunc,
-              statistic = ~ "{weightedmean} {st.err} {weightedsd}"
-              )
+#Masterdata1998 |>
+#  rename(unemployment_rate =`unemployment rate`) |>
+#  select(crude_rate,unemployment_rate,BankrupcyP100k,PercW,Pre_Post_Parity) |>
+#  tbl_custom_summary(by= "Pre_Post_Parity",
+ #             stat_fns = ~ summaryfunc,
+ #             statistic = ~ "{weightedmean} {st.err} {weightedsd}"
+#              )
 
 
 ## Idk what this is / I think this was check what states were treated in the data
