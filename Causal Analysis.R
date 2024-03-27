@@ -172,14 +172,29 @@ Masterdata1998 <- Masterdata1998|> mutate(
   
 Masterdata1998 <- fastDummies::dummy_cols(Masterdata1998,select_columns = "Expr") 
 
+Masterdata1998 <- Masterdata1998 |>
+  mutate(Treat=if_else(State %in% TreatedStates1998 & Year.x >= 1998,1,
+                       if_else(State %in% TreatedStates1998 & Year.x < 1998,1,
+                               if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,0,0)))) |>
+  mutate(Post = ifelse(Year.x >= 1998,1,0)) |>
+  mutate(TreatPost = Treat * Post)
 
-ttestlm <- lm(crude_rate ~ Masterdata1998$`Expr_No-TreatPost-Period`+
-                Masterdata1998$`Expr_Treated-Post-Period`+
-                Masterdata1998$`Expr_Treated-Pre-Period`, 
+
+ttestlm <- lm(crude_rate ~ Masterdata1998$Treat+
+              Masterdata1998$Post+
+              Masterdata1998$TreatPost,
               weights = Masterdata1998$population,
               data = Masterdata1998)
 
 summary(ttestlm)
+
+logttestlm <- lm(lcruderate ~ Masterdata1998$`Expr_No-TreatPost-Period`+
+                   Masterdata1998$`Expr_No-TreatPre-Period`+
+                   Masterdata1998$`Expr_Treated-Post-Period`+
+                   Masterdata1998$`Expr_Treated-Pre-Period`, 
+                 weights = Masterdata1998$population,
+                 data = Masterdata1998)
+summary(logttestlm)
 
 ## In order to get all Difference estimates you have to take away one from each group for a total of three regressions, and that coef is the diference
 
