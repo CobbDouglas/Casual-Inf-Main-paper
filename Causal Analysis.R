@@ -188,10 +188,9 @@ ttestlm <- lm(crude_rate ~ Masterdata1998$Treat+
 
 summary(ttestlm)
 
-logttestlm <- lm(lcruderate ~ Masterdata1998$`Expr_No-TreatPost-Period`+
-                   Masterdata1998$`Expr_No-TreatPre-Period`+
-                   Masterdata1998$`Expr_Treated-Post-Period`+
-                   Masterdata1998$`Expr_Treated-Pre-Period`, 
+logttestlm <- lm(lcruderate ~ Masterdata1998$Treat+
+                   Masterdata1998$Post+
+                   Masterdata1998$TreatPost,
                  weights = Masterdata1998$population,
                  data = Masterdata1998)
 summary(logttestlm)
@@ -306,7 +305,7 @@ lm_robust(lcruderate ~
 # didn't work
 summary(MasterdataTable4Reg1)
 
-lapply(Masterdata1998[,41:46], sum)
+
 
 Masterdata1998 |>
   filter(D_NoLaw == 1) |>
@@ -366,7 +365,7 @@ Masterdata1998 |>
 ## The above mess is an attempt to bring in line all groups w/o having them secretly mix behind my code
 ## Each group will be turned into dummies using ifelse statement to match when they turn on
 ## Check if group sum to their totals
-lapply(Masterdata1998[,41:47], sum)
+##lapply(Masterdata1998[,41:47], sum)
 ### Let's use Matchit
 library(MatchIt)
 # No matching; constructing a pre-match matchit object
@@ -613,9 +612,10 @@ fixestmodelcol4 = feols(lcruderate ~ `D_AccessToParity`
                         +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
 summary(fixestmodelcol4, cluster = "State")
 
-Masterdata1998 <-Masterdata1998 |>
-  mutate(TimingCntrl = Lag(Masterdata1998$lcruderate,shift=1))|>
-  mutate(lDelta = lcruderate- TimingCntrl)
+Masterdata1998 <- Masterdata1998 |>
+  group_by(State) |>
+  mutate(TimingCntrl = dplyr::lag(lcruderate,n=1,default = NULL))|>
+  mutate(lDelta = lcruderate- TimingCntrl) 
 
 fixestmodel1stDifcol1 = feols(`lDelta` ~ `D_AccessToParity`
                         +`D_NonParityLaw`
@@ -628,12 +628,106 @@ Firstdifcol2data <- Masterdata1998 |>
   filter( AccesstoParity > 1 ) 
 
 
-fixestmodel1stDifcol2 = feols(`lDelta` ~ `D_AccessToParity`
+fixestmodel1stDifcol2 = feols(`lDelta` ~ TreatPost
                               +`unemployment rate` 
                               +`BankrupcyP100k`
                               +`PercW`| State + Year.x, Firstdifcol2data, weights = Firstdifcol2data$population )
 
 summary(fixestmodel1stDifcol2, cluster = "State")
+## REDO  FIRST DIFFERENCE TABLE, DIDNT DO IT RIGHT NEED TO USE PLM
+#PanelMasterdata <- plm::pdata.frame(Masterdata1998)
+#class(PanelMasterdata)
+#PanelMasterdata <- na.omit(PanelMasterdata)
+#PanelMasterdata <- plm::pdata.frame(Masterdata1998,index = c("State","Year.x"))
+#firstdifplm <-plm(lcruderate ~ D_AccessToParity
+ #     +D_NonParityLaw
+#      +unemployment.rate
+#      +BankrupcyP100k
+#      +PercW,
+#    index = c("State", "Year.x"), 
+#    data = PanelMasterdata,
+#    weights = "population",
+#    model = "fd")
+
+#summary(firstdifplm)
+# CANT FIX IDK WHY RESORTING TO STATA- EDIT STATA IS EATING MY DATA FOUND ANOTHER PACKAGE
+library(lfe)
+library(wfe)
+library(sandwhich)
+library(writexl)
+
+
+Firstdiffreg1 <- wfe::wfe(lcruderate ~ D_AccessToParity
+          +`unemployment rate`
+          +BankrupcyP100k
+          +PercW,
+         treat = "D_AccessToParity",
+        unit.index = "State",
+        time.index = "Year.x", 
+        data = Masterdata1998,
+        C.it = "population",
+        estimator = "fd")
+
+
+summary(Firstdiffreg1)
+
+ Masterdata1998 |>
+   select(where(is.numeric))|>
+   names()
+
+
+Masterdata1998$population <- as.numeric(Masterdata1998$population)
+Firstdiffreg1 <- lfe::felm(lcruderate ~ D_AccessToParity
+                       +D_NonParityLaw
+                       +`unemployment rate`
+                       +BankrupcyP100k
+                       +PercW| FIPS + Year.x,
+                      weights = population,
+                       data = Masterdata1998)
+
+class(Masterdata1998$population)
+# Trying to export shit
+write_xlsx(Masterdata1998, path = "Masterdata1998.xlsx")
+write_delim(Masterdata1998,file = "Masterdata1998.csv")
+write.csv2(Masterdata1998,file = "Masterdata1998.csv")
+write_excel_csv2(Masterdata1998,file = "Masterdata1998.csv2")
+write.table(Masterdata1998, "Masterdata1998.txt", sep=";")
+Masterdata1998 |>
+  select(-1)|>
+  write_excel_csv2(file = "Masterdata1998.csv")
+
+## BRUH WE NEED TABLES ON TABLES ON TABLES
+setFixest_dict(c(`crude_rate` ="Crude Suicide Rate",
+                 `lcruderate`= "Log Suicide Rate",
+                 `unemployment rate` = "Unemployment Rate",
+                 `BankrupcyP100k`= "Bankruptcy Per 100,000",
+                 `PercW` = "Percent Working in Large Firms"))
+etable(feols(`crude_rate`~`unemployment rate` 
+             +`BankrupcyP100k`
+             +`PercW`
+             + csw0(`D_AccessToParity`,
+                    `D_ParityLawPassed`,
+                    `D_Mandatedofferinglaws`,
+                    `D_MandatedifOffered`,
+                    `D_NonParityLaw`)|State + Year.x, Masterdata1998, 
+             weights = Masterdata1998$population,
+             cluster = "State"),file ="FETablesResults.tex" )
+etable(feols(`lcruderate`~`unemployment rate` 
+             +`BankrupcyP100k`
+             +`PercW`
+             + csw0(`D_AccessToParity`,
+                    `D_ParityLawPassed`,
+                    `D_Mandatedofferinglaws`,
+                    `D_MandatedifOffered`,
+                    `D_NonParityLaw`)|State + Year.x, Masterdata1998, 
+             weights = Masterdata1998$population,
+             cluster = "State"),file ="FETablesResults2.tex" )
+## Let's create the table columns- TABLE 4
+etable(fixestmodelcol1,fixestmodelcol2,fixestmodelcol3,fixestmodelcol4,
+       file = "FETable4Results.tex",
+       title = "Wowthis is a title")
+## TABLE 5
+etable()
 
 ## Let's run a simple Did from Fixest
 

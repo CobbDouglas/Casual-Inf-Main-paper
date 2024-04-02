@@ -86,7 +86,6 @@ Percent of workers in large Firms & 330 & 0.4887 & 0.03845 & 178 & 0.4886 & 0.03
 }
 \end{table}
 ```
-
 ```{=latex}
 \begin{table}
 
@@ -120,6 +119,109 @@ Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
 \bottomrule
 \end{tabular}
 \end{table}
+```
+```{=latex}
+\begin{table}
+\raggedleft
+\caption{\small{Difference in Difference estimates of the impact of access to parity mandates on suicide rates}}
+\label{tab:my_label}
+ \begin{tabular}{ccccccc}
+ \toprule
+ \multicolumn{7}{c}{Panel A}\\ 
+ \midrule
+         State/ Type Period&  &  1990-1997&  &  1998-2004&  &difference between periods\\ 
+         \midrule
+         Access to Parity States&  &  11.083&  &  9.787
+&  &-1.2964\\ 
+         &  &  (.262)&  &  (.293)
+&  &(0.2272)  \\ 
+         &  &  [232]&  & [203]&  &\\ 
+         No Parity States/ No Law States&  &  12.892
+&  &  12.2426
+&  &0.6495\\ 
+ & & (0.226)
+& & (0.212)
+& &(0.2730)\\ 
+ & & [154]& & [176]& &\\ 
+ Difference between types of states& & -1.809& & -2.456     & &\\ 
+ & & (0.2481)   & & (0.2541)   & &\\ 
+ Difference in Difference& & & -.647& & &\\ 
+ & & & (0.3552)  & & &\\
+ \toprule
+ \multicolumn{7}{c}{Panel B}\\
+ \midrule
+ State/ Type Period& & 1990-1997& & 1998-2004& &difference between periods
+ \\\midrule
+ Access to Parity States& & 2.380& & 2.249 
+& &-.131\\
+ & & (.024)& & 
+(.029)& &(.0202)\\
+ & & [232]& & [203]& &\\
+ No Parity States/ No Law States& & 2.541
+& & 2.492& &-.049\\
+ & & (.0165)
+& & 
+(.0165)& &(.02422)\\
+ & & [176]& & [154]& &\\
+ Difference between types of states& & -.161& & 
+-.243& &
+\\
+ & & (.022)& & (.0226)& &
+\\
+ Difference in Difference& & & -.0817***& & &
+\\
+ & & & (.032)& & &\\
+ \bottomrule
+    \end{tabular}
+\small {Each cell contains the average suicide rate/log suicide rate for the specified group that are weighted by yearly state population. \\Standard errors are reported in parentheses; sample sizes are reported in brackets.\\**Significant at the 5\% level, ***significant at the 1\% level.
+}
+\end{table} 
+```
+```{=latex}
+
+\begin{table}[htbp]
+   \caption{The impact of mental health laws on state suicide rates }
+   \centering
+   \begin{tabular}{lcccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{4}{c}{Log Suicide Rate}\\
+      Model:                         & (1)                     & (2)                     & (3)                     & (4)\\  
+      \midrule
+      \emph{Variables}\\
+      D\_AccessToParity              & -0.0418$^{***}$         & -0.0411$^{***}$         &                         & -0.0461$^{**}$\\   
+                                     & (0.0129)                & (0.0131)                &                         & (0.0186)\\   
+      D\_NonParityLaw                & -0.0019                 &                         &                         &   \\   
+                                     & (0.0134)                &                         &                         &   \\   
+      `unemploymentrate`             & 0.0152$^{***}$          & 0.0152$^{***}$          & 0.0151$^{***}$          & 0.0155$^{***}$\\   
+                                     & (0.0049)                & (0.0049)                & (0.0049)                & (0.0049)\\   
+      Bankruptcy Per 100,000         & 0.0002$^{***}$          & 0.0002$^{***}$          & 0.0003$^{***}$          & 0.0002$^{***}$\\   
+                                     & ($4.38\times 10^{-5}$)  & ($4.41\times 10^{-5}$)  & ($4.27\times 10^{-5}$)  & ($4.29\times 10^{-5}$)\\    
+      Percent Working in Large Firms & 0.6413                  & 0.6406                  & 0.5382                  & 0.6499\\   
+                                     & (0.4625)                & (0.4636)                & (0.4538)                & (0.4739)\\   
+      D\_ParityLawPassed             &                         &                         & -0.0294$^{**}$          &   \\   
+                                     &                         &                         & (0.0144)                &   \\   
+      D\_Mandatedofferinglaws        &                         &                         & -0.0872$^{***}$         &   \\   
+                                     &                         &                         & (0.0226)                &   \\   
+      D\_MandatedifOffered           &                         &                         & -0.0196                 & -0.0220\\   
+                                     &                         &                         & (0.0154)                & (0.0179)\\   
+      D\_NoLaw                       &                         &                         &                         & -0.0043\\   
+                                     &                         &                         &                         & (0.0148)\\   
+      \midrule
+      \emph{Fixed-effects}\\
+      State                          & Yes                     & Yes                     & Yes                     & Yes\\  
+      Year.x                         & Yes                     & Yes                     & Yes                     & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations                   & 765                     & 765                     & 765                     & 765\\  
+      R$^2$                          & 0.94704                 & 0.94704                 & 0.94836                 & 0.94715\\  
+      Within R$^2$                   & 0.21667                 & 0.21664                 & 0.23609                 & 0.21825\\  
+      \midrule \midrule
+      \multicolumn{5}{l}{\emph{Clustered (State) standard-errors in parentheses}}\\
+      \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
+
+
 ```
 \newpage
 
