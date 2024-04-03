@@ -653,39 +653,38 @@ summary(fixestmodel1stDifcol2, cluster = "State")
 # CANT FIX IDK WHY RESORTING TO STATA- EDIT STATA IS EATING MY DATA FOUND ANOTHER PACKAGE
 library(lfe)
 library(wfe)
-library(sandwhich)
+library(sandwich)
 library(writexl)
 
 
-Firstdiffreg1 <- wfe::wfe(lcruderate ~ D_AccessToParity
-          +`unemployment rate`
-          +BankrupcyP100k
-          +PercW,
-         treat = "D_AccessToParity",
-        unit.index = "State",
-        time.index = "Year.x", 
-        data = Masterdata1998,
-        C.it = "population",
-        estimator = "fd")
+#Firstdiffreg1 <- wfe::wfe(lcruderate ~ D_AccessToParity
+ #         +`unemployment rate`
+##          +PercW,
+#         treat = "D_AccessToParity",
+#        unit.index = "State",
+ #       time.index = "Year.x", 
+  #      data = Masterdata1998,
+   #     C.it = "population",
+    #    estimator = "fd")
 
 
-summary(Firstdiffreg1)
+#summary(Firstdiffreg1)
 
- Masterdata1998 |>
-   select(where(is.numeric))|>
-   names()
+ #Masterdata1998 |>
+#   select(where(is.numeric))|>
+#   names()
 
 
-Masterdata1998$population <- as.numeric(Masterdata1998$population)
-Firstdiffreg1 <- lfe::felm(lcruderate ~ D_AccessToParity
-                       +D_NonParityLaw
-                       +`unemployment rate`
-                       +BankrupcyP100k
-                       +PercW| FIPS + Year.x,
-                      weights = population,
-                       data = Masterdata1998)
+#Masterdata1998$population <- as.numeric(Masterdata1998$population)
+#Firstdiffreg1 <- lfe::felm(lcruderate ~ D_AccessToParity
+#                       +D_NonParityLaw
+#                       +`unemployment rate`
+#                       +BankrupcyP100k
+#                       +PercW| FIPS + Year.x,
+ #                     weights = population,
+ #                      data = Masterdata1998)
 
-class(Masterdata1998$population)
+#class(Masterdata1998$population)
 # Trying to export shit
 write_xlsx(Masterdata1998, path = "Masterdata1998.xlsx")
 write_delim(Masterdata1998,file = "Masterdata1998.csv")
@@ -727,7 +726,7 @@ etable(fixestmodelcol1,fixestmodelcol2,fixestmodelcol3,fixestmodelcol4,
        file = "FETable4Results.tex",
        title = "Wowthis is a title")
 ## TABLE 5
-etable()
+
 
 ## Let's run a simple Did from Fixest
 
@@ -786,9 +785,10 @@ Sunabmodelref = feols(lcruderate ~ `unemployment rate`
                    | State + Year.x,
                    Masterdata1998, 
                    weights = Masterdata1998$population)
+## What is this comparing?
 iplot(list(Sunabmodel,Sunabmodelref))
-iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
-
+SAplot <-iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
+legend("topright",col = 1:2, pch = 20, lwd = 1, lty = 1:2,legend = c("SA model", "SA with relative points" ))
 summary(Sunabmodel,agg = "ATT")
 summary(Sunabmodelref, agg = "ATT")
 ##
@@ -937,6 +937,9 @@ df_bacon <- bacon(lcruderate ~ D_AccessToParity,
                   time_var = "Year.x")
 coef_bacon <- sum(df_bacon$estimate * df_bacon$weight)
 print(paste("Weighted sum of decomposition =", round(coef_bacon, 4)))
+df_bacon |>
+  filter(weight > .05)|>
+  arrange(treated)
 
 df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
                   + `unemployment rate`
@@ -964,7 +967,7 @@ ggplot(df_bacon) +
   labs(x = "Weight", y = "Estimate", shape = "Type")
 
 
-df_bacon$two_by_twos %>% 
+GoodmannBacon1 <-df_bacon$two_by_twos %>% 
   mutate(subgroup = paste0(treated, "_", untreated),
          subgroup = factor(subgroup),
          subgroup = forcats::fct_reorder(subgroup, estimate)) %>% 
@@ -981,7 +984,9 @@ df_bacon$two_by_twos %>%
        title = "Goodman-Bacon diff in diff decomposition",
        subtitle = "Dotted line indicates two-way FE estimate.",
        caption = "Subgroups 99999 correspond to never treated groups")
-
+ggsave(plot = last_plot(),filename = "Goodman-Bacon-Diff-in-Diff.png")
+png(GoodmannBacon1,filename = "Goodman-Bacon-Diff-in-Diff.png",
+    width= 480,height=480,units = "px")
 
 Masterdata1998 %>%
   select(Year.x,State,TreatPost,D_AccessToParity) %>%
