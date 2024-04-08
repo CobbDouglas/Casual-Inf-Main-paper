@@ -6,6 +6,7 @@ library(plm)
 library(MatchIt)
 library(did)
 library(readr)
+library(fixest)
 Masterdata<-read_csv("Masterdataset.csv")
 Treatdf <- read_delim("Treatdf.csv", delim = ";", 
                       escape_double = FALSE, trim_ws = TRUE)
@@ -387,7 +388,7 @@ plot(m.out1, type = "density", interactive = FALSE,
      + `BankrupcyP100k` 
      + `PercW`)
 
-plot(summary(m.out1),var.order = "unmatched",abs = F)
+Matchedplot1 <-plot(summary(m.out1),var.order = "unmatched",abs = F, main= "Nearest Neighbor")
 
 ## Nearest Neighbhor with Probit
 m.out1.2 <- matchit(D_AccessToParity ~ `unemployment rate` 
@@ -396,7 +397,7 @@ m.out1.2 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "nearest", link = "probit", replace = T)
 summary(m.out1.2, un =FALSE)
 
-plot(summary(m.out1.2),var.order = "unmatched",abs = F)
+Matchedplot2 <-plot(summary(m.out1.2),var.order = "unmatched",abs = F,main= "Nearest Neighbor using Probit")
 
 ## Quick check with this.
 m.data <- match.data(m.out1.2)
@@ -416,21 +417,25 @@ m.out1.3 <- matchit(D_AccessToParity ~ `unemployment rate`
                     ,replace = T)
 summary(m.out1.3, un =FALSE)
 
-plot(summary(m.out1.3),var.order = "unmatched",abs = F)
+Matchedplot3 <- plot(summary(m.out1.3),var.order = "unmatched",abs = F,main= "Mahalanobis matching with Nearest Neighbor computing Propensity Score")
 ## Mahal- ATT Estimate
 m.data <- match.data(m.out1.3)
 
 library("marginaleffects")
+library("modelsummary")
 
 fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate` 
                                            + `BankrupcyP100k` 
                                            + `PercW`), data = m.data)
 
-avg_comparisons(fit,
+MahalMatchResult <-avg_comparisons(fit,
                 variables = "D_AccessToParity",
                 vcov = "stata",
                 newdata = subset(m.data, D_AccessToParity == 1),
                 wts = "population")
+#Mahalmodelsave<- modelsummary(MahalMatchResult,output = "testtable.tex")
+#Mahalmodelsave %>% kable_styling(latex_options = "striped",full_width = T)
+  
 ## Mala- Let's use it in a twfe
 MatchedDid = feols(`crude_rate` ~  `TreatPost`
                         +`unemployment rate` 
@@ -453,7 +458,7 @@ m.out2 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "full",link = "probit", estimand = "ATE")
 m.out2
 summary(m.out2, un=F)
-plot(summary(m.out2),var.order = "unmatched",abs = F)
+Matchedplot4 <- plot(summary(m.out2),var.order = "unmatched",abs = F,main= "Full Matching Using Probit")
 ## We try to get the ATE 
 m.data <- match.data(m.out2)
 
@@ -463,11 +468,13 @@ fit <- lm(lcruderate ~ D_AccessToParity * (`unemployment rate`
                                            + `BankrupcyP100k` 
                                            + `PercW`), data = m.data)
 
-avg_comparisons(fit,
+ProbitMatch <- avg_comparisons(fit,
                 variables = "D_AccessToParity",
                 vcov = ~subclass,
                 newdata = subset(m.data, D_AccessToParity == 1),
                 wts = "population")
+#modelsummary(list(ProbitMatch,Mahalmodelsave),output = "testtable2.tex")
+
 # Simple Did With the Probit
 MatchedDid3 = feols(`crude_rate` ~  `TreatPost`
                    +`unemployment rate` 
@@ -491,7 +498,7 @@ m.out3 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "full", distance = "glm",estimand = "ATE")
 m.out3
 summary(m.out3, un=F)
-plot(summary(m.out3),var.order = "unmatched",abs = F)
+Matchedplot5 <- plot(summary(m.out3),var.order = "unmatched",abs = F,main = "Full Matching using GLM")
 
 ## Introducing Sampling Weight is chaos. Going to try this to get robust clustered standerrs
 ## Now the Did
@@ -517,7 +524,7 @@ m.out4 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "cardinality", distance = "glm",estimand = "ATE")
 m.out4
 summary(m.out4, un=F)
-plot(summary(m.out4),var.order = "unmatched",abs = F)
+Matchedplot6 <- plot(summary(m.out4),var.order = "unmatched",abs = F,main = "Full matching using Cardinality")
 
 ## Did
 m.data <- match.data(m.out4)
@@ -543,7 +550,7 @@ m.out5 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "cem", distance = "glm",estimand = "ATE")
 m.out5
 summary(m.out5, un=F)
-plot(summary(m.out5),var.order = "unmatched",abs = F)
+Matchedplot7 <-plot(summary(m.out5),var.order = "unmatched",abs = F,main="Coarse-Exact Matching")
 
 ## Did
 m.data <- match.data(m.out5)
@@ -567,7 +574,7 @@ m.out6 <- matchit(D_AccessToParity ~ `unemployment rate`
                   method = "subclass", distance = "glm",estimand = "ATE")
 m.out6
 summary(m.out6, un=F)
-plot(summary(m.out6),var.order = "unmatched",abs = F)
+Matchedplot8 <-plot(summary(m.out6),var.order = "unmatched",abs = F,main= "Subclass Matching")
 
 # Did
 m.data <- match.data(m.out6)
@@ -583,6 +590,7 @@ MatchedDid12 = feols(`lcruderate` ~  `TreatPost`
                      +`BankrupcyP100k`
                      +`PercW`| State + Year.x, m.data, weights = ~population )
 summary(MatchedDid12, cluster = "State")
+## We pull together fixest results
 # try fixest
 library(fixest)
 fixestmodelcol1 = feols(lcruderate ~ `D_AccessToParity`
@@ -725,7 +733,25 @@ etable(feols(`lcruderate`~`unemployment rate`
 etable(fixestmodelcol1,fixestmodelcol2,fixestmodelcol3,fixestmodelcol4,
        file = "FETable4Results.tex",
        title = "Wowthis is a title")
-## TABLE 5
+
+## We run Matched regressions now
+ paste0("MatchedDid",1:12)
+ MatchedDidList <- paste0("MatchedDid",1:12)
+ #etable(MatchedDidList)
+ #MatchedDidList <- c(MatchedDid,MatchedDid2,MatchedDid3,MatchedDid4,MatchedDid5,MatchedDid6
+ #,MatchedDid7,MatchedDid8,MatchedDid9,MatchedDid10,MatchedDid11,MatchedDid12)
+ #Matchlist2 <- matrix(MatchedDid,MatchedDid2)
+etable(MatchedDid,MatchedDid2,MatchedDid3,MatchedDid4,file = "BigMatchTable1.tex",digits = 3)
+etable(MatchedDid5,MatchedDid6,MatchedDid7,MatchedDid8,file = "BigMatchTable2.tex",digits = 3)
+etable(MatchedDid9,MatchedDid10,MatchedDid11,MatchedDid12,file = "BigMatchTable3.tex",digits = 3)
+ ## TABLE 5 DONE IN STATA
+## We pull together the plots for Matching
+#library(patchwork)
+#par(mfcol=c(2,2))
+#plot(summary(m.out1),var.order = "unmatched",abs = F, main= "Nearest Neighbor") 
+#plot(summary(m.out1.2),var.order = "unmatched",abs = F,main= "Nearest Neighbor using Probit") 
+#plot(summary(m.out1.3),var.order = "unmatched",abs = F,main= "Mahalanobis matching Using Nearest Neighbor",legend("topright")) 
+#plot(summary(m.out2),var.order = "unmatched",abs = F,main= "Full Matching Using Probit")
 
 
 ## Let's run a simple Did from Fixest
@@ -781,7 +807,7 @@ Sunabmodelref = feols(lcruderate ~ `unemployment rate`
                    +`BankrupcyP100k`
                    +`PercW`
                    + sunab(`AccesstoParity`,Year.x,
-                   ref.p = c(.F + 0:2,-1))
+                   ref.p = c(1))
                    | State + Year.x,
                    Masterdata1998, 
                    weights = Masterdata1998$population)
@@ -791,6 +817,8 @@ SAplot <-iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
 legend("topright",col = 1:2, pch = 20, lwd = 1, lty = 1:2,legend = c("SA model", "SA with relative points" ))
 summary(Sunabmodel,agg = "ATT")
 summary(Sunabmodelref, agg = "ATT")
+
+iplot(Sunabmodel,main= "Sun and Abraham adjusted Fixed Effects")
 ##
 ## event study. 
 ## Here we are going to use DiD

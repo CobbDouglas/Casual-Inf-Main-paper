@@ -7,7 +7,7 @@ date: "`r format(Sys.Date(),'%m/%d/%Y')`"
 abstract: Over the past two decades, despite efforts from psychologists and mental health professionals alike, the United States has seen a steady growth of suicides despite nearly all other Western countries experiencing the contrary. Apart of this growth could be attributed to the lagging implementation of mental health care pairty. The Mental Health Parity Act of 1996 (MHPA) was critized during the turn of the century for not doing enough to restrict insurance companies ability to discrimate between treating bodily and mental injury. In this study, I attempt to replicate and build upon results from Lang (2013) using additional data, propensity score matching methods along with heterogenous difference in difference.
 bibliography: references.bib
 fontsize: 12pt
-header-includes: \usepackage{setspace}\doublespacing
+header-includes:  \usepackage{setspace} \doublespacing \usepackage{booktabs} \usepackage{tabularray} \usepackage{float} \usepackage{graphicx} \usepackage{codehigh} \usepackage[normalem]{ulem}
 ---
 
 ```{r setup, include=FALSE}
@@ -180,7 +180,7 @@ Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
 ```{=latex}
 
 \begin{table}[htbp]
-   \caption{The impact of mental health laws on state suicide rates }
+   \caption{The Two-way Fixed Effect Regressions on the Impact of Mental Health Parity Laws }
    \centering
    \begin{tabular}{lcccc}
       \tabularnewline \midrule \midrule
@@ -220,8 +220,221 @@ Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
       \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
    \end{tabular}
 \end{table}
+```
+```{=tex}
+\begin{table}[!h]
+\caption{First Differences Regressions on the Impact of Mental Health Parity Laws}
+\centering
+\begin{tabular}{lllll}
+\cline{1-5}
+\multicolumn{1}{r}{} &
+  \multicolumn{2}{c}{$\Delta$Log Crude Rate} &
+  \multicolumn{2}{c}{$\Delta$Log Crude Rate} \\
+\cline{1-5}
+\multicolumn{1}{l}{$\Delta$Unemployment Rate} &
+  \multicolumn{1}{r}{0.014} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.014} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.008)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.008)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Percent of Workers in Large Firms} &
+  \multicolumn{1}{r}{-0.702} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.690} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.647)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.660)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Bankruptcy per 100,000} &
+  \multicolumn{1}{r}{-0.000} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.000} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.000)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.000)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Access to Parity} &
+  \multicolumn{1}{r}{-0.021} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.021} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.012)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.012)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Non Parity Law} &
+  \multicolumn{1}{r}{} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.004} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.015)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{Intercept} &
+  \multicolumn{1}{r}{-0.007} &
+  \multicolumn{1}{l}{**} &
+  \multicolumn{1}{r}{-0.007} &
+  \multicolumn{1}{l}{**} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.001)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.001)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$R^{2}$} &
+  \multicolumn{1}{r}{0.14} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.14} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{N} &
+  \multicolumn{1}{r}{714} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{714} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{Adjusted$R^{2}$} &
+  \multicolumn{1}{r}{0.05} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.05} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{F Statistic} &
+  \multicolumn{1}{r}{2.86} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{2.50} &
+  \multicolumn{1}{l}{} \\
+\cline{1-5}
+\end{tabular}
+
+\footnotesize{
+** p$<$.01, * p$<$.05
+}
+\end{table}
+```
+```{=tex}
+
+\begin{table}[htbp]
+\centering
+\caption{Matched Table A}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables:           & Crude Suicide Rate & Log Suicide Rate        & Crude Suicide Rate & Log Suicide Rate\\  
+   Matching Model:                & Mahalanobis        & Mahalanobis             & Full with Probit   & Full with Probit \\  
+   \midrule
+   \emph{Variables}\\
+   TreatPost                      & 0.060              & -0.015                  & -0.279             & -0.043$^{***}$\\   
+                                  & (0.329)            & (0.028)                 & (0.176)            & (0.015)\\   
+   `unemploymentrate`             & 0.229$^{*}$        & 0.027$^{**}$            & 0.121$^{**}$       & 0.014$^{***}$\\   
+                                  & (0.126)            & (0.011)                 & (0.057)            & (0.005)\\   
+   Bankruptcy Per 100,000         & 0.0007             & $5.64\times 10^{-5}$    & 0.003$^{***}$      & 0.0003$^{***}$\\   
+                                  & (0.0006)           & ($4.79\times 10^{-5}$)  & (0.0005)           & ($4.25\times 10^{-5}$)\\    
+   Percent Working in Large Firms & 6.05               & 0.539                   & -0.346             & 0.548\\   
+                                  & (8.36)             & (0.788)                 & (4.43)             & (0.435)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   State                          & Yes                & Yes                     & Yes                & Yes\\  
+   Year.x                         & Yes                & Yes                     & Yes                & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                   & 284                & 284                     & 765                & 765\\  
+   R$^2$                          & 0.96644            & 0.96979                 & 0.94241            & 0.94692\\  
+   Within R$^2$                   & 0.03924            & 0.06029                 & 0.14513            & 0.21481\\  
+   \midrule \midrule
+   \multicolumn{5}{l}{\emph{Clustered (State) standard-errors in parentheses}}\\
+   \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Matched Table B}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables:           & Crude Suicide Rate & Log Suicide Rate        & Crude Suicide Rate & Log Suicide Rate\\  
+   Matching Model:                & Full with GLM     & Full with GLM            & Full with Cardinality & Full with  Cardinality\\  
+   \midrule
+   \emph{Variables}\\
+   TreatPost                      & -0.279             & -0.043$^{***}$          & -0.103             & -0.038\\   
+                                  & (0.176)            & (0.015)                 & (0.408)            & (0.038)\\   
+   `unemploymentrate`             & 0.121$^{**}$       & 0.014$^{***}$           & 0.418$^{***}$      & 0.039$^{***}$\\   
+                                  & (0.057)            & (0.005)                 & (0.136)            & (0.013)\\   
+   Bankruptcy Per 100,000         & 0.003$^{***}$      & 0.0003$^{***}$          & 0.0002             & $-1.08\times 10^{-5}$\\    
+                                  & (0.0005)           & ($4.25\times 10^{-5}$)  & (0.0009)           & ($8.48\times 10^{-5}$)\\    
+   Percent Working in Large Firms & -0.346             & 0.548                   & 17.8$^{**}$        & 1.84$^{**}$\\   
+                                  & (4.43)             & (0.435)                 & (8.07)             & (0.803)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   State                          & Yes                & Yes                     & Yes                & Yes\\  
+   Year.x                         & Yes                & Yes                     & Yes                & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                   & 765                & 765                     & 168                & 168\\  
+   R$^2$                          & 0.94241            & 0.94692                 & 0.97177            & 0.97352\\  
+   Within R$^2$                   & 0.14513            & 0.21481                 & 0.12200            & 0.16782\\  
+   \midrule \midrule
+   \multicolumn{5}{l}{\emph{Clustered (State) standard-errors in parentheses}}\\
+   \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}%
+}
+\end{table}
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{Matched Table C}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables:           & Crude Suicide Rate & Log Suicide Rate        & Crude Suicide Rate & Log Suicide Rate\\  
+   Matching Model:                & Coarse-Exact Matching & Coarse-Exact Matching & Subclass           & Subclass\\  
+   \midrule
+   \emph{Variables}\\
+   TreatPost                      & -0.156             & -0.027                  & -0.279             & -0.043$^{***}$\\   
+                                  & (0.217)            & (0.020)                 & (0.176)            & (0.015)\\   
+   `unemploymentrate`             & 0.108              & 0.018                   & 0.121$^{**}$       & 0.014$^{***}$\\   
+                                  & (0.119)            & (0.012)                 & (0.057)            & (0.005)\\   
+   Bankruptcy Per 100,000         & 0.002$^{**}$       & 0.0002$^{**}$           & 0.003$^{***}$      & 0.0003$^{***}$\\   
+                                  & (0.0007)           & ($7.95\times 10^{-5}$)  & (0.0005)           & ($4.25\times 10^{-5}$)\\    
+   Percent Working in Large Firms & -6.37              & -0.002                  & -0.346             & 0.548\\   
+                                  & (7.16)             & (0.666)                 & (4.43)             & (0.435)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   State                          & Yes                & Yes                     & Yes                & Yes\\  
+   Year.x                         & Yes                & Yes                     & Yes                & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                   & 319                & 319                     & 765                & 765\\  
+   R$^2$                          & 0.96784            & 0.96903                 & 0.94241            & 0.94692\\  
+   Within R$^2$                   & 0.07776            & 0.10345                 & 0.14513            & 0.21481\\  
+   \midrule \midrule
+   \multicolumn{5}{l}{\emph{Clustered (State) standard-errors in parentheses}}\\
+   \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}%
+}
+\end{table}
+
 
 ```
+![](SunAbrahamGraph.png)
+
+![](Goodman-Bacon-Diff-in-Diff.png)
+
+![](CSEventStudyFE.png)
+
+![](CSDiDGroupAvgEffect.png)
+
 \newpage
 
 ## References

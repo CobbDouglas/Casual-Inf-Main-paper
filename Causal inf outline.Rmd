@@ -36,18 +36,34 @@ What does the balance of evidence come up to? It's probably close to Zero the pe
 
 -   *Copy Figure 1 from Lang*
 
+    -   not done
+
 -   Table 2 from me
+
+    -   done
 
 -   *Created Table 3*
 
+    -   done
+
 -   FE Table 4
+
+    -   done
 
 -   *First Difference Table 5*
 
+    -   done
+
 -   Matching Regressions \*
+
+    -   Done I think. The Did Regressions are tabled and labled except for what algo they are using.
 
 -   Matching Plots \*
 
+    -   not happening unless you want 10 graphs
+
 -   Event study PLOTS Not table that's dumb \*
+
+    -   not done  - I just need to save the plots already created.
 
 -   For the CS Did Estimates, it's likely better just to produce graphs of each of the dynamic effects printed out of each regression you run References
