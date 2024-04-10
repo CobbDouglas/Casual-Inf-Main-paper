@@ -25,7 +25,7 @@ The Federal Mental Health Parity Act of 1996 prevented group health plan and ins
 
 ### Lang (2013)
 
-My seminal paper, @lang2013 attempts to identify causal effects using difference-in-difference methods and fixed effects using two policy shocks, the aftereffects of the Federal Health Parity Act of 1996 and The Affordable Care Act of 2008. @lang2013 showed a statistically significant effect of a 4-7% decrease in suicide rate after policy implementation. I draw the same data detailed in the study but add years spanning from 1990 to 2016, 36 years of data in total. I run my difference in difference using regression unlike @lang2013 addition to conduct propensity score matching methods to achieve a better balance between covariates between control and treatment states.
+My seminal paper, @lang2013 attempts to identify causal effects using difference-in-difference methods and fixed effects using policy shocks resulting from the aftereffects of the Federal Health Parity Act of 1996. @lang2013 showed a statistically significant effect of a 4-7% decrease in suicide rate after policy implementation. I draw the same data detailed in the study while using more modern statistical methods that surround difference in difference. I run my difference in difference using regression similar to @lang2013 in addition to conducting propensity score matching methods to achieve a better balance between covariates between control and treatment states. I also use more modern difference in difference methods using the data and found
 
 ### Parity laws:
 
@@ -35,7 +35,7 @@ My seminal paper, @lang2013 attempts to identify causal effects using difference
 
 ## Data
 
-My dataset pulls from the same sources from @lang2013 with the exception of one variable.
+My dataset pulls from the same sources from @lang2013 with the exception of one variable. I pull from the CDC's WISRAQ
 
 ## Methods
 
@@ -424,7 +424,6 @@ Pre-Period & 2.3800 & 0.0241 & 0.2285 & 232\\
 \end{tabular}%
 }
 \end{table}
-
 ```
 ![](SunAbrahamGraph.png)
 

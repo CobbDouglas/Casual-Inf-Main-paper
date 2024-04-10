@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.3.30)  7 APR 2024 04:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.9)  9 APR 2024 19:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -671,35 +671,35 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {c:/Users/danie/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}] [2] [3] [4]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 236.
+(Font)              <12> on input line 237.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 236.
+(Font)              <8> on input line 237.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 236.
+(Font)              <6> on input line 237.
 
-Overfull \hbox (73.89284pt too wide) in paragraph at lines 293--341
+Overfull \hbox (73.89284pt too wide) in paragraph at lines 294--342
  [][]
  []
 
 
-Overfull \hbox (27.81523pt too wide) in paragraph at lines 348--385
+Overfull \hbox (27.81523pt too wide) in paragraph at lines 349--386
  [][] 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 480.
+(Font)              <5> on input line 481.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <SunAbrahamGraph.png, id=46, 700.77924pt x 306.54811pt>
 File: SunAbrahamGraph.png Graphic file (type png)
 <use SunAbrahamGraph.png>
-Package pdftex.def Info: SunAbrahamGraph.png  used on input line 588.
+Package pdftex.def Info: SunAbrahamGraph.png  used on input line 589.
 (pdftex.def)             Requested size: 469.7656pt x 205.49374pt.
 <Goodman-Bacon-Diff-in-Diff.png, id=47, 481.5591pt x 481.5591pt>
 File: Goodman-Bacon-Diff-in-Diff.png Graphic file (type png)
 <use Goodman-Bacon-Diff-in-Diff.png>
-Package pdftex.def Info: Goodman-Bacon-Diff-in-Diff.png  used on input line 590.
+Package pdftex.def Info: Goodman-Bacon-Diff-in-Diff.png  used on input line 591.
 (pdftex.def)             Requested size: 469.77908pt x 469.77908pt.
 [5 <./SunAbrahamGraph.png>] [6] [7{c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
 Overfull \vbox (113.89304pt too high) has occurred while \output is active []
@@ -708,12 +708,12 @@ Overfull \vbox (113.89304pt too high) has occurred while \output is active []
 <CSEventStudyFE.png, id=88, 700.77924pt x 306.54811pt>
 File: CSEventStudyFE.png Graphic file (type png)
 <use CSEventStudyFE.png>
-Package pdftex.def Info: CSEventStudyFE.png  used on input line 592.
+Package pdftex.def Info: CSEventStudyFE.png  used on input line 593.
 (pdftex.def)             Requested size: 469.7656pt x 205.49374pt.
 <CSDiDGroupAvgEffect.png, id=89, 700.77924pt x 306.54811pt>
 File: CSDiDGroupAvgEffect.png Graphic file (type png)
 <use CSDiDGroupAvgEffect.png>
-Package pdftex.def Info: CSDiDGroupAvgEffect.png  used on input line 594.
+Package pdftex.def Info: CSDiDGroupAvgEffect.png  used on input line 595.
 (pdftex.def)             Requested size: 469.7656pt x 205.49374pt.
 [10 <./CSEventStudyFE.png>] [11 <./CSDiDGroupAvgEffect.png>] [12] (./Working-draft-causal-inference-paper.aux)
  ***********
@@ -722,15 +722,15 @@ L3 programming layer <2024-03-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15487 strings out of 476063
- 267906 string characters out of 5791114
+ 15487 strings out of 476064
+ 267906 string characters out of 5791136
  1989496 words of memory out of 5000000
- 37298 multiletter control sequences out of 15000+600000
+ 37297 multiletter control sequences out of 15000+600000
  615791 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,12n,93p,396b,446s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/danie/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on Working-draft-causal-inference-paper.pdf (12 pages, 460647 bytes).
+Output written on Working-draft-causal-inference-paper.pdf (12 pages, 460723 bytes).
 PDF statistics:
  213 PDF objects out of 1000 (max. 8388607)
  166 compressed objects within 2 object streams
