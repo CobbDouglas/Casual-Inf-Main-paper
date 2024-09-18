@@ -25,7 +25,7 @@ The Federal Mental Health Parity Act of 1996 prevented group health plan and ins
 
 ### Lang (2013)
 
-My seminal paper, @lang2013 attempts to identify causal effects using difference-in-difference methods and fixed effects using policy shocks resulting from the aftereffects of the Federal Health Parity Act of 1996. @lang2013 showed a statistically significant effect of a 4-7% decrease in suicide rate after policy implementation. I draw the same data detailed in the study while using more modern statistical methods that surround difference in difference. I run my difference in difference using regression similar to @lang2013 in addition to conducting propensity score matching methods to achieve a better balance between covariates between control and treatment states. I also use more modern difference in difference methods using the data and found
+@lang2013 attempts to identify causal effects using difference-in-difference methods and fixed effects using policy shocks resulting from the aftereffects of the Federal Health Parity Act of 1996. @lang2013 showed a statistically significant effect of a 4-7% decrease in suicide rate after policy implementation. I draw the same data detailed in the study while using more modern statistical methods that surround difference in difference. I run my difference in difference using regression similar to @lang2013 in addition to conducting propensity score matching methods to achieve a better balance between covariates between control and treatment states. I also use more modern difference in difference methods using the data and found
 
 ### Parity laws:
 

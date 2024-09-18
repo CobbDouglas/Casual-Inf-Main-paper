@@ -10,7 +10,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
--It's own thing, a quick intro, not too long Lang 2013- Use this section as a theorical framework/ Intro Talk about
+-   Note: Look over results and make sure sigficant stars are assigned correctly. The inital DID tables don't have them.
+
+-It's own thing, a quick intro, not too long Lang 2013- Use this section as a theorical framework/ Intro
+
+What is the punch line?
+
+-   I find statistically significant effects in traditional inference methods while for the heterousgenous results leave me unconvinced of a significant effect.
+
+-   Reason why we care: A lot like how a doctor might follow up on a patient after treatment, economists also care whether a particular policy was instrumental in delivering on it's promises. This wave of parity legislation was championed being the next step in progressive healthcare in the years before the passing of the Affordable Care Act. I largely find that while it does (survive initial robustness checks)\*\*(Double check if this is true) a slightly more modern analysis provides a new lens.
 
 ## Legislation
 
