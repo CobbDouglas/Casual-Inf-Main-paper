@@ -8,6 +8,10 @@ date: "2024-03-20"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+New Work: First differences must be redone.\*\* 2nd column.
+
+\*The author is dropping data from the regressions and saying that despite the drop the coefficent is holding. I think It'll be addressed in STATA at this point. I think it's just column 2 that needs to be looked at. The different N sizes are accounted by the author has having the same regression effects with or without the different coding.
+
 ## Introduction
 
 -   Note: Look over results and make sure sigficant stars are assigned correctly. The inital DID tables don't have them.
@@ -30,11 +34,15 @@ How insurance companies were avoiding restrictions using limits on both mental a
 
 the Big Signal- How it motivated states to implement heterogenous policy parity laws to stay ahead of federal overight
 
-\- the 2000 GAO report
+\- the 2000 GAO report-
+
+Remeber how mental health parity works- The lifetime dollar amount is changed to be at parity with regular medical procedures.
+
+insurance gets around this easily by installing limits on the amount of days you can use mental health services which kneecaps MH services since large in part, treatments take time. intital reports gathered in the GAO report, have a slew of different stats from different frims and studies estimating how costs will rise. Almost all of them are wrong basically or atleast don't account for firms using the loophole presumingly.
 
 -The history and politicans Senator Domenici, Wellstone, Pete Stark
 
-— "The result of this reform movement is that, by August 2001, fewer than a dozen states did not have some form of mental health parity legislation.'\^'' The MHPA may have encouraged this state legislative activity in at least two ways: by highlighting the issue of mental health parity\^\^ and by providing an incentive for states to head off federal regulatory oversight by enacting laws that were either comparable to the federal law or more comprehensive."
+--- "The result of this reform movement is that, by August 2001, fewer than a dozen states did not have some form of mental health parity legislation.'\^'' The MHPA may have encouraged this state legislative activity in at least two ways: by highlighting the issue of mental health parity\^\^ and by providing an incentive for states to head off federal regulatory oversight by enacting laws that were either comparable to the federal law or more comprehensive."
 
 ## Methods
 

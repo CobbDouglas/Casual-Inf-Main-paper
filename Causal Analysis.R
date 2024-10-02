@@ -643,19 +643,46 @@ fixestmodel1stDifcol2 = feols(`lDelta` ~ TreatPost
 
 summary(fixestmodel1stDifcol2, cluster = "State")
 ## REDO  FIRST DIFFERENCE TABLE, DIDNT DO IT RIGHT NEED TO USE PLM
-#PanelMasterdata <- plm::pdata.frame(Masterdata1998)
-#class(PanelMasterdata)
-#PanelMasterdata <- na.omit(PanelMasterdata)
-#PanelMasterdata <- plm::pdata.frame(Masterdata1998,index = c("State","Year.x"))
-#firstdifplm <-plm(lcruderate ~ D_AccessToParity
- #     +D_NonParityLaw
-#      +unemployment.rate
-#      +BankrupcyP100k
-#      +PercW,
-#    index = c("State", "Year.x"), 
-#    data = PanelMasterdata,
-#    weights = "population",
-#    model = "fd")
+PanelMasterdata <- plm::pdata.frame(Masterdata1998)
+class(PanelMasterdata)
+PanelMasterdata <- subset(PanelMasterdata, select = -c(TimingCntrl
+                                                       ,Delta
+                                                       ,lDelta))
+PanelMasterdata <- na.omit(PanelMasterdata)
+PanelMasterdata <- plm::pdata.frame(PanelMasterdata,index = c("State","Year.x"))
+index(PanelMasterdata)
+PanelMasterdata$population <- as.numeric(PanelMasterdata$population)
+# converting it into a plm frame cause something to happen
+firstdifdata <- subset(Masterdata1998,select = -c(TimingCntrl
+                                                  ,Delta
+                                                  ,lDelta))
+firstdifplm <- plm(lcruderate ~ D_AccessToParity
+     +D_NonParityLaw
+     +unemployment.rate
+      +BankrupcyP100k
+      +PercW,
+     index = c("State","Year.x"),
+    data = firstdifdata,
+model = "fd")
+summary(firstdifplm)
+# The weight isn't the same size as the fc coefficents because the regression is omitting the first
+# year 1990 from all states in the dataset. the weight needs to do the same
+FirstdifWeight<-firstdifdata$population
+FirstdifWeight <- as.data.frame(FirstdifWeight)
+FirstdifWeight <- FirstdifWeight %>%
+  slice(-c(seq(1,765,15)))
+
+
+FirstdifWeight2 <- as.numeric(FirstdifWeight$FirstdifWeight)
+firstdifplm <- plm(lcruderate ~ D_AccessToParity
+                   +D_NonParityLaw
+                   +unemployment.rate
+                   +BankrupcyP100k
+                   +PercW,
+                   index = c("State","Year.x"),
+                   data = firstdifdata,
+                   model = "fd",
+                   weights = "FirstdifWeight2")
 
 #summary(firstdifplm)
 # CANT FIX IDK WHY RESORTING TO STATA- EDIT STATA IS EATING MY DATA FOUND ANOTHER PACKAGE
@@ -665,18 +692,23 @@ library(sandwich)
 library(writexl)
 
 
-#Firstdiffreg1 <- wfe::wfe(lcruderate ~ D_AccessToParity
- #         +`unemployment rate`
-##          +PercW,
-#         treat = "D_AccessToParity",
-#        unit.index = "State",
- #       time.index = "Year.x", 
-  #      data = Masterdata1998,
-   #     C.it = "population",
-    #    estimator = "fd")
+Firstdiffreg1 <- wfe::wfe(lcruderate ~  D_AccessToParity
+        + D_NonParityLaw
+       +`unemployment rate`
+         +PercW
+       + BankrupcyP100k,
+        treat = "D_AccessToParity",
+        unit.index = "State",
+       time.index = "Year.x", 
+      data = Masterdata1998,
+        C.it = "population",
+       method = "unit",
+      qoi = "ate",
+      auto.se = T,
+        estimator = "did")
 
 
-#summary(Firstdiffreg1)
+summary(Firstdiffreg1)
 
  #Masterdata1998 |>
 #   select(where(is.numeric))|>
