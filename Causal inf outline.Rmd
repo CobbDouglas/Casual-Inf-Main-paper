@@ -12,6 +12,8 @@ New Work: First differences must be redone.\*\* 2nd column.
 
 \*The author is dropping data from the regressions and saying that despite the drop the coefficent is holding. I think It'll be addressed in STATA at this point. I think it's just column 2 that needs to be looked at. The different N sizes are accounted by the author has having the same regression effects with or without the different coding.
 
+References bib can be used to manually create a citation if you need it
+
 ## Introduction
 
 -   Note: Look over results and make sure sigficant stars are assigned correctly. The inital DID tables don't have them.
