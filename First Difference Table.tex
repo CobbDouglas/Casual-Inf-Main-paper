@@ -1,0 +1,107 @@
+---
+title: "First Difference Table Tex"
+author: "Daniel Ownby"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+``` latex
+\begin{table}[!h]
+\caption{First Differences Regressions on the Impact of Mental Health Parity Laws}
+\centering
+\begin{tabular}{lllll}
+\cline{1-5}
+\multicolumn{1}{r}{} &
+  \multicolumn{2}{c}{$\Delta$Log Crude Rate} &
+  \multicolumn{2}{c}{$\Delta$Log Crude Rate} \\
+\cline{1-5}
+\multicolumn{1}{l}{$\Delta$Unemployment Rate} &
+  \multicolumn{1}{r}{0.014} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.014} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.008)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.008)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Percent of Workers in Large Firms} &
+  \multicolumn{1}{r}{-0.702} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.690} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.647)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.660)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Bankruptcy per 100,000} &
+  \multicolumn{1}{r}{-0.000} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.000} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.000)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.000)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Access to Parity} &
+  \multicolumn{1}{r}{-0.021} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{-0.021} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.012)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.012)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$\Delta$Non Parity Law} &
+  \multicolumn{1}{r}{} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.004} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.015)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{Intercept} &
+  \multicolumn{1}{r}{-0.007} &
+  \multicolumn{1}{l}{**} &
+  \multicolumn{1}{r}{-0.007} &
+  \multicolumn{1}{l}{**} \\
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.001)} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{(0.001)} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{$R^{2}$} &
+  \multicolumn{1}{r}{0.14} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.14} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{N} &
+  \multicolumn{1}{r}{714} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{714} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{Adjusted$R^{2}$} &
+  \multicolumn{1}{r}{0.05} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{0.05} &
+  \multicolumn{1}{l}{} \\
+\multicolumn{1}{l}{F Statistic} &
+  \multicolumn{1}{r}{2.86} &
+  \multicolumn{1}{l}{} &
+  \multicolumn{1}{r}{2.50} &
+  \multicolumn{1}{l}{} \\
+\cline{1-5}
+\end{tabular}
+
+\footnotesize{
+** p$<$.01, * p$<$.05
+}
+\end{table}
+```
+
+Table 7 shows that we failed to replicate @lang2013 First Difference regressions. Both Models do not show significant effects for any variable beside the intercept. This might mean that the model is more sentitive serialization than previously thought. However this is address when I use both the @sun2021 and @callaway2021 estimators to address different lags bleeding effects into different slices of time.

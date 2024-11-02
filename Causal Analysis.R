@@ -94,7 +94,29 @@ kable(list(table2all,table2pairity))
 ## So there are 8 observations we need to fix outta this. If we allow one observation from each state that had a late adaoption
 ## It should work.  ACTUALLY DONT BOTHER THIS ISNT WORTH IT JUST REPORT YOUR FINDINGS 
 
+# Here we define the new group to use. 
+Masterdata1998 %>%
+mutate(Table2TreatPost= if_else(State %in% TreatedStates1998 & Year.x >= AccesstoParity,"Post-Period",
+                                       if_else(State %in% TreatedStates1998 & Year.x < AccesstoParity,"Pre-Period",
+                                               if_else(State %in% NotTreatedStates1998 & Year.x >= AccesstoParity,"NoTreatPost-Period","NoTreatPre-Period"))))
 
+Table2Redo_all <-sumtable(Masterdata1998,vars = Covariates,digits = 4,
+                     labels = table2labs,
+                     group.weights = Masterdata1998$population,
+                     out = "latex"
+)
+Table2Redo_Parity <- sumtable(Masterdata1998,vars = Covariates,
+                          group = "Pre_Post_Parity",digits = 4,
+                          group.weights = Masterdata1998$population,
+                          labels = table2labs,
+                          group.long = F,
+                          out = "latex")
+kable(list(Table2Redo_all,Table2Redo_all))
+
+
+
+## Here in 10/14/24 We're going to copy the above code and redo the table. Instead with a
+## Pre-post variable that is accurate to what we're doing with the CS and SunAbram Est
 
 FixSumstats <- c("Arkansas","California","Hawaii","Maryland","Minnesota","New Mexico","South Dakota", "West Virginia","Georgia")
 library(plotrix)
@@ -122,6 +144,18 @@ mutate(Group_Time_Period= if_else(State %in% NotTreatedStates1998 & Year.x >= 19
             st.err= wtd.stderror( x=`crude_rate`,weights = population),
             sd   = weighted.sd(x=`crude_rate`,w=population),
             n = n())
+## Testing the difference between Group_Time_Period is the same is Pre_Post_Period-
+## SO WE DIDNT NEED TO DO THIS. Ofc they are different look at definitions. 
+## The Treated States definition
+##Masterdata1998 %>%
+#  mutate(Group_Time_Period= if_else(State %in% NotTreatedStates1998 & Year.x >= 1998,
+#                                    "NoTreatPost-Period","NoTreatPre-Period")) %>%
+#  mutate(Group_Time_Period2= if_else(State %in% TreatedStates1998 & Year.x >= 1998,
+#                                    "TreatPost-Period","TreatPre-Period")) %>%
+#  select(State,Year.x,Pre_Post_Parity,Group_Time_Period,AccesstoParity,Group_Time_Period2)%>%
+#  group_by(Group_Time_Period) %>%
+#  write_excel_csv(file="SumstatsCheckingData.csv")
+
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!
 kable(TestFigure1,format = "latex",digits = 4,
       caption = "Weighted Means of Treated States, Pre and Post Period",
@@ -610,6 +644,7 @@ fixestmodelcol3 = feols(lcruderate ~ `D_ParityLawPassed`+
                         +`D_MandatedifOffered`
                         +`unemployment rate` 
                         +`BankrupcyP100k`
+                        +`D_NoLaw`
                         +`PercW`| State + Year.x, Masterdata1998, weights = Masterdata1998$population )
 summary(fixestmodelcol3, cluster = "State")
 fixestmodelcol4 = feols(lcruderate ~ `D_AccessToParity`
@@ -672,6 +707,9 @@ FirstdifWeight <- as.data.frame(FirstdifWeight)
 FirstdifWeight <- FirstdifWeight %>%
   slice(-c(seq(1,765,15)))
 
+firstdifdata <- firstdifdata %>%
+  filter( Year.x !="1990")
+
 
 FirstdifWeight2 <- as.numeric(FirstdifWeight$FirstdifWeight)
 firstdifplm <- plm(lcruderate ~ D_AccessToParity
@@ -682,7 +720,12 @@ firstdifplm <- plm(lcruderate ~ D_AccessToParity
                    index = c("State","Year.x"),
                    data = firstdifdata,
                    model = "fd",
-                   weights = "FirstdifWeight2")
+                   weights = `population`)
+
+library(foreign)
+Masterdata1998 %>%
+  rename(`unemployment_rate`=`unemployment rate`) %>%
+write.dta(file = "Masterdata1998STATA.dta")
 
 #summary(firstdifplm)
 # CANT FIX IDK WHY RESORTING TO STATA- EDIT STATA IS EATING MY DATA FOUND ANOTHER PACKAGE
@@ -843,14 +886,81 @@ Sunabmodelref = feols(lcruderate ~ `unemployment rate`
                    | State + Year.x,
                    Masterdata1998, 
                    weights = Masterdata1998$population)
+# Testing on Sunab
+SunAbTest <- feols(lcruderate ~ `unemployment rate`
+      +`BankrupcyP100k`
+      +`PercW`
+      + sunab(`AccesstoParity`,Year.x,
+              ref.p = c(-1))
+      | State + Year.x,
+      Masterdata1998, 
+      weights = Masterdata1998$population)
+SunAbTest2 <- feols(lcruderate ~ `unemployment rate`
+                   +`BankrupcyP100k`
+                   +`PercW`
+                   + sunab(`AccesstoParity`,Year.x,
+                           ref.p = c(-2))
+                   | State + Year.x,
+                   Masterdata1998, 
+                   weights = Masterdata1998$population)
+SunAbTest3 <- feols(lcruderate ~ `unemployment rate`
+                    +`BankrupcyP100k`
+                    +`PercW`
+                    + sunab(`AccesstoParity`,Year.x,
+                            ref.p = c(.F,-2))
+                    | State + Year.x,
+                    Masterdata1998, 
+                    weights = Masterdata1998$population)
+SunAbTest4 <- feols(lcruderate ~ `unemployment rate`
+                   +`BankrupcyP100k`
+                   +`PercW`
+                   + sunab(`AccesstoParity`,Year.x,
+                           ref.p = c(.F,-1))
+                   | State + Year.x,
+                   Masterdata1998, 
+                   weights = Masterdata1998$population)
+summary(SunAbTest,agg = "ATT")
+summary(SunAbTest,agg = "Cohort")
+iplot(SunAbTest)
+iplot(list(SunAbTest,SunAbTest2,SunAbTest3), main = "Sun and Abraham adjusted Fixed Effects")
+legend("topright",col = 1:3, pch = 20, lwd = 1, lty = 1:2,cex = .75 ,
+       legend = c("SA with Base period of -1",
+                  "SA with Base period of -2",
+                  "SA with First Year Dropped and BP of -2"))
+## ALT RESULTS 
+SunAbResult <- summary(SunAbTest,agg = "ATT")
+SunAbResult2 <- summary(SunAbTest2, agg = "ATT")
+SunAbResult3 <- summary(SunAbTest3, agg = "ATT")
+SunAbResult4 <- summary(SunAbTest4, agg = "ATT")
+etable(list(SunAbResult,SunAbResult2,SunAbResult3),
+       file = "SunAbResultsNEW.tex",
+       title = "Sun and Abraham Estimates")
+
+#Creating a time to treated variable and creating a count of how 
+#many are in that group
+Masterdata1998 %>%
+  mutate(TimetillTreat = ifelse((Year.x - AccesstoParity)>20,
+                                NA,
+                                Year.x - AccesstoParity)) %>%
+  select(State,Year.x,AccesstoParity,TimetillTreat) %>%
+  group_by(TimetillTreat) %>%
+  summarise( count= n()) %>%
+  print(n=51)
+
 ## What is this comparing?
 iplot(list(Sunabmodel,Sunabmodelref))
 SAplot <-iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
 legend("topright",col = 1:2, pch = 20, lwd = 1, lty = 1:2,legend = c("SA model", "SA with relative points" ))
-summary(Sunabmodel,agg = "ATT")
-summary(Sunabmodelref, agg = "ATT")
+SunAbamResults1 <- summary(Sunabmodel,agg = "ATT")
+SunAbamResults2 <- summary(Sunabmodelref, agg = "ATT")
 
-iplot(Sunabmodel,main= "Sun and Abraham adjusted Fixed Effects")
+iplot(Sunabmodel,main= "Sun and Abraham Adjusted Fixed Effects")
+
+
+## I export the Sun and Abraham results into a table
+etable(SunAbamResults1,SunAbamResults2,
+       file = "SunAbamResults.tex",
+       title = "Table 11: Sun and Abraham Estimates")
 ##
 ## event study. 
 ## Here we are going to use DiD
@@ -865,9 +975,30 @@ Masterdata1998 <-Masterdata1998 |>
           if_else(State %in% TreatedStates1998 &AccesstoParity >= 1998 & AccesstoParity < 2000,2000,
                    if_else(State %in% TreatedStates1998& AccesstoParity >= 2000,2002,0))))
 
-
+# Check Group Size of EAch Group of Years that Treated 
+ Masterdata1998 %>% 
+select(AccesstoParity,State,Year.x)  %>% 
+ group_by(AccesstoParity) %>% 
+ summarise( count=n()) %>%
+   print(n=51)
+ ##
+ #Conditonal Pre-trend test
+ conditional_did_pretest(yname = "lcruderate",
+        gname = "AccesstoParity",
+        tname = "Year.x",
+        idname = "FIPS",
+        data = Masterdata1998,
+        weightsname = "population",
+        bstrap = T,
+        control_group = "notyettreated",
+        est_method = "reg"
+        
+ )
+ 
+ ##
 
 library(did)
+ ## Regression without Covariates
 out0 <- att_gt(yname = "lcruderate",
                gname = "AccesstoParity",
                tname = "Year.x",
@@ -877,6 +1008,8 @@ out0 <- att_gt(yname = "lcruderate",
                bstrap = T,
                base_period = "universal",
                control_group = "notyettreated",
+               print_details = T,
+               est_method = "ipw"
 )
 summary(out0)
 ggdid(out0)
@@ -888,7 +1021,7 @@ summary(agg.simple0)
 summary(agg.dynamic0)
 summary(agg.gs0)
 ggdid(agg.dynamic0)
-
+## COVARIATE REGRESSION with simplfied groups
 out <- att_gt(yname = "lcruderate",
               gname = "simple3did",
               tname = "Year.x",
@@ -897,7 +1030,7 @@ out <- att_gt(yname = "lcruderate",
               data = Masterdata1998,
               weightsname = "population",
               bstrap = T,
-              base_period = "universal",
+              base_period = "varying",
               control_group = "notyettreated",
               )
 summary(out)
@@ -910,8 +1043,35 @@ summary(agg.simple)
 summary(agg.dynamic)
 summary(agg.gs)
 ggdid(agg.dynamic)
+## 
+# Let's try something, Spilt the Access to Parity groups into groups. 
+#  Ideally we would want to have something that can generate seperate models with each
+Masterdata1998 %>%
+  mutate(ParityLawGroups = ifelse( 1 == D_ParityLawPassed | 1 == D_MandatedifOffered,1,
+                                   ifelse( 1==D_MandatedifOffered | 1== D_MinimumMandatedBenefit,2,0))) %>%
+  select(ParityLawGroups,Year.x,State,AccesstoParity) %>%
+  group_by(ParityLawGroups) %>%
+  summarise(count=n()) 
+Masterdata1998 <- Masterdata1998 %>%
+  mutate(ParityLawGroups = ifelse( 1 == D_ParityLawPassed | 1 == D_MandatedifOffered,1,
+                                   ifelse( 1==D_MandatedifOffered | 1== D_MinimumMandatedBenefit,2,0)))
 
+outGroup <- att_gt(yname = "lcruderate",
+                    gname = "ParityLawGroups",
+                    tname = "Year.x",
+                    idname = "FIPS",
+                    xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+                    data = Masterdata1998,
+                    weightsname = "population",
+                    bstrap = T,
+                    base_period = "universal",
+                    control_group = "notyettreated",
+                    est_method = "reg",
+                    anticipation = 0
+                    
+)
 
+## REGULAR OUTCOME REGRESSION
 out2 <- att_gt(yname = "lcruderate",
               gname = "AccesstoParity",
               tname = "Year.x",
@@ -922,22 +1082,26 @@ out2 <- att_gt(yname = "lcruderate",
               bstrap = T,
               base_period = "universal",
               control_group = "notyettreated",
-              est_method = "reg"
+              est_method = "reg",
+              anticipation = 0
               
 )
 summary(out2)
 ggdid(out2)
 agg.simple2 <- aggte(out2,type = "simple",na.rm = T)
-agg.dynamic2 <- aggte(out2,type = "dynamic", na.rm =T)
+agg.dynamic2 <- aggte(out2,type = "dynamic", na.rm =F)
 agg.gs2 <- aggte(out2,type = "group",na.rm=T)
+agg.cal <- aggte(out2,type = "calendar",na.rm=T)
 summary(agg.simple2)
 #ggdid(agg.simple2)
 summary(agg.dynamic2)
 summary(agg.gs2)
+summary(agg.cal)
 ggdid(agg.gs2)
 ggdid(agg.dynamic2)
 
 ## Try again with the CS Did
+## Doubly Robust
 out3 <- att_gt(yname = "lcruderate",
                gname = "AccesstoParity",
                tname = "Year.x",
@@ -945,7 +1109,7 @@ out3 <- att_gt(yname = "lcruderate",
                xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
                data = Masterdata1998,
                bstrap = T,
-               base_period = "universal",
+               base_period = "varying",
                control_group = "notyettreated"
                
                
@@ -964,7 +1128,209 @@ summary(agg.gs3)
 ggdid(agg.gs3)
 ggdid(agg.dynamic3)
 
+### Here is assigning results into tibbles where we turn those into kable tables. I want to get the IPW results
+### And the Outcome Regression results. I will report that the doubly robust starts dropping pairs of DID
+## New Table
+CSCol1 <- att_gt(yname = "lcruderate",
+               gname = "AccesstoParity",
+               tname = "Year.x",
+               idname = "FIPS",
+               data = Masterdata1998,
+               weightsname = "population",
+               bstrap = T,
+               base_period = "universal",
+               control_group = "notyettreated",
+               est_method = "reg"
+               
+)
+CSCol2<- att_gt(yname = "lcruderate",
+          gname = "AccesstoParity",
+          tname = "Year.x",
+          idname = "FIPS",
+          data = Masterdata1998,
+          weightsname = "population",
+          bstrap = T,
+          base_period = "universal",
+          control_group = "notyettreated",
+          est_method = "ipw"
+          
+)
+CSCol3<- att_gt(yname = "lcruderate",
+          gname = "AccesstoParity",
+          tname = "Year.x",
+          idname = "FIPS",
+          xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+          data = Masterdata1998,
+          weightsname = "population",
+          bstrap = T,
+          base_period = "universal",
+          control_group = "notyettreated",
+          est_method = "reg"
+          
+)
+CSCol4<- att_gt(yname = "lcruderate",
+          gname = "AccesstoParity",
+          tname = "Year.x",
+          idname = "FIPS",
+          xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+          data = Masterdata1998,
+          weightsname = "population",
+          bstrap = T,
+          base_period = "universal",
+          control_group = "notyettreated",
+          est_method = "ipw"
+          
+)
+CSCol5<- att_gt(yname = "lcruderate",
+          gname = "AccesstoParity",
+          tname = "Year.x",
+          idname = "FIPS",
+          xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+          data = Masterdata1998,
+          weightsname = "population",
+          bstrap = T,
+          base_period = "varying",
+          control_group = "notyettreated",
+          est_method = "reg"
+          
+)
+CSCol6<- att_gt(yname = "lcruderate",
+                gname = "AccesstoParity",
+                tname = "Year.x",
+                idname = "FIPS",
+                xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+                data = Masterdata1998,
+                weightsname = "population",
+                bstrap = T,
+                base_period = "varying",
+                control_group = "notyettreated",
+                est_method = "ipw"
+)
+CSColNames <- list(paste("CSCol",1:6))
+## Running into Werid Tidy Bug here. I will just tidy them manually
+#map(CSColNames,tidy)
+CSColTidylistSimple <- list(
+tidy(aggte(CSCol1,type = "simple")),
+#tidy(aggte(CSCol2,type = "simple")),
+tidy(aggte(CSCol3,type = "simple")),
+#tidy(aggte(CSCol4,type = "simple",na.rm = T)),
+tidy(aggte(CSCol5,type = "simple",na.rm = T))
+#tidy(aggte(CSCol6,type = "simple",na.rm = T))
+)
+CSColTidylistSimplerow <- rbind(
+  tidy(aggte(CSCol1,type = "simple")),
+  #tidy(aggte(CSCol2,type = "simple")),
+  tidy(aggte(CSCol3,type = "simple")),
+  #tidy(aggte(CSCol4,type = "simple",na.rm = T)),
+  tidy(aggte(CSCol5,type = "simple",na.rm = T))
+  #tidy(aggte(CSCol6,type = "simple",na.rm = T))
+)
 
+kable(CSColTidylistSimplerow[1:3,2:3], booktabs = T) %>%
+  kable_styling() %>%
+  pack_rows("Simple Group",1,3) 
+# Commented out since I edited the csv file to include parathesis
+#write.csv(CSColTidylistSimplerow[1:3,2:3],file = "CStidysimpleresults.csv")
+
+
+kable(CSColTidylistSimple,booktabs = T) 
+## Commented out are the reported IPW stuff
+CSColTidylistSGroup <- list(
+  tidy(aggte(CSCol1,type = "group")),
+  #tidy(aggte(CSCol2,type = "group")),
+  tidy(aggte(CSCol3,type = "group")),
+  #tidy(aggte(CSCol4,type = "group",na.rm = T)),
+  tidy(aggte(CSCol5,type = "group"))
+  #tidy(aggte(CSCol6,type = "group",na.rm = T))
+)
+CSColTidylistSGrouprbind <- rbind(
+  tidy(aggte(CSCol1,type = "group")),
+  #tidy(aggte(CSCol2,type = "group")),
+  tidy(aggte(CSCol3,type = "group")),
+  #tidy(aggte(CSCol4,type = "group",na.rm = T)),
+  tidy(aggte(CSCol5,type = "group"))
+  #tidy(aggte(CSCol6,type = "group",na.rm = T))
+)
+CSColTidylistSGrouprbind %>%
+  filter( grepl("Average",CSColTidylistSGrouprbind$term,perl  = T)) %>%
+  select(1:5) %>%
+  select(4,5) %>%
+  kable(booktabs=T) %>%
+  kable_styling() %>%
+  pack_rows(group_label = "Group Averages",1,3)
+
+CSColTidylistSGrouprbind %>%
+  filter( grepl("Average",CSColTidylistSGrouprbind$term,perl  = T)) %>%
+  select(1:5) %>%
+  select(4,5)
+#Commented out since I edited the file to include parathesis. 
+#  write.csv(file = "CStidygroupresults.csv")
+
+ggdid(aggte(CSCol1,type = "group"))
+ggdid(aggte(CSCol3,type = "group"))
+ggdid(aggte(CSCol5,type = "group"))
+
+# Dynamic- First Two are Universal, The Third is Varying
+# The Varying should be interperted as the ATT if the Policy Had been implmented
+# At that time. 
+ggdid(aggte(CSCol1,type = "dynamic"))
+#ggdid(aggte(CSCol2,type = "dynamic"))
+ggdid(aggte(CSCol3,type = "dynamic"))
+#ggdid(aggte(CSCol4,type = "dynamic",na.rm = T))
+ggdid(aggte(CSCol5,type = "dynamic"))
+#ggdid(aggte(CSCol6,type = "dynamic",na.rm = T))
+
+
+
+tidy(CSCol1)
+tidy(CSCol2)
+tidy(CSCol3)
+tidy(CSCol4)
+tidy(CSCol5)
+tidy(CSCol6)
+
+# Below is did troubleshoot with trimmer
+# did reports different coefficents and sigficance if different methods used and different sets
+# of observations 
+
+trimmer(g = 2000  ,
+        gname = "AccesstoParity",
+        tname = "Year.x",
+        idname = "FIPS",
+        xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+        data = Masterdata1998,
+        control_group = "notyettreated",
+        threshold = 0.0000001)
+## Trimmer shows that I have a lot of obs that are close to 0 rather than 1. 
+## Below is output out to stata because the stata offered a feature that it runs the regression
+## seperately from the doubly robust part. We'll see how it goes. 
+
+### Here is Me retriving estimates for a anticipation CS 
+CSanticipation <- att_gt(yname = "lcruderate",
+                gname = "AccesstoParity",
+                tname = "Year.x",
+                idname = "FIPS",
+                xformla = ~ `unemployment rate`+ `BankrupcyP100k`  +  `PercW`,
+                data = Masterdata1998,
+                weightsname = "population",
+                bstrap = T,
+                base_period = "universal",
+                control_group = "notyettreated",
+                est_method = "reg",
+                anticipation = -1
+                
+)
+summary(CSanticipation)
+aggte(CSanticipation, type = "simple")
+aggte(CSanticipation, type = "group")
+aggte(CSanticipation, type = "dynamic")
+
+###
+Masterdata1998 %>%
+  select(FIPS,Year.x,lcruderate,D_AccessToParity,
+         AccesstoParity,`unemployment rate`,
+         BankrupcyP100k,PercW,population) %>%
+  write_xlsx(path = "MasterdataSTATA.csv",col_names = T)
 
 #below is bacon decomp
 
@@ -1001,14 +1367,22 @@ df_bacon |>
   filter(weight > .05)|>
   arrange(treated)
 
+#df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
+ #                 + `unemployment rate`
+ #                 +  `BankrupcyP100k`  
+  #                +  `PercW`
+  #                + population,
+  #                data = Masterdata1998,
+  #                id_var = "State",
+  #                time_var = "Year.x",)
+
 df_bacon <- bacon(`lcruderate` ~ D_AccessToParity
-                  + `unemployment rate`
-                  +  `BankrupcyP100k`  
-                  +  `PercW`
-                  + population,
-                  data = Masterdata1998,
-                  id_var = "State",
-                  time_var = "Year.x",)
+                + `unemployment rate`
+                 +  `BankrupcyP100k`  
+                 +  `PercW`,
+                 data = Masterdata1998,
+                 id_var = "State",
+                 time_var = "Year.x",)
 coef_bacon <- sum(df_bacon$two_by_twos$estimate * df_bacon$two_by_twos$weight)
 print(paste("Weighted sum of decomposition =", round(coef_bacon, 4)))
 
@@ -1018,13 +1392,15 @@ ggplot(df_bacon$two_by_twos) +
   geom_hline(yintercept = 0) + 
   theme_minimal() +
   labs(x = "Weight", y = "Estimate", shape = "Type")
-
-ggplot(df_bacon) +
-  aes(x = weight, y = estimate, shape = factor(type)) +
-  geom_point() +
-  geom_hline(yintercept = 0) + 
-  theme_minimal() +
-  labs(x = "Weight", y = "Estimate", shape = "Type")
+##  This is for a without controls
+# ggplot(df_bacon) +
+#  aes(x = weight, y = estimate, shape = factor(type)) +
+#  geom_point() +
+#  geom_hline(yintercept = 0) + 
+#  theme_minimal() +
+ # labs(x = "Weight", y = "Estimate", shape = "Type")
+# Install & load ggpmisc
+library("ggpmisc")
 
 
 GoodmannBacon1 <-df_bacon$two_by_twos %>% 
@@ -1043,13 +1419,41 @@ GoodmannBacon1 <-df_bacon$two_by_twos %>%
        x = "Estimate",
        title = "Goodman-Bacon diff in diff decomposition",
        subtitle = "Dotted line indicates two-way FE estimate.",
-       caption = "Subgroups 99999 correspond to never treated groups")
+       caption = "Subgroups 99999 correspond to never treated groups") +
+  annotate(geom = "table",
+           x= 0,
+           y= 0,
+           label = list(bacontable))
+
+#GoodmannBacon1 <-df_bacon %>% 
+#  mutate(subgroup = paste0(treated, "_", untreated),
+#         subgroup = factor(subgroup),
+ #        subgroup = forcats::fct_reorder(subgroup, estimate)) %>% 
+  #ggplot(aes(x = estimate, 
+   #          y = subgroup,
+    #         size = weight)) +
+#  geom_point() +
+ # geom_vline(xintercept = weighted.mean(df_bacon$estimate, df_bacon$weight),
+  #           linetype = "longdash") +
+#  theme_minimal() +
+#  labs(size = "Weight",
+ #      y = "Subgroup",
+ #      x = "Estimate",
+  #     title = "Goodman-Bacon diff in diff decomposition",
+#     subtitle = "Dotted line indicates two-way FE estimate.",
+#       caption = "Subgroups 99999 correspond to never treated groups")
+#
+
+
 ggsave(plot = last_plot(),filename = "Goodman-Bacon-Diff-in-Diff.png")
-png(GoodmannBacon1,filename = "Goodman-Bacon-Diff-in-Diff.png",
-    width= 480,height=480,units = "px")
+ #      units = "px",dpi = 300)
+#png(GoodmannBacon1,filename = "Goodman-Bacon-Diff-in-Diff.png",
+ #   width= 480,height=480, units = "px")
 
 Masterdata1998 %>%
   select(Year.x,State,TreatPost,D_AccessToParity) %>%
   print(n=100)
 
-
+bacontable <- data.frame(type = c("Both Treated","Treated vs Untreated"),
+                         weight = c(0.2916,.7084),
+                         avg_est = c(.0050,-.0211))

@@ -8,11 +8,83 @@ date: "2024-03-20"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+26- expand on this
+
+-   thoughts and feelings
+
+    -   Most the effect size comes after 1998 where most of the states recieve their treatment.
+
+    -   Most of the treatment cohort was uneven and in some cases as low as one or two treated states.
+
+        -   Due to this Hard to use advanced Different in difference techicques because of very low cohort size.
+
+    -   limtations
+
+        -   Things to try would be wooldriges estimator.
+
+        -   Above
+
+        -   Cant think More later
+
+Notes for today 16th-
+
+Intro
+
+Looking over the results,
+
+-   Sun and Abrham drop the first period before treatment with each cohort
+
+-   CS does not have to do this since they can estimate, those periods with a psuedo-ATT
+
+-   Both CS and SA use the period before treatment as "relative" i.e control periods while CS uses notyettreated and SA always uses never treated.
+
+-   ESTIMATES ARE SENSATIVE TO THESE CONTROLS- Indicating there may be anticipation. They are sensitive because there are many controls. Each of the Group-time coefficent is it's own control. 765 vs 105+3 controls. 1 control per 7 obs. Already not good. What is also not good is how small our group are with our smallest being 15 observations at 1997
+
+    -   CS estimates are made up of group-time controls that are eventually aggregated to construct the ATT.
+
+    -   The interpertation of the Average Effect by length of Exposure graph is the coefficent is the average efffect by length of exposure. Meaning after every treatment, a negative drop in coefficents afterward (i.e period 0,1,2)reduces the suicide rate in both CS and SA.
+
+    -   I should create another column demonstrating shifting the base period by -1
+
+ADJUST NARRATIVE- SPEND ANOTHER 2 days getting RESULTS FIXED AND THEN GO AND WRITE. WE REPLICATED RESULTS 2-5% PERCENT. THOSE WHO WROTE LEGISATION FIRST ENJOYED BENEFITS. THOSE WHO JOINED WHEN THE PARTY STARTED ALSO ENJOYED BENEFITS.
+
+New edit: Sum Stats need to be better labeled. Table 2 shows the actual statistics used for the rest of the data. Table 3,4,5 show if the variable was coded as if the intervention happened just in 1998. Make that more apparent.- Labled the graphs. ADD EXPLINATION AS TO WHY THE SUM STATS ARE DIFFERENT AND STUFF. DIFFERENTATE WHY OUR RESULT AVERAGES ARE A LITTLE DIFFERENT.
+
+REDO TABLE 2 WITH PRE_POST_PARITY with A pre_post----------- NO. For our purposes, for a sum stats table we just need to include the control group averages. Can't do a clear cut pre and post since there's no reference for the control pre and post. SO table 2 is fine
+
+Double check if Lang actually kept his 1998 intervention definition or not. HE DOES. It's never stated that he doesn't and so we should that both his DID and regression does use their real enactment dates. He simply checks if they were treated and Assigned them to a treated or non-treated group.
+
 New Work: First differences must be redone.\*\* 2nd column.
 
 \*The author is dropping data from the regressions and saying that despite the drop the coefficent is holding. I think It'll be addressed in STATA at this point. I think it's just column 2 that needs to be looked at. The different N sizes are accounted by the author has having the same regression effects with or without the different coding.
 
+MPHA is a MANDATED MINIMUM LAW FEDERALLY
+
 References bib can be used to manually create a citation if you need it
+
+I think We're giving up on CS DID. The problems I'm experiencing I cannot diagnose myself. Different time-group averages are not being generated in the ATT creation process depending on the varying or universal base option.
+
+update- The problems have something to do with the propensity score matching the doubly robust thing does. Using the varying base should create the psuedo-ATT that don't have a event study interpertation. Varying base also creates more observations that Effect the general ATT and outcome of the regression and wether or not it's significant. According to Callaway it also has something to do with the smallness of groups included in the regression.
+
+-   I think there's a issue with anticipation and the heterogenous DID. Regular Event studies doesn't confirm this. when the reference base is changed so do the estimates.
+
+-   Estimates are more consistent with Bacon Decomp and SA. CSdid I will try and find the best working model.
+
+-   Results are from Regression Out2 "outcome regression" and ipw
+
+    -   This is the only regression specification that doesn't drop our data.
+
+    -   IPW WORKS
+
+        -   Get Anticipation Periods -1-0
+
+        -   Save Graphs of sets of regressions
+
+        -   Find a way to tidy the data- USE KABLE
+
+-   Need to explain why doubly robust doesn't work
+
+    -   In essence, the pre-propensity score matching doubly robust does, kills a lot of our small groups in our dataset. States and times where only only a small change occured the regression does not take kindly too and spits out NAs for our trouble. Droped data is generally bad and it's obvious that the statistics are effected without good reason or a interpertable reason. Like imagine dropping data because of a weak signal, you bias your results towards the strongest singals.
 
 ## Introduction
 
@@ -46,9 +118,31 @@ insurance gets around this easily by installing limits on the amount of days you
 
 --- "The result of this reform movement is that, by August 2001, fewer than a dozen states did not have some form of mental health parity legislation.'\^'' The MHPA may have encouraged this state legislative activity in at least two ways: by highlighting the issue of mental health parity\^\^ and by providing an incentive for states to head off federal regulatory oversight by enacting laws that were either comparable to the federal law or more comprehensive."
 
+## data
+
+Look this is my data
+
+-   CDC suicide rates uncompressed 1990-2004- HAVE \-- Already in dataset
+
+    -   unemploymetn rates (CPS)- Get these from FRED \-- Already in dataset
+
+    -   US courts bankrupcy files since 1990- HAVE NEED TO CONVERT TO PER 100,000 all chapters of bankruptcy- HAVE
+
+    -   percentage of workers in large firms from US small business adminstration- HAVE Need to format sourced from census (controlls for large firms since they're selfinsured and are exempt)
+
+    -   timing control - YtY change is controlled- 1 yr- This is the delta change between the suicide rate
+
 ## Methods
 
-Diff in Diff Matching / IPW with doubly robust estimators Hetero Diff in Diff
+TWFE, Matching and Heterogenous Treatment effects.
+
+-   Cover TWFE First
+
+Diff in Diff Matching / IPW with doubly robust estimators Hetero Diff in Diff. I dont think I used IPW but we may have done one doubly robust? I'd have to look back.
+
+-   IPW is suffering from the same issue as Doubly robust. Perfect seperation in the smaller groups is preventing any sort of glm-robustness checking done by ipw or doubly robust.
+
+-   I will report that this happens but I will just report the outcome regression in a table.
 
 ## Results
 
@@ -95,6 +189,8 @@ What does the balance of evidence come up to? It's probably close to Zero the pe
     -   not done - I just need to save the plots already created.
 
 -   For the CS Did Estimates, it's likely better just to produce graphs of each of the dynamic effects printed out of each regression you run References
+
+    -   Edit- Create a small Table for the CS estimates just to have
 
 note:
 
