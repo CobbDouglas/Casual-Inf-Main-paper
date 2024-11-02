@@ -8,6 +8,10 @@ date: "2024-03-20"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+11/2-
+
+Fix Table 5-
+
 26- expand on this
 
 -   thoughts and feelings

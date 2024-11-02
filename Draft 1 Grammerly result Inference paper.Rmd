@@ -69,7 +69,7 @@ Table 6 details a replication of Table 4 of \@lang2013. Regressing the log suici
 
 Matching
 
-Our first extension to \@lang2013 uses the assumption of a 1998 treatment time from \@lang2013 and adds matching to the difference in difference model as a robustness check. I run several different matching methods available to the \@MatchIt package.
+My first extension to \@lang2013 uses the assumption of a 1998 treatment time from \@lang2013 and adds matching to the difference in difference model as a robustness check. I run several different matching methods available to the \@MatchIt package.
 
 Tables 7, 8, and 9 detail Difference-in-Differences regressions using two-way fixed effects. The same as previous models, variables are weighted by population at that state's point in time and additionally are clustered at the state level. Columns 1 and 2 detail the Difference in Difference models using Mahalanobis distance, switching between the regular and logged suicide rate. Columns 3 and 4 show models matched with a probit method. The only significant effect was found in column 4 with a -4% decrease associated with the post-treatment effect. Table 8 features GLM in columns 1 and 2 with the only significant effect belonging to column 2, finding the same coefficient as Table 7 Column 4. Columns 3 and 4 showcase models with Cardinality matching and find no significant effects. Table 9 Uses Coarse-Exact matching and Subclass matching to find the same coefficient in column 4. Overall every matching method that either cut down on the observations or didn't use a logged crude rate did not retrieve significant effects.
 
