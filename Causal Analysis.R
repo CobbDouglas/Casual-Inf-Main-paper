@@ -947,6 +947,16 @@ Masterdata1998 %>%
   summarise( count= n()) %>%
   print(n=51)
 
+
+Masterdata1998 %>%
+  mutate(TimetillTreat = ifelse((Year.x - AccesstoParity)>20,
+                                NA,
+                                Year.x - AccesstoParity)) %>%
+  select(State,Year.x,AccesstoParity,TimetillTreat) %>%
+  group_by(TimetillTreat) %>%
+  filter(TimetillTreat %in% c(-7) ) %>%
+  arrange(desc(TimetillTreat)) %>%
+  print(n=80)
 ## What is this comparing?
 iplot(list(Sunabmodel,Sunabmodelref))
 SAplot <-iplot(list(Sunabmodel,Sunabmodelref), ref = "all")
